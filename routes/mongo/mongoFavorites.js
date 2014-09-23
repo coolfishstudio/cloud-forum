@@ -1,4 +1,4 @@
-var favoritesColl = require('./mongo').getCollection('favorites');
+var favoritesColl = require('./mongo').getCollection('forum_favorites');
 
 exports.insert = function(favoritesObj, callback){
 	favoritesColl.insert(favoritesObj, callback);

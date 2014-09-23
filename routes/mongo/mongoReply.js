@@ -1,4 +1,4 @@
-var replyColl = require('./mongo').getCollection('reply');
+var replyColl = require('./mongo').getCollection('forum_reply');
 
 exports.insert = function(replyObj, callback){
 	replyColl.insert(replyObj, callback);

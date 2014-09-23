@@ -1,4 +1,4 @@
-var topicColl = require('./mongo').getCollection('topic');
+var topicColl = require('./mongo').getCollection('forum_topic');
 
 exports.insert = function(topicObj, callback){
 	topicColl.insert(topicObj, callback);

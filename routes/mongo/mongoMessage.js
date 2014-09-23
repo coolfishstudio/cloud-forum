@@ -1,4 +1,4 @@
-var messageColl = require('./mongo').getCollection('message');
+var messageColl = require('./mongo').getCollection('forum_message');
 
 exports.insert = function(messageObj, callback){
 	messageColl.insert(messageObj, callback);
