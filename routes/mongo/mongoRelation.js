@@ -1,10 +1,15 @@
 var relationColl = require('./mongo').getCollection('forum_relation');
+var tool = require('../util/tool');
 
 exports.insert = function(relationObj, callback){
+	relationObj._id = tool.generateUUID();
+	relationObj.createTimestamp = new Date().getTime();
+	relationObj.createDate = tool.getThisTime();
 	relationColl.insert(relationObj, callback);
 };
 
 exports.update = function(relationID, relationObj, callback){
+	relationObj.updateDate = tool.getThisTime();
 	relationColl.findAndModify({_id: relationID.toLowerCase()}, [], {$set: relationObj}, {new: true}, callback);
 };
 

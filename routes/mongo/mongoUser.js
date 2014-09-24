@@ -1,10 +1,15 @@
 var userColl = require('./mongo').getCollection('user');
+var tool = require('../util/tool');
 
 exports.insert = function(userObj, callback){
+	userObj._id = tool.generateUUID();
+	userObj.createTimestamp = new Date().getTime();
+	userObj.createDate = tool.getThisTime();
 	userColl.insert(userObj, callback);
 };
 
 exports.update = function(userID, userObj, callback){
+	userObj.updateDate = tool.getThisTime();
 	userColl.findAndModify({_id: userID.toLowerCase()}, [], {$set: userObj}, {new: true}, callback);
 };
 

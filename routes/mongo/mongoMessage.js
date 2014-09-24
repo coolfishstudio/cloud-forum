@@ -1,10 +1,15 @@
 var messageColl = require('./mongo').getCollection('forum_message');
+var tool = require('../util/tool');
 
 exports.insert = function(messageObj, callback){
+	messageObj._id = tool.generateUUID();
+	messageObj.createTimestamp = new Date().getTime();
+	messageObj.createDate = tool.getThisTime();
 	messageColl.insert(messageObj, callback);
 };
 
 exports.update = function(messageID, messageObj, callback){
+	messageObj.updateDate = tool.getThisTime();
 	messageColl.findAndModify({_id: messageID.toLowerCase()}, [], {$set: messageObj}, {new: true}, callback);
 };
 

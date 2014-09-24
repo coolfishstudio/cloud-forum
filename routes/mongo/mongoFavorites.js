@@ -1,10 +1,15 @@
 var favoritesColl = require('./mongo').getCollection('forum_favorites');
+var tool = require('../util/tool');
 
 exports.insert = function(favoritesObj, callback){
+	favoritesObj._id = tool.generateUUID();
+	favoritesObj.createTimestamp = new Date().getTime();
+	favoritesObj.createDate = tool.getThisTime();
 	favoritesColl.insert(favoritesObj, callback);
 };
 
 exports.update = function(favoritesID, favoritesObj, callback){
+	favoritesObj.updateDate = tool.getThisTime();
 	favoritesColl.findAndModify({_id: favoritesID.toLowerCase()}, [], {$set: favoritesObj}, {new: true}, callback);
 };
 
