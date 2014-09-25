@@ -16,39 +16,3 @@ a{text-decoration:none;}
 	padding-bottom: 10px;
 }
 
-.in.uk-grid-margin {
-	margin-top: 10px;
-}
-.in .uk-grid{
-	margin-left: 0px;
-	background: #fff;
-	clear: both;
-	-webkit-box-shadow: 0 1px 3px #c7c7c8;
-	box-shadow: 0 1px 3px #c7c7c8;
-	position: relative;
-	border-radius: 8px !important;
-}
-.in .uk-grid img {
-	float: left;
-	display: inline;
-	padding-left: 0px;
-	width: 60px;
-	height: 60px;
-}
-.in .uk-grid div {
-	float: left;
-	display: inline;
-	margin-left: 10px;
-	line-height: 1.3em;
-}
-.in .uk-grid div strong {
-	display: block;
-	font-size: 14px;
-	color: #35383b;
-}
-.in .uk-grid div span {
-	display: block;
-	color: #9c9c9c;
-	font-size: 12px;
-	line-height: 1.8em;
-}
