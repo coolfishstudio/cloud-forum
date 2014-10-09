@@ -38,6 +38,9 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .pd5{
 	padding: 5px;
 }
+.pd10{
+	padding: 10px;
+}
 .mb10{
 	margin-bottom: 10px;
 }
@@ -46,4 +49,7 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 }
 .h88{
 	height:88px;
+}
+.ads li{
+	padding-bottom: 5px;
 }
