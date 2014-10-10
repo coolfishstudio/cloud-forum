@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var pageUser = require('./pageUser');
+var pageUser = require('./pageUser'),
+	pageStatic = require('./pageStatic');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -16,8 +17,9 @@ router.get('/login', pageUser.gotoLogin);
 router.post('/login', pageUser.login);
 //退出
 router.get('/logout', pageUser.gotoLogout);
-
-
+/* static */
+//工具
+router.get('/tool/:toolName', pageStatic.gotoStatic);
 /* password */
 // 找回密码
 // 修改密码

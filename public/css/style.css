@@ -1,4 +1,5 @@
-a{text-decoration:none;}
+a{text-decoration:none;color: #666;}
+a:hover{color: #666;}
 body{background: #e2e2e2;background-image: url('../images/bg.png');}
 
 .tm-navbar{
@@ -47,9 +48,56 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .h268{
 	height:268px;
 }
-.h88{
-	height:88px;
+.h80{
+	height:80px;
 }
 .ads li{
 	padding-bottom: 5px;
 }
+.tag_btn{
+	line-height: 80px;
+	position: relative;
+	overflow: hidden;
+}
+.tag_btn i{
+	position: absolute;
+	bottom: -10px;
+	right: -10px;
+	font-size: 85px;	
+}
+.tag_btn b{
+	position: absolute;
+	left: 15px;
+	font-size: 35px;
+}
+.tag_text{
+	color: #CC9933;
+	background: #FFFFCC;	
+}
+.tag_star{
+	color: #3399CC;
+	background: #CCFFFF;
+}
+.tag_send{
+	color: #339966;
+	background: #CCFFCC;
+}
+.tag_help{
+	color: #CC3366;
+	background: #FFCCFF;
+}
+.uk-badge-black{
+	background-color: #222;
+	background-image: -webkit-linear-gradient(top,#666666,#222);
+	background-image: linear-gradient(to bottom,#666666,#222);
+}
+
+.card_list li{height: 40px;line-height: 40px;}
+.card_list li:hover{background: #eee;}
+.card_list li a{width: 100%;height: 100%;display: inline-block;}
+.card_list .uk-badge{padding: 2px;margin:2px;}
+.card_list .card_list_image img{margin:0 2px 0 2px;height: 40px;border: 1px solid #ddd; padding: 2px;background: #fff;border-radius: 50%;}
+.card_list .card_list_num code{padding: 2px;margin:2px;}
+.card_list .card_list_title{font-size: 18px;}
+.card_list .card_list_user img{margin:0 2px 0 2px;height: 20px;border-radius: 5px;}
+
