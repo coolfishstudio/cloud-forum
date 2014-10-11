@@ -1,0 +1,38 @@
+<%- include ../header %>
+<div class="tm-middle">
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-bottom">
+    	<div class="uk-width-medium-5-6 uk-container-center">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-3-4">
+                    <div class="panel panel_border mb10">
+                    	<div class="uk-panel uk-panel-header pd5">
+                            <h3 class="uk-panel-title">字母大小写转换工具</h3>
+                        	<div class="uk-grid uk-form mb10">
+		                        <div class="uk-form-icon mb10 uk-width-1-1">
+		                        	<p class="uk-form-help-block mb10">请在下框输入您要转换的内容:</p>
+		                            <textarea cols="30" rows="5" placeholder="Textarea"></textarea>
+		                        </div>
+		                        <div class="uk-form-icon mb10 uk-width-1-1 uk-button-group">
+		                            <button class="uk-button uk-button-success">转换成小写</button>
+		                            <button class="uk-button uk-button-success">转换成大写</button>
+		                            <button class="uk-button uk-button-success">还原</button>
+		                            <button class="uk-button uk-button-success">清空</button>
+		                        </div>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-large-1-4 uk-hidden-small">
+                	<%- include ../goHome %>
+                    <%- include ../userInfo %>
+                    <%- include ../tool %>
+                    <%- include ../friendship %>
+                    <%- include ../ads %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ../footer %>
+

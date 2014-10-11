@@ -66,20 +66,20 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	padding-bottom: 5px;
 }
 .tag_btn{
-	line-height: 80px;
+	line-height: 60px;
 	position: relative;
 	overflow: hidden;
 }
 .tag_btn i{
 	position: absolute;
 	bottom: -10px;
-	right: -10px;
-	font-size: 85px;	
+	right: -5px;
+	font-size: 65px;	
 }
 .tag_btn b{
 	position: absolute;
 	left: 15px;
-	font-size: 35px;
+	font-size: 30px;
 }
 .tag_text{
 	color: #CC9933;

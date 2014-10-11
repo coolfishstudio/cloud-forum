@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pageUser = require('./pageUser'),
+	pageTopic = require('./pageTopic'),
 	pageStatic = require('./pageStatic');
 
 /* GET home page. */
@@ -40,6 +41,7 @@ router.get('/tool/:toolName', pageStatic.gotoStatic);
 
 /* topic */
 // 新建文章界面
+router.get('/topic', pageTopic.gotoTopic);
 // 显示某个话题
 // 将某话题置顶
 // 将某话题加精
