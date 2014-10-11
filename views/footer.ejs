@@ -5,8 +5,20 @@
                 京ICP备14019006号
             </div>
         </div>
-<!-- 
+
         <a href="javascript:void(0)" id="goTop" class="uk-button" data-uk-smooth-scroll><i class="uk-icon-chevron-up"></i></a>
- -->
+
     </body>
 </html>
+<script type="text/javascript">
+$(function(){
+	$(window).scroll(function(){
+        if ($(window).scrollTop()>200){
+            $("#goTop").fadeIn(300);
+        }else{
+            $("#goTop").fadeOut(200);
+        }
+    });
+
+});
+</script>

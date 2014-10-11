@@ -4,9 +4,7 @@ var pageUser = require('./pageUser'),
 	pageStatic = require('./pageStatic');
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', pageStatic.gotoIndex);
 
 /* signin, login, logout */
 // 注册
