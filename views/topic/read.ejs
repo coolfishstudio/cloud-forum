@@ -5,8 +5,43 @@
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-3-4">
                     <div class="panel panel_border mb10">
-                        
-                        
+                        <div class="uk-panel uk-panel-header pd5">
+                            <div class="uk-panel-title">
+                                <div class="topic_title">关于事件循环</div>
+                                <div class="topic_time">发布于 21小时前 - 作者 michaeljunlove - 106 次浏览</div>
+                            </div>
+                            <div class="topic_box">
+                                <div class="topic_content mb10">
+                                    在看《node.js入门经典》这本书的时候看到：
+                                    由于事件循环是以单一进程为基础的，所以为了确保高性能需要遵循以下原则：
+                                    1,函数必须快速返回。2，函数不得阻塞。3，长时间运行的操作必须移到另一个进程中去
+                                    但是之前在看《深入浅出node.js》的时候，说异步I/O在windows下是通过IOCP的线程池执行的，不管它是否阻塞I/O，
+                                    都不会影响到javascript线程的后续执行的，这和上面说的函数必须快速返回是不是矛盾啊？
+                                    求大神指点一下：为什么函数必须快速返回？
+                                </div>
+                                <div class="uk-clearfix">
+                                    <div class="uk-float-right">
+                                        <div class="uk-button-group">
+                                            <a class="uk-button uk-button-success" href="###">收藏</a>
+                                            <a class="uk-button uk-button-success" href="###">分享</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel_border mb10">
+                        <div class="uk-panel uk-panel-header pd5">
+                            <h3 class="uk-panel-title">回复</h3>
+                            <ul class="uk-list uk-list-line">
+                                <li>11111</li>
+                                <li>1111</li>
+                                <li>1111</li>
+                            </ul>
+                        </div>
 
                     </div>
                 </div>

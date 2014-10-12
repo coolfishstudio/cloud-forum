@@ -13,11 +13,11 @@
                 <li>
                     <div class="uk-form mb10">
                         <div class="uk-form-icon mb10">
-                            <i class="uk-icon-user"></i>
+                            <i class="uk-icon-envelope-o"></i>
                             <input type="text">
                         </div>
                         <div class="uk-form-icon mb10">
-                            <i class="uk-icon-user"></i>
+                            <i class="uk-icon-keyboard-o"></i>
                             <input type="text">
                         </div>   
                     </div>
@@ -26,11 +26,15 @@
                 <li>
                     <div class="uk-form mb10">
                         <div class="uk-form-icon mb10">
-                            <i class="uk-icon-user"></i>
+                            <i class="uk-icon-envelope-o"></i>
                             <input type="text">
                         </div>
                         <div class="uk-form-icon mb10">
-                            <i class="uk-icon-user"></i>
+                            <i class="uk-icon-keyboard-o"></i>
+                            <input type="text">
+                        </div>
+                        <div class="uk-form-icon mb10">
+                            <i class="uk-icon-retweet"></i>
                             <input type="text">
                         </div>
                         <div class="uk-form-icon mb10">
@@ -41,14 +45,59 @@
                     </div>
                 </li>
             </ul>
-            <!-- <div class="mb10" data-uk-switcher="{connect:'#button-user-content'}">
-                <button class="uk-button uk-button-success"></button>
-                <button class="uk-button">注&nbsp;册</button>
-            </div> -->
-            
-
         </div>
     </div>
-
-
 </div>
+<script type="text/javascript">
+$(function(){
+    var userName,passWord,passwordRepeat;
+    //注册
+    $('#regUser').click(function(){
+        userName = $('#userName').val();
+        passWord = $('#password').val();
+        passwordRepeat = $('#passwordRepeat').val();
+        //校验
+        if(changeCheck()){
+            $.ajax({
+                type: 'POST',
+                url: '/reg',
+                data: {userName : userName, passWord : passWord},
+                success: function(result){
+                    if(0 == result.status){
+                        toastr.success(result.content);
+                        window.location.href = '/';
+                    }else{
+                        toastr.error(result.content);
+                    }
+                }
+            });
+        }
+    });
+
+    function changeCheck(){
+        var userPatrn = /^(\w|[\u4e00-\u9fa5]){2,10}$/;
+        var pwdPatrn = /^(\w){5,10}$/;
+        if('' == userName){
+            toastr.warning('用户名不能为空');
+            return false;
+        }
+        if(!userPatrn.exec(userName)){
+            toastr.warning('用户名只能输入2-10个字母、汉字、数字、下划线');
+            return false;
+        }
+        if('' == passWord || '' == passwordRepeat){
+            toastr.warning('密码不能为空');
+            return false;
+        }
+        if(passWord != passwordRepeat){
+            toastr.warning('密码不相同,请重新输入');
+            return false;
+        }
+        if(!pwdPatrn.exec(passWord) || !pwdPatrn.exec(passwordRepeat)){
+            toastr.warning('密码只能输入5-20个字母、数字、下划线');
+            return false;
+        }
+        return true;
+    }
+});
+</script>

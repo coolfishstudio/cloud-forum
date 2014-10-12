@@ -111,3 +111,7 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .card_list .card_list_num code{padding: 2px;margin:2px;}
 .card_list .card_list_title{font-size: 18px;}
 .card_list .card_list_user img{margin:0 2px 0 2px;height: 20px;border-radius: 5px;}
+
+.topic_title{font-weight: bold;}
+.topic_time{font-size: 13px;color:#999;}
+.topic_box{padding: 0 10px 10px 10px; }
