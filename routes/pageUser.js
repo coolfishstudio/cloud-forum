@@ -18,10 +18,11 @@ exports.gotoLogout = function(req, res){
 exports.signin = function(req, res){
 	var userName = req.body.userName;
     var passWord = req.body.passWord;
+    var email = req.body.email;
     async.series({
     	//查看是否有这个用户
         findUserName: function(done){
-        	user.getByUserName(userName, function(err, info){
+        	user.getByEmail(email, function(err, info){
         		if(!err){
                     if(null != info){
                         done('该用户名称已经存在了。');
@@ -33,9 +34,10 @@ exports.signin = function(req, res){
                 }
         	});
         },
-        //注册用户
+        // 注册用户
         regUser: function(done){
             user.insert({
+            	email : email,
                 name : userName,
                 passWord : tool.getMD5(passWord)
             },function(err, info){

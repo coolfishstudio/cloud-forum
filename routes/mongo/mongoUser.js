@@ -29,3 +29,6 @@ exports.getByUserName = function(userName, callback){
 	userColl.findOne({userName : userName},callback);
 };
 
+exports.getByEmail = function(email, callback){
+	userColl.findOne({email : email},callback);
+};

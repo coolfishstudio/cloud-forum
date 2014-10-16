@@ -8,3 +8,4 @@ exports.getAll = mongoUser.getAll;
 exports.getById = mongoUser.getById;
 
 exports.getByUserName = mongoUser.getByUserName;
+exports.getByEmail = mongoUser.getByEmail;

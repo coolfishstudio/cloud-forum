@@ -14,11 +14,11 @@
                     <div class="uk-form mb10">
                         <div class="uk-form-icon mb10">
                             <i class="uk-icon-envelope-o"></i>
-                            <input type="text">
+                            <input type="text" placeholder="邮箱帐号">
                         </div>
                         <div class="uk-form-icon mb10">
                             <i class="uk-icon-keyboard-o"></i>
-                            <input type="text">
+                            <input type="password" placeholder="输入密码">
                         </div>   
                     </div>
                     <button class="uk-button uk-button-success">登&nbsp;陆</button>
@@ -27,21 +27,21 @@
                     <div class="uk-form mb10">
                         <div class="uk-form-icon mb10">
                             <i class="uk-icon-envelope-o"></i>
-                            <input type="text">
+                            <input type="text" id="reg_email" placeholder="邮箱帐号">
                         </div>
                         <div class="uk-form-icon mb10">
                             <i class="uk-icon-keyboard-o"></i>
-                            <input type="text">
+                            <input type="password" id="reg_password" placeholder="输入密码">
                         </div>
                         <div class="uk-form-icon mb10">
                             <i class="uk-icon-retweet"></i>
-                            <input type="text">
+                            <input type="password" id="reg_passwordRepeat" placeholder="确认密码">
                         </div>
                         <div class="uk-form-icon mb10">
                             <i class="uk-icon-user"></i>
-                            <input type="text">
+                            <input type="text" id="reg_userName" placeholder="输入昵称">
                         </div>
-                        <button class="uk-button uk-button-success">注&nbsp;册</button>
+                        <button class="uk-button uk-button-success" id='regUser'>注&nbsp;册</button>
                     </div>
                 </li>
             </ul>
@@ -50,24 +50,27 @@
 </div>
 <script type="text/javascript">
 $(function(){
-    var userName,passWord,passwordRepeat;
+    var email,userName,passWord,passwordRepeat;
     //注册
     $('#regUser').click(function(){
-        userName = $('#userName').val();
-        passWord = $('#password').val();
-        passwordRepeat = $('#passwordRepeat').val();
+
+        email = $('#reg_email').val();
+        userName = $('#reg_userName').val();
+        passWord = $('#reg_password').val();
+        passwordRepeat = $('#reg_passwordRepeat').val();
+        console.log($('#reg_email').val(),$('#reg_userName').val(),$('#reg_password').val(),$('#reg_passwordRepeat').val());
+        console.log(email,userName,passWord,passwordRepeat);
         //校验
         if(changeCheck()){
             $.ajax({
                 type: 'POST',
-                url: '/reg',
-                data: {userName : userName, passWord : passWord},
+                url: '/signin',
+                data: {email : email, userName : userName, passWord : passWord},
                 success: function(result){
                     if(0 == result.status){
-                        toastr.success(result.content);
-                        window.location.href = '/';
+                        $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
                     }else{
-                        toastr.error(result.content);
+                        $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                     }
                 }
             });
@@ -77,24 +80,28 @@ $(function(){
     function changeCheck(){
         var userPatrn = /^(\w|[\u4e00-\u9fa5]){2,10}$/;
         var pwdPatrn = /^(\w){5,10}$/;
+        if('' == email){
+            $.UIkit.notify('邮箱不能为空', {pos:'top-right',status:'warning',timeout: 1000});
+            return false;
+        }
         if('' == userName){
-            toastr.warning('用户名不能为空');
+            $.UIkit.notify('昵称不能为空', {pos:'top-right',status:'warning',timeout: 1000});
             return false;
         }
         if(!userPatrn.exec(userName)){
-            toastr.warning('用户名只能输入2-10个字母、汉字、数字、下划线');
+            $.UIkit.notify('昵称只能输入2-10个字母、汉字、数字、下划线', {pos:'top-right',status:'warning',timeout: 1000});
             return false;
         }
         if('' == passWord || '' == passwordRepeat){
-            toastr.warning('密码不能为空');
+            $.UIkit.notify('密码不能为空', {pos:'top-right',status:'warning',timeout: 1000});
             return false;
         }
         if(passWord != passwordRepeat){
-            toastr.warning('密码不相同,请重新输入');
+            $.UIkit.notify('密码不相同,请重新输入', {pos:'top-right',status:'warning',timeout: 1000});
             return false;
         }
         if(!pwdPatrn.exec(passWord) || !pwdPatrn.exec(passwordRepeat)){
-            toastr.warning('密码只能输入5-20个字母、数字、下划线');
+            $.UIkit.notify('密码只能输入5-20个字母、数字、下划线', {pos:'top-right',status:'warning',timeout: 1000});
             return false;
         }
         return true;
