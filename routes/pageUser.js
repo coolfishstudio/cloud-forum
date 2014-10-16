@@ -16,7 +16,44 @@ exports.gotoLogout = function(req, res){
 };
 //注册
 exports.signin = function(req, res){
-    res.render('singin', {});
+	var userName = req.body.userName;
+    var passWord = req.body.passWord;
+    async.series({
+    	//查看是否有这个用户
+        findUserName: function(done){
+        	user.getByUserName(userName, function(err, info){
+        		if(!err){
+                    if(null != info){
+                        done('该用户名称已经存在了。');
+                    }else{
+                        done();
+                    }
+                }else{
+                    done(err);
+                }
+        	});
+        },
+        //注册用户
+        regUser: function(done){
+            user.insert({
+                name : userName,
+                passWord : tool.getMD5(passWord)
+            },function(err, info){
+                if(!err){
+                    req.session.user = info[0];
+                    done();
+                }else{
+                    done(err);
+                }
+            });
+        }
+    }, function(err){
+        if(err){
+            res.send({status: -1, content: err});
+        }else{
+            res.send({status: 0, content: '注册成功。'});
+        }      
+    })
 };
 //登录
 exports.login = function(req, res){

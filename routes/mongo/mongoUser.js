@@ -24,3 +24,8 @@ exports.getAll = function(pageNum, page, callback){
 exports.getById = function(userID, callback){
 	userColl.findOne({_id:userId},callback);
 };
+
+exports.getByUserName = function(userName, callback){
+	userColl.findOne({userName : userName},callback);
+};
+

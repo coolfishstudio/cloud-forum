@@ -6,3 +6,5 @@ exports.update = mongoUser.update;
 exports.remove = mongoUser.remove;
 exports.getAll = mongoUser.getAll;
 exports.getById = mongoUser.getById;
+
+exports.getByUserName = mongoUser.getByUserName;
