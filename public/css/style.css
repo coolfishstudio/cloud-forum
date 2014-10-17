@@ -118,3 +118,9 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .topic_title{font-weight: bold;}
 .topic_time{font-size: 13px;color:#999;}
 .topic_box{padding: 0 10px 10px 10px; }
+
+.user_info img{margin:0;border: 1px solid #ddd; padding: 4px;background: #fff;border-radius: 50%;}
+
+.jybfb{position: relative;}
+.jybfb_bar{position: absolute;top: -3px;left: 50%;color:#f90;font-size: 11px;width:120px;margin-left: -55px;text-align: center;}
+.jybfb .uk-progress{margin-bottom: 0px;}

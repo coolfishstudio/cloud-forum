@@ -42,6 +42,7 @@ exports.signin = function(req, res){
                 passWord : tool.getMD5(passWord)
             },function(err, info){
                 if(!err){
+                	info[0].passWord = '';
                     req.session.user = info[0];
                     done();
                 }else{
@@ -59,5 +60,44 @@ exports.signin = function(req, res){
 };
 //登录
 exports.login = function(req, res){
-    res.render('login', {});
+    var email = req.body.email;
+    var passWord = req.body.passWord;
+    var userInfo = {};
+    async.series({
+        //根据名字去查询
+        findUserName: function(done){
+            user.getByEmail(email, function(err, info){
+                if(!err){
+                    if(null != info){
+                        userInfo = info;
+                        done();
+                    }else{
+                        done('该帐户不存在，请检查你的输入信息。');
+                    }
+                }else{
+                    done(err);
+                }
+            });
+        },
+        //判断找到的数据是否密码一样
+        contrastPassword: function(done){
+            if(tool.getMD5(passWord) == userInfo.passWord){
+            	
+            	userInfo.passWord = '';
+                req.session.user = userInfo;//用户信息存入 session
+                console.log(req.session.user);
+                done();
+            }else{
+                done('密码不正确，请重新输入。');
+            }
+        }
+    },function(err){
+        console.log(err);
+        if(err){
+            res.send({status: -1, content: err});
+        }else{
+            res.send({status: 0, content: '登录成功。'});
+            // res.render('index');//注册成功后返回主页
+        } 
+    });
 };
