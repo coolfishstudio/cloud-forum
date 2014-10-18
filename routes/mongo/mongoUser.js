@@ -5,6 +5,9 @@ exports.insert = function(userObj, callback){
 	userObj._id = tool.generateUUID();
 	userObj.createTimestamp = new Date().getTime();
 	userObj.createDate = tool.getThisTime();
+	userObj.integral = 0;//积分
+	userObj.headSrc = 'images/face/default.png';//头像
+	userObj.describe = ' 这家伙很懒，什么个性签名都没有留下。';//描述
 	userColl.insert(userObj, callback);
 };
 

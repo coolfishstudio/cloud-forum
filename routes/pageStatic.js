@@ -4,7 +4,11 @@ var user = require('./module/user'),
 
 //跳转到静态工具页面
 exports.gotoIndex = function(req, res){
-	res.render('index', { titleName: config.NAME });
+	if(!req.session || !req.session.user){
+		res.render('index', { titleName: config.NAME, user: ''});
+	}else{
+		res.render('index', { titleName: config.NAME, user: req.session.user });	
+	}
 };
 
 //跳转到静态工具页面

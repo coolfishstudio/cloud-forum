@@ -19,13 +19,16 @@ exports.signin = function(req, res){
 	var userName = req.body.userName;
     var passWord = req.body.passWord;
     var email = req.body.email;
+    if('default' == userName){
+    	return res.send({status: -1, content: '该用户名已经存在了。'});
+    }
     async.series({
     	//查看是否有这个用户
-        findUserName: function(done){
+        findEmail: function(done){
         	user.getByEmail(email, function(err, info){
         		if(!err){
                     if(null != info){
-                        done('该用户名称已经存在了。');
+                        done('该邮箱已经注册过了。');
                     }else{
                         done();
                     }
@@ -54,7 +57,7 @@ exports.signin = function(req, res){
         if(err){
             res.send({status: -1, content: err});
         }else{
-            res.send({status: 0, content: '注册成功。'});
+            res.send({status: 0, content: '注册成功。',user: req.session.user});
         }      
     })
 };
@@ -96,7 +99,7 @@ exports.login = function(req, res){
         if(err){
             res.send({status: -1, content: err});
         }else{
-            res.send({status: 0, content: '登录成功。'});
+            res.send({status: 0, content: '登录成功。', user: req.session.user});
             // res.render('index');//注册成功后返回主页
         } 
     });
