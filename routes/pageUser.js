@@ -12,6 +12,7 @@ exports.gotoLogin = function(req, res){
 };
 //退出跳转到首页面
 exports.gotoLogout = function(req, res){
+	req.session.user = null;
     res.redirect('/');
 };
 //注册
@@ -66,6 +67,7 @@ exports.login = function(req, res){
     var email = req.body.email;
     var passWord = req.body.passWord;
     var userInfo = {};
+    console.log('----');
     async.series({
         //根据名字去查询
         findUserName: function(done){
