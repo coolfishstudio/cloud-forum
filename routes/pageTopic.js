@@ -1,5 +1,6 @@
 var topic = require('./module/topic'),
     async = require('async'),
+    tool = require('./util/tool'),
     config = require('../config');
 
 //跳转到话题页面
@@ -11,8 +12,11 @@ exports.gotoTopic = function(req, res){
 		userInfo = req.session.user;	
 	}
 	var topicId = req.params.topicId;
-	
-	res.render('topic/read', { titleName: config.NAME , user: userInfo});
+	topic.getById(topicId, function(err, info){
+		console.log(err,'-=-=-=',info);
+		info.lastTime = tool.getDateDiff(info.lastTimestamp);
+		res.render('topic/read', { titleName: config.NAME, user: userInfo, topicInfo : info});
+	});
 };
 
 //跳转到发布话题页面

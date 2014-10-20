@@ -7,17 +7,12 @@
                     <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
                             <div class="uk-panel-title pd10">
-                                <div class="topic_title">关于事件循环</div>
-                                <div class="topic_time">发布于 21小时前 - 作者 michaeljunlove - 106 次浏览</div>
+                                <div class="topic_title"><%- topicInfo.title %></div>
+                                <div class="topic_time">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 michaeljunlove - <%- topicInfo.visitQuantity%> 次浏览</div>
                             </div>
                             <div class="topic_box">
                                 <div class="topic_content mb10">
-                                    在看《node.js入门经典》这本书的时候看到：
-                                    由于事件循环是以单一进程为基础的，所以为了确保高性能需要遵循以下原则：
-                                    1,函数必须快速返回。2，函数不得阻塞。3，长时间运行的操作必须移到另一个进程中去
-                                    但是之前在看《深入浅出node.js》的时候，说异步I/O在windows下是通过IOCP的线程池执行的，不管它是否阻塞I/O，
-                                    都不会影响到javascript线程的后续执行的，这和上面说的函数必须快速返回是不是矛盾啊？
-                                    求大神指点一下：为什么函数必须快速返回？
+                                    <%- topicInfo.content %>
                                 </div>
                                 <div class="uk-clearfix">
                                     <div class="uk-float-right">

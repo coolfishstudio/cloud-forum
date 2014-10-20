@@ -1,6 +1,7 @@
 var user = require('./module/user'),
     async = require('async'),
     topic = require('./module/topic'),
+    tool = require('./util/tool'),
     config = require('../config');
 
 //跳转到首页页面
@@ -17,8 +18,11 @@ exports.gotoIndex = function(req, res){
     	//获取列表信息
         findTopicList: function(done){
         	topic.getAll(config.INDEXPAGENUM, page, function(err, info){
-        		console.log(err,'-=-=-=',info);
+        		for(var i = 0; i < info.length; i++){
+        			info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
+        		}
         		topicList = info;
+        		console.log('-=-=-=',topicList);
         		done(err);
         	});
         }

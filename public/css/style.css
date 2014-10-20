@@ -113,7 +113,8 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .card_list .card_list_image img{margin:0 2px 0 2px;height: 40px;border: 1px solid #ddd; padding: 2px;background: #fff;border-radius: 50%;}
 .card_list .card_list_num code{padding: 2px;margin:2px;}
 .card_list .card_list_title{font-size: 16px;font-family: '微软雅黑'}
-.card_list .card_list_user img{margin:0 2px 0 2px;height: 20px;border-radius: 5px;}
+.card_list .card_list_user img{margin:0 6px 0 2px;height: 20px;border-radius: 5px;}
+.card_list .card_list_time{font-size: 12px;width:50px;}
 
 .topic_title{font-weight: bold;}
 .topic_time{font-size: 13px;color:#999;}
