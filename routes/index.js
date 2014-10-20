@@ -41,8 +41,9 @@ router.get('/tool/:toolName', pageStatic.gotoStatic);
 
 /* topic */
 // 新建文章界面
-router.get('/topic', pageTopic.gotoTopic);
+router.get('/topic/create', pageTopic.gotoCreateTopic);
 // 显示某个话题
+router.get('/topic/:topicName', pageTopic.gotoTopic);
 // 将某话题置顶
 // 将某话题加精
 // 编辑某话题
