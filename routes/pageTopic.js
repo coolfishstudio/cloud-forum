@@ -10,6 +10,8 @@ exports.gotoTopic = function(req, res){
 	}else{
 		userInfo = req.session.user;	
 	}
+	var topicId = req.params.topicId;
+	
 	res.render('topic/read', { titleName: config.NAME , user: userInfo});
 };
 

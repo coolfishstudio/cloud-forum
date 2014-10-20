@@ -12,16 +12,18 @@ exports.gotoIndex = function(req, res){
 		userInfo = req.session.user;	
 	}
 	var page = req.body.page || 1;
+	var topicList = [];
 	async.series({
     	//获取列表信息
         findTopicList: function(done){
         	topic.getAll(config.INDEXPAGENUM, page, function(err, info){
         		console.log(err,'-=-=-=',info);
+        		topicList = info;
         		done(err);
         	});
         }
     }, function(err){
-        res.render('index', { titleName: config.NAME ,user : userInfo});  
+        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList });  
     })
 
 
