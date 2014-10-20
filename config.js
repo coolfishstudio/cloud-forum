@@ -21,5 +21,7 @@ module.exports = {
 	      user: 'it_coolfish@126.com',
 	      pass: '789512357'
 	    }
-	}
+	},
+	//首页一页显示几个文章
+	INDEXPAGENUM: 20
 }

@@ -58,7 +58,7 @@ exports.signin = function(req, res){
         if(err){
             res.send({status: -1, content: err});
         }else{
-            res.send({status: 0, content: '注册成功。',user: req.session.user});
+            res.send({status: 0, content: '注册成功。'});
         }      
     })
 };
@@ -67,7 +67,6 @@ exports.login = function(req, res){
     var email = req.body.email;
     var passWord = req.body.passWord;
     var userInfo = {};
-    console.log('----');
     async.series({
         //根据名字去查询
         findUserName: function(done){
@@ -101,7 +100,7 @@ exports.login = function(req, res){
         if(err){
             res.send({status: -1, content: err});
         }else{
-            res.send({status: 0, content: '登录成功。', user: req.session.user});
+            res.send({status: 0, content: '登录成功。'});
             // res.render('index');//注册成功后返回主页
         } 
     });
