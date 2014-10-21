@@ -59,7 +59,6 @@
 <link rel="stylesheet" href="/css/editor.css" />
 <script type="text/javascript" src="/js/editor.js"></script>
 <script type="text/javascript" src="/js/marked.js"></script>
-
 <script type="text/javascript">
 (function(){
     var editor = new Editor();
@@ -68,7 +67,7 @@
     var title, content, tag;
     $('#createTopic').click(function(){
         title = $('#topic_title').val();
-        content = editor.codemirror.getValue();
+        content = editor.constructor.markdown(editor.codemirror.getValue());
         tag = $('#topic_tag').val();
         if('' == title){
             $.UIkit.notify('请输入标题', {pos:'top-right',status:'danger',timeout: 1000});

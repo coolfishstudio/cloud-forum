@@ -15,7 +15,7 @@ exports.gotoTopic = function(req, res){
 	topic.getById(topicId, function(err, info){
 		console.log(err,'-=-=-=',info);
 		info.lastTime = tool.getDateDiff(info.lastTimestamp);
-		res.render('topic/read', { titleName: config.NAME, user: userInfo, topicInfo : info});
+		res.render('topic/read', { titleName: info.title + ' -- ' +config.NAME, user: userInfo, topicInfo : info});
 	});
 };
 
