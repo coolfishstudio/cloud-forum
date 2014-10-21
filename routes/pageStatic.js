@@ -22,9 +22,23 @@ exports.gotoIndex = function(req, res){
         			info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
         		}
         		topicList = info;
-        		console.log('-=-=-=',topicList);
         		done(err);
         	});
+        },
+        //获取对应的用户信息
+        findUserInfo: function(done){
+            var iterator = function(topicInfo, eachFinish){
+                user.getById(topicInfo.userId, function(err, dbUserInfo){
+                    console.log('[dbUserInfo]',dbUserInfo);
+                    user.getById(topicInfo.lastUser, function(err, dbLastUserInfo){
+                        console.log('[dbUserInfo]',dbLastUserInfo);
+                        eachFinish();
+                    });   
+                });
+            };
+            async.forEach(topicList, iterator, function(err){
+                done(err);
+            });
         }
     }, function(err){
         res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList });  

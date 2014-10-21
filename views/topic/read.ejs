@@ -11,16 +11,13 @@
                                 <div class="topic_time">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 michaeljunlove - <%- topicInfo.visitQuantity%> 次浏览</div>
                             </div>
                             <div class="topic_box">
-                                <div class="topic_content mb10">
+                                <div class="topic_content">
                                     <%- topicInfo.content %>
                                 </div>
                                 <div class="uk-clearfix">
                                     <div class="uk-float-right">
-                                        <div class="uk-button-group">
-                                            <a class="uk-button uk-button-success" href="###">收藏</a>
-                                            <a class="uk-button uk-button-success" href="###">分享</a>
-                                        </div>
-
+                                        <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###">收藏</a>
+                                        <a class="uk-button uk-button-success" href="###">分享</a>
                                     </div>
                                 </div>
                             </div>
@@ -39,6 +36,25 @@
                         </div>
 
                     </div>
+
+                    <div class="panel panel_border mb10">
+                        <div class="uk-panel uk-panel-header pd5">
+                            <h3 class="uk-panel-title">发言</h3>
+                            <div class="topic_content uk-form">
+                                <div class="uk-form-row topic_speech">
+                                    <textarea class='editor' name='t_content' rows='4'
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <div class="uk-clearfix topic_box">
+                                <div class="uk-float-right">
+                                    <a href="###" class="uk-button uk-button-success uk-vertical-align-middle" id="createTopic"><i class="uk-icon-location-arrow"></i>&nbsp;我要发言</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
                     <%- include ../goHome %>
@@ -58,3 +74,9 @@
 <link rel="stylesheet" href="/css/editor.css" />
 <script type="text/javascript" src="/js/editor.js"></script>
 <script type="text/javascript" src="/js/marked.js"></script>
+<script type="text/javascript">
+(function(){
+    var editor = new Editor();
+    editor.render($('.editor')[0]);
+})();
+</script>

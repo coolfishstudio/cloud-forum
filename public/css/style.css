@@ -119,11 +119,11 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .topic_title{font-weight: bold;}
 .topic_time{font-size: 13px;color:#999;}
 .topic_box{padding: 0 10px 10px 10px; }
+.topic_speech .CodeMirror{height:150px;}
 .topic_content{}
 .topic_content h1, .topic_content h2, .topic_content h3,
 .topic_content h4, .topic_content h5, .topic_content h6{
 	margin: 30px 0 15px 0;
-	border-bottom: 1px solid #eee;
 }
 .topic_content h1{
 	font-size: 13 * 2.5px;
