@@ -29,9 +29,11 @@ exports.gotoIndex = function(req, res){
         findUserInfo: function(done){
             var iterator = function(topicInfo, eachFinish){
                 user.getById(topicInfo.userId, function(err, dbUserInfo){
-                    console.log('[dbUserInfo]',dbUserInfo);
+                    topicInfo.userName = dbUserInfo.name;
+                    topicInfo.userHeadSrc = dbUserInfo.headSrc;
                     user.getById(topicInfo.lastUser, function(err, dbLastUserInfo){
-                        console.log('[dbUserInfo]',dbLastUserInfo);
+                        topicInfo.lastUserName = dbLastUserInfo.name;
+                        topicInfo.lastUserHeadSrc = dbLastUserInfo.headSrc;
                         eachFinish();
                     });   
                 });
