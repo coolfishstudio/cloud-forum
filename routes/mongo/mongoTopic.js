@@ -36,3 +36,7 @@ exports.getAll = function(pageNum, page, callback){
 exports.getById = function(topicID, callback){
 	topicColl.findOne({_id:topicID},callback);
 };
+
+exports.getCount = function(info, callback){
+	topicColl.count(info, callback);
+};

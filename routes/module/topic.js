@@ -8,3 +8,5 @@ exports.getAll = mongoTopic.getAll;
 exports.getById = mongoTopic.getById;
 
 exports.handle = mongoTopic.handle;
+exports.getCount = mongoTopic.getCount;
+
