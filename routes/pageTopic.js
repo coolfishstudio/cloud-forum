@@ -89,7 +89,7 @@ exports.getTop = function(req, res){
 		return res.send({status: -2, content: '非法操作'});
 	}
 	var topicId = req.params.topicId;
-	var type = req.params.type || 0;
+	var type = parseInt(req.params.type) || 0;
 	async.series({
     	//修改话题属性
         updateTopic: function(done){
@@ -112,7 +112,7 @@ exports.getGood = function(req, res){
 		return res.send({status: -2, content: '非法操作'});
 	}
 	var topicId = req.params.topicId;
-	var type = req.params.type || 0;
+	var type = parseInt(req.params.type) || 0;
 	async.series({
     	//修改话题属性
         updateTopic: function(done){

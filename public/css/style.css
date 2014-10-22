@@ -118,7 +118,7 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 
 .topic_title{font-weight: bold;}
 .topic_info{font-size: 13px;color:#999;}
-.topic_icon{}
+.topic_icon{cursor: pointer;}
 .topic_box{padding: 0 10px 10px 10px; }
 .topic_speech .CodeMirror{height:150px;}
 .topic_content{}

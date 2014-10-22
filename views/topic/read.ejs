@@ -9,13 +9,13 @@
                             <div class="uk-panel-title pd10">
                                 <div class="topic_title"><%- topicInfo.title %></div>
                                 <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览</div>
-                                <div class="topic_icon">
+                                <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
                                     <a href="###" title="修改"><i class="uk-icon-pencil-square"></i></a>
                                     <a href="###" title="删除"><i class="uk-icon-bitbucket"></i></a>
-                                    <a href="###" id="iGood_t" title="加精"><i class="uk-icon-star"></i></a>
-                                    <a href="/topic/<%= topicInfo._id %>/good/0" id="iGood_f" title="取消加精"><i class="uk-icon-star-o"></i></a>
-                                    <a href="/topic/<%= topicInfo._id %>/top/1" title="置顶"><i class="uk-icon-arrow-circle-up"></i></a>
-                                    <a href="/topic/<%= topicInfo._id %>/top/0" title="取消置顶"><i class="uk-icon-arrow-circle-o-up"></i></a>
+                                    <i class="uk-icon-star <%- topicInfo.isGood ? 'uk-hidden' : '' %>" id="iGood_t" title="加精"></i>
+                                    <i class="uk-icon-star-o <%- topicInfo.isGood ? '' : 'uk-hidden'  %>" id="iGood_f" title="取消加精"></i>
+                                    <i class="uk-icon-arrow-circle-up <%- topicInfo.isTop ? 'uk-hidden' : '' %>" id="iTop_t" title="置顶"></i>
+                                    <i class="uk-icon-arrow-circle-o-up <%- topicInfo.isTop ? '' : 'uk-hidden'  %>" id="iTop_f" title="取消置顶"></i>
                                 </div>
                             </div>
                             <div class="topic_box">
@@ -85,7 +85,65 @@
 (function(){
     var editor = new Editor();
     editor.render($('.editor')[0]);
-
-
+    $('#iGood_t').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/good/1',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $('#iGood_t').addClass('uk-hidden');
+                    $('#iGood_f').removeClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    $('#iGood_f').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/good/0',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $('#iGood_t').removeClass('uk-hidden');
+                    $('#iGood_f').addClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    $('#iTop_t').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/top/1',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $('#iTop_t').addClass('uk-hidden');
+                    $('#iTop_f').removeClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    $('#iTop_f').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/top/0',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $('#iTop_t').removeClass('uk-hidden');
+                    $('#iTop_f').addClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
 })();
 </script>
