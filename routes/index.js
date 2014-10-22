@@ -45,8 +45,10 @@ router.get('/topic/create', pageTopic.gotoCreateTopic);
 router.post('/topic/create', pageTopic.createTopic);
 // 显示某个话题
 router.get('/topic/:topicId', pageTopic.gotoTopic);
-// 将某话题置顶
-// 将某话题加精
+// 将某话题置顶(取消置顶)
+router.get('/topic/:topicId/top/:type', pageTopic.getTop);
+// 将某话题加精(取消加精)
+router.get('/topic/:topicId/good/:type', pageTopic.getGood);
 // 编辑某话题
 // 关注某话题
 // 取消关注某话题

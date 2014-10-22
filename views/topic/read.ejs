@@ -8,7 +8,15 @@
                         <div class="uk-panel uk-panel-header pd5">
                             <div class="uk-panel-title pd10">
                                 <div class="topic_title"><%- topicInfo.title %></div>
-                                <div class="topic_time">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 michaeljunlove - <%- topicInfo.visitQuantity%> 次浏览</div>
+                                <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览</div>
+                                <div class="topic_icon">
+                                    <a href="###" title="修改"><i class="uk-icon-pencil-square"></i></a>
+                                    <a href="###" title="删除"><i class="uk-icon-bitbucket"></i></a>
+                                    <a href="###" id="iGood_t" title="加精"><i class="uk-icon-star"></i></a>
+                                    <a href="/topic/<%= topicInfo._id %>/good/0" id="iGood_f" title="取消加精"><i class="uk-icon-star-o"></i></a>
+                                    <a href="/topic/<%= topicInfo._id %>/top/1" title="置顶"><i class="uk-icon-arrow-circle-up"></i></a>
+                                    <a href="/topic/<%= topicInfo._id %>/top/0" title="取消置顶"><i class="uk-icon-arrow-circle-o-up"></i></a>
+                                </div>
                             </div>
                             <div class="topic_box">
                                 <div class="topic_content">
@@ -58,7 +66,6 @@
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
                     <%- include ../goHome %>
-                    <%- include ../userInfo %>
                     <%- include ../works %>
                     <%- include ../tool %>
                     <%- include ../friendship %>
@@ -78,5 +85,7 @@
 (function(){
     var editor = new Editor();
     editor.render($('.editor')[0]);
+
+
 })();
 </script>

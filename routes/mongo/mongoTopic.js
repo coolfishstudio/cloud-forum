@@ -21,6 +21,10 @@ exports.update = function(topicID, topicObj, callback){
 	topicColl.findAndModify({_id: topicID.toLowerCase()}, [], {$set: topicObj}, {new: true}, callback);
 };
 
+exports.handle = function(topicID, topicObj, callback){
+	topicColl.findAndModify({_id: topicID.toLowerCase()}, [], {$set: topicObj}, {new: true}, callback);
+};
+
 exports.remove = function(topicID, callback){
 	topicColl.remove({_id: topicID}, callback);
 };

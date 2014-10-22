@@ -6,3 +6,5 @@ exports.update = mongoTopic.update;
 exports.remove = mongoTopic.remove;
 exports.getAll = mongoTopic.getAll;
 exports.getById = mongoTopic.getById;
+
+exports.handle = mongoTopic.handle;

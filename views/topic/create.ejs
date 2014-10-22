@@ -44,7 +44,17 @@
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
                     <%- include ../goHome %>
-                    <%- include ../userInfo %>
+                    <div class="panel mb10 panel_border">
+                        <div class="uk-panel uk-panel-header pd5">
+                            <h3 class="uk-panel-title">Markdown 语法参考</h3>
+                            ### 单行的标题<br />
+                            **粗体**<br />
+                            `console.log('行内代码')`<br />
+                            ```js\n code \n``` 标记代码块<br />
+                            [内容](链接)<br />
+                            ![文字说明](图片链接)<br />
+                        </div>
+                    </div>
                     <%- include ../works %>
                     <%- include ../tool %>
                     <%- include ../friendship %>
@@ -78,18 +88,18 @@
             return;   
         }
         $.ajax({
-                type: 'POST',
-                url: '/topic/create',
-                data: {title : title, content : content, tag : tag},
-                success: function(result){
-                    if(0 == result.status){
-                        $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-                        window.location.href = '/';
-                    }else{
-                        $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
-                    }
+            type: 'POST',
+            url: '/topic/create',
+            data: {title : title, content : content, tag : tag},
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    window.location.href = '/';
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                 }
-            });
+            }
+        });
     });
 
 })();
