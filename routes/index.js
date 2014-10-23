@@ -49,6 +49,8 @@ router.get('/topic/:topicId', pageTopic.gotoTopic);
 router.get('/topic/:topicId/top/:type', pageTopic.getTop);
 // 将某话题加精(取消加精)
 router.get('/topic/:topicId/good/:type', pageTopic.getGood);
+// 将某话题加精(取消加精)
+router.get('/topic/:topicId/waste/:type', pageTopic.getWaste);
 // 编辑某话题
 // 关注某话题
 // 取消关注某话题

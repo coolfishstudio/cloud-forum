@@ -91,6 +91,10 @@ exports.getTop = function(req, res){
 	var topicId = req.params.topicId;
 	var type = parseInt(req.params.type) || 0;
 	async.series({
+		//获取个数
+		// findTopicCount : function(done){
+
+		// },
     	//修改话题属性
         updateTopic: function(done){
         	topic.handle(topicId, {isTop : !!type}, function(err, info){
@@ -125,6 +129,29 @@ exports.getGood = function(req, res){
             res.send({status: -1, content: err});
         }else{
             res.send({status: 0, content: (!!type ? '':'取消')+'加精操作成功。'});
+        }      
+    });
+};
+
+//将某话题废弃(找回)
+exports.getWaste = function(req, res){
+	if(!req.session || !req.session.user){
+		return res.send({status: -2, content: '非法操作'});
+	}
+	var topicId = req.params.topicId;
+	var type = parseInt(req.params.type) || 0;
+	async.series({
+    	//修改话题属性
+        updateTopic: function(done){
+        	topic.handle(topicId, {isWaste : !!type}, function(err, info){
+        		done(err);
+        	});
+        }
+    }, function(err){
+        if(err){
+            res.send({status: -1, content: err});
+        }else{
+            res.send({status: 0, content: (!!type ? '删除':'找回')+'操作成功。'});
         }      
     });
 };

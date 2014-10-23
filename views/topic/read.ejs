@@ -11,7 +11,8 @@
                                 <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览</div>
                                 <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
                                     <a href="###" title="修改"><i class="uk-icon-pencil-square"></i></a>
-                                    <a href="###" title="删除"><i class="uk-icon-bitbucket"></i></a>
+                                    <i class="uk-icon-bitbucket" id="iWaste_t" title="删除"></i>
+                                    <i class="uk-icon-bitbucket" id="iWaste_f" title="找回"></i>
                                     <i class="uk-icon-star <%- topicInfo.isGood ? 'uk-hidden' : '' %>" id="iGood_t" title="加精"></i>
                                     <i class="uk-icon-star-o <%- topicInfo.isGood ? '' : 'uk-hidden'  %>" id="iGood_f" title="取消加精"></i>
                                     <i class="uk-icon-arrow-circle-up <%- topicInfo.isTop ? 'uk-hidden' : '' %>" id="iTop_t" title="置顶"></i>
@@ -139,6 +140,20 @@
                     $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
                     $('#iTop_t').removeClass('uk-hidden');
                     $('#iTop_f').addClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    $('#iWaste_t').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/waste/1',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    window.location.href = '/';
                 }else{
                     $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                 }
