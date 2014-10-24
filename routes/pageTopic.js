@@ -28,6 +28,11 @@ exports.gotoTopic = function(req, res){
         //获取对应的用户信息
         findUserInfo: function(done){
             user.getById(topicInfo.userId, function(err, dbUserInfo){
+            	if(userInfo != '' && userInfo.name == dbUserInfo.name){
+            		topicInfo.user = true;
+            	}else{
+            		topicInfo.user = false;
+            	}
                 topicInfo.userName = dbUserInfo.name;
                 topicInfo.userHeadSrc = dbUserInfo.headSrc;
                 done(err);

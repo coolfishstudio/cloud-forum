@@ -13,12 +13,20 @@ exports.gotoIndex = function(req, res){
 		userInfo = req.session.user;	
 	}
 	var page = req.query.page || 1;
+    var type = req.query.type || 'all';
 	var topicList = [];
     var count = 0;
+    var info = {};
+
+    if('jp' == type){
+        info.isGood = true;
+    }else if('all' != type){
+        info.tag = type;
+    }
 	async.series({
     	//获取列表信息
         findTopicList: function(done){
-        	topic.getAll(config.LIMIT.INDEXPAGENUM, page, function(err, info){
+        	topic.getAll(config.LIMIT.INDEXPAGENUM, page, info, function(err, info){
         		for(var i = 0; i < info.length; i++){
         			info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
         		}
@@ -45,16 +53,15 @@ exports.gotoIndex = function(req, res){
         },
         //获取总数
         findCount : function(done){
-            topic.getCount({
-                isWaste:false,
-                isOpen:true
-            }, function(err, info){
+            info.isWaste = false;
+            info.isOpen = true;
+            topic.getCount(info, function(err, info){
                 count = Math.ceil(info/config.LIMIT.INDEXPAGENUM);
                 done(err);
             });
         }
     }, function(err){
-        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, page : page});  
+        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type});  
     })
 
 

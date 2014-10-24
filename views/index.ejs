@@ -4,7 +4,7 @@
     	<div class="uk-width-medium-5-6 uk-container-center">
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-1-2 uk-width-large-1-4">
-                    <a href='###'>
+                    <a href='/'>
                         <div class="panel panel_border h60 tag_text tag_btn">
                             <b>看帖</b>
                             <i class="uk-icon-file-text-o"></i> 
@@ -12,7 +12,7 @@
                     </a>
                 </div>
                 <div class="uk-width-1-2 uk-width-large-1-4">
-                    <a href='###'>
+                    <a href='/?type=jp'>
                         <div class="panel panel_border h60 tag_star tag_btn">
                             <b>精品</b>
                             <i class="uk-icon-star-o"></i> 
@@ -20,7 +20,7 @@
                     </a>
                 </div>
                 <div class="uk-width-1-2 uk-width-large-1-4">
-                    <a href='###'>
+                    <a href='/?type=fx'>
                         <div class="panel panel_border h60 tag_send tag_btn">
                             <b>分享</b>
                             <i class="uk-icon-send-o"></i> 
@@ -28,7 +28,7 @@
                     </a>
                 </div>
                 <div class="uk-width-1-2 uk-width-large-1-4">
-                    <a href='###'>
+                    <a href='/?type=qz'>
                         <div class="panel panel_border h60 tag_help tag_btn">
                             <b>求助</b>
                             <i class="uk-icon-comment-o"></i> 
@@ -84,9 +84,7 @@
                     <%- include userInfo %>
                     <%- include works %>
                     <%- include tool %>
-                    <%- include rankings %>
                     <%- include friendship %>
-                    <%- include ads %>
                 </div>
             </div>
         </div>
@@ -97,18 +95,22 @@
 <script type="text/javascript">
 (function(){
     function init(){
-        var currentPage = <%- page || 1 %>;
+        var currentPage = <%- currentPage || 1 %>;
+        var currentType = '<%- currentType || "all" %>';
         var countPage = <%- count || 1 %>;
         var pageHtml = '';
         if(currentPage > countPage || currentPage <= 0){
             $.UIkit.notify('非法参数。', {pos:'top-right',status:'danger',timeout: 1000});
             return;
         }
+        if(countPage == 1){
+            return;
+        }
         //头
         if(currentPage == 1){
             pageHtml += '<li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>';
         }else{
-            pageHtml += '<li><a href="/?page=1"><i class="uk-icon-angle-double-left"></i></a></li>';
+            pageHtml += '<li><a href="/?page=1&&type=' + currentType + '"><i class="uk-icon-angle-double-left"></i></a></li>';
         }
         //身
         if(countPage <= 5){
@@ -116,7 +118,7 @@
                 if(i == currentPage){
                     pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
                 }else{
-                    pageHtml += '<li><a href="/?page=' + i + '">' + i + '</a></li>';
+                    pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
                 }
             }
         }else{
@@ -125,7 +127,7 @@
                     if(i == currentPage){
                         pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
                     }else{
-                        pageHtml += '<li><a href="/?page=' + i + '">' + i + '</a></li>';
+                        pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
                     }
                 }
                 pageHtml += '<li><span>...</span></li>';
@@ -135,7 +137,7 @@
                     if(i == currentPage){
                         pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
                     }else{
-                        pageHtml += '<li><a href="/?page=' + i + '">' + i + '</a></li>';
+                        pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
                     }
                 }
             }else{
@@ -144,7 +146,7 @@
                     if(i == currentPage){
                         pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
                     }else{
-                        pageHtml += '<li><a href="/?page=' + i + '">' + i + '</a></li>';
+                        pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
                     }
                 }
                 pageHtml += '<li><span>...</span></li>';
@@ -154,7 +156,7 @@
         if(currentPage == countPage){
             pageHtml += '<li class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>';
         }else{
-            pageHtml += '<li><a href="/?page=' + countPage + '"><i class="uk-icon-angle-double-right"></i></a></li>';
+            pageHtml += '<li><a href="/?page=' + countPage + '&&type=' + currentType + '"><i class="uk-icon-angle-double-right"></i></a></li>';
         }
         $('#paging').html(pageHtml);
     }

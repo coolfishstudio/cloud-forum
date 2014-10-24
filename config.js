@@ -25,7 +25,7 @@ module.exports = {
 	//限制
 	LIMIT: {
 		//首页一页显示几个文章
-		INDEXPAGENUM: 20,
+		INDEXPAGENUM: 5,
 		//置顶个数
 		INDEXTOPNUM : 3
 	}

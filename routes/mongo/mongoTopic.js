@@ -30,8 +30,10 @@ exports.remove = function(topicID, callback){
 	topicColl.remove({_id: topicID}, callback);
 };
 
-exports.getAll = function(pageNum, page, callback){
-	topicColl.find({isWaste:false,isOpen:true}).sort({'isTop':-1,'lastTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
+exports.getAll = function(pageNum, page, info, callback){
+	info.isWaste = false;
+	info.isOpen = true
+	topicColl.find(info).sort({'isTop':-1,'lastTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
 };
 
 exports.getById = function(topicID, callback){
