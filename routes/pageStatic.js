@@ -12,12 +12,13 @@ exports.gotoIndex = function(req, res){
 	}else{
 		userInfo = req.session.user;	
 	}
-	var page = req.body.page || 1;
+	var page = req.query.page || 1;
 	var topicList = [];
+    var count = 0;
 	async.series({
     	//获取列表信息
         findTopicList: function(done){
-        	topic.getAll(config.INDEXPAGENUM, page, function(err, info){
+        	topic.getAll(config.LIMIT.INDEXPAGENUM, page, function(err, info){
         		for(var i = 0; i < info.length; i++){
         			info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
         		}
@@ -41,9 +42,19 @@ exports.gotoIndex = function(req, res){
             async.forEach(topicList, iterator, function(err){
                 done(err);
             });
+        },
+        //获取总数
+        findCount : function(done){
+            topic.getCount({
+                isWaste:false,
+                isOpen:true
+            }, function(err, info){
+                count = Math.ceil(info/config.LIMIT.INDEXPAGENUM);
+                done(err);
+            });
         }
     }, function(err){
-        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList });  
+        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, page : page});  
     })
 
 

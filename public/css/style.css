@@ -50,6 +50,9 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .mb10{
 	margin-bottom: 10px;
 }
+.mr5{
+	margin-right: 5px;
+}
 .pb10{
 	padding-bottom: 10px;
 }

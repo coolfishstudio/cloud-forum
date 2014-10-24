@@ -61,6 +61,7 @@ exports.createTopic = function(req, res){
 	var title = req.body.title;
 	var content = req.body.content;
 	var tag = req.body.tag;
+	var isOpen = !!parseInt(req.body.isOpen);//是否公开
 
 	async.series({
     	//发帖
@@ -69,6 +70,7 @@ exports.createTopic = function(req, res){
         		title : title,
         		content : content,
         		tag : tag,
+        		isOpen : isOpen,
         		userId : userInfo._id
         	}, function(err, info){
         		done(err);
@@ -92,9 +94,18 @@ exports.getTop = function(req, res){
 	var type = parseInt(req.params.type) || 0;
 	async.series({
 		//获取个数
-		// findTopicCount : function(done){
-
-		// },
+		findTopicCount : function(done){
+			topic.getCount({
+				isTop:true
+			}, function(err,info){
+				console.log(err,'-=-=',info);
+				if(info >= config.LIMIT.INDEXTOPNUM && !!type){
+					done('最多有' + config.LIMIT.INDEXTOPNUM + '个置顶');
+				}else{
+					done(err);
+				}
+			});
+		},
     	//修改话题属性
         updateTopic: function(done){
         	topic.handle(topicId, {isTop : !!type}, function(err, info){

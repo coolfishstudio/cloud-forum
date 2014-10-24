@@ -38,6 +38,20 @@ exports.signin = function(req, res){
                 }
         	});
         },
+        //查看是否有这个用户名
+        findEmail: function(done){
+            user.getByUserName(userName, function(err, info){
+                if(!err){
+                    if(null != info){
+                        done('该昵称已经被人抢占了。');
+                    }else{
+                        done();
+                    }
+                }else{
+                    done(err);
+                }
+            });
+        },
         // 注册用户
         regUser: function(done){
             user.insert({

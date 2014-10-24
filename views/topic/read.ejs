@@ -12,7 +12,6 @@
                                 <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
                                     <a href="###" title="修改"><i class="uk-icon-pencil-square"></i></a>
                                     <i class="uk-icon-bitbucket" id="iWaste_t" title="删除"></i>
-                                    <i class="uk-icon-bitbucket" id="iWaste_f" title="找回"></i>
                                     <i class="uk-icon-star <%- topicInfo.isGood ? 'uk-hidden' : '' %>" id="iGood_t" title="加精"></i>
                                     <i class="uk-icon-star-o <%- topicInfo.isGood ? '' : 'uk-hidden'  %>" id="iGood_f" title="取消加精"></i>
                                     <i class="uk-icon-arrow-circle-up <%- topicInfo.isTop ? 'uk-hidden' : '' %>" id="iTop_t" title="置顶"></i>
@@ -34,7 +33,7 @@
 
                     </div>
 
-                    <div class="panel panel_border mb10">
+                    <!-- <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">回复</h3>
                             <ul class="uk-list uk-list-line">
@@ -44,9 +43,9 @@
                             </ul>
                         </div>
 
-                    </div>
+                    </div> -->
 
-                    <div class="panel panel_border mb10">
+                    <!-- <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">发言</h3>
                             <div class="topic_content uk-form">
@@ -63,7 +62,7 @@
                         </div>
 
                     </div>
-
+ -->
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
                     <%- include ../goHome %>
@@ -84,8 +83,8 @@
 <script type="text/javascript" src="/js/marked.js"></script>
 <script type="text/javascript">
 (function(){
-    var editor = new Editor();
-    editor.render($('.editor')[0]);
+    // var editor = new Editor();
+    // editor.render($('.editor')[0]);
     $('#iGood_t').click(function(){
         $.ajax({
             type: 'GET',

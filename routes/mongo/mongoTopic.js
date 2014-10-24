@@ -31,7 +31,7 @@ exports.remove = function(topicID, callback){
 };
 
 exports.getAll = function(pageNum, page, callback){
-	topicColl.find().sort({'isTop':-1,'lastTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
+	topicColl.find({isWaste:false,isOpen:true}).sort({'isTop':-1,'lastTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
 };
 
 exports.getById = function(topicID, callback){
