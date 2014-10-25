@@ -27,7 +27,9 @@ module.exports = {
 		//首页一页显示几个文章
 		INDEXPAGENUM: 20,
 		//置顶个数
-		INDEXTOPNUM : 3
+		INDEXTOPNUM : 3,
+		//不能使用的用户名字
+		NAME : ['admin', 'administrator','coolfish','管理员','系统管理员','system','系统消息']
 	},
 	//积分规则
 	INTEGRAL:{

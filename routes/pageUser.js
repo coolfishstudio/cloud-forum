@@ -1,7 +1,8 @@
 var user = require('./module/user'),
     async = require('async'),
     integral = require('./module/integral'),
-    tool = require('./util/tool');
+    tool = require('./util/tool'),
+    config = require('../config');
 
 //跳转到注册页面
 exports.gotoSignin = function(req, res){
@@ -46,7 +47,18 @@ exports.signin = function(req, res){
                     if(null != info){
                         done('该昵称已经被人抢占了。');
                     }else{
-                        done();
+                        var i = true;
+                        for(var i = 0; i < config.LIMIT.NAME.length; i++){
+                            if(userName == config.LIMIT.NAME[i]){
+                                i = false;
+                                break;
+                            }
+                        }
+                        if(i){
+                            done();
+                        }else{
+                            done('该昵称已经被人抢占了。');
+                        } 
                     }
                 }else{
                     done(err);
