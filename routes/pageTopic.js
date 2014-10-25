@@ -1,5 +1,6 @@
 var topic = require('./module/topic'),
 	user = require('./module/user'),
+    integral = require('./module/integral'),
     async = require('async'),
     tool = require('./util/tool'),
     config = require('../config');
@@ -33,6 +34,11 @@ exports.gotoTopic = function(req, res){
             	}else{
             		topicInfo.user = false;
             	}
+                if(userInfo != '' && userInfo.power == 'a'){
+                   topicInfo.power = true;
+                }else{
+                    topicInfo.power = false; 
+                }
                 topicInfo.userName = dbUserInfo.name;
                 topicInfo.userHeadSrc = dbUserInfo.headSrc;
                 done(err);
@@ -56,18 +62,15 @@ exports.gotoCreateTopic = function(req, res){
 
 //发布话题页面
 exports.createTopic = function(req, res){
-	var userInfo = '';
 	if(!req.session || !req.session.user){
-		userInfo = '';
-	}else{
-		userInfo = req.session.user;	
-	}
-
+        return res.send({status: -2, content: '非法操作'});
+    }
+    var userInfo = req.session.user;
 	var title = req.body.title;
 	var content = req.body.content;
 	var tag = req.body.tag;
 	var isOpen = !!parseInt(req.body.isOpen);//是否公开
-
+    var userIntegral = 0;
 	async.series({
     	//发帖
         createTopic: function(done){
@@ -80,6 +83,17 @@ exports.createTopic = function(req, res){
         	}, function(err, info){
         		done(err);
         	});
+        },
+        findIntegral : function(done){
+            integral.getById(userInfo._id,function(err, info){
+                userIntegral = info.integral;
+                done(err);
+            });
+        },
+        updateUserIntegral : function(done){
+            integral.update(userInfo._id,{integral : userIntegral + config.INTEGRAL.POSTING},function(err,info){
+                done(err);
+            });
         }
     }, function(err){
         if(err){
@@ -168,6 +182,29 @@ exports.getWaste = function(req, res){
             res.send({status: -1, content: err});
         }else{
             res.send({status: 0, content: (!!type ? '删除':'找回')+'操作成功。'});
+        }      
+    });
+};
+
+//将某话题私密(取消私密)
+exports.getOpen = function(req, res){
+    if(!req.session || !req.session.user){
+        return res.send({status: -2, content: '非法操作'});
+    }
+    var topicId = req.params.topicId;
+    var type = parseInt(req.params.type) || 0;
+    async.series({
+        //修改话题属性
+        updateTopic: function(done){
+            topic.handle(topicId, {isOpen : !!type}, function(err, info){
+                done(err);
+            });
+        }
+    }, function(err){
+        if(err){
+            res.send({status: -1, content: err});
+        }else{
+            res.send({status: 0, content: (!!type ? '公开':'私密')+'操作成功。'});
         }      
     });
 };

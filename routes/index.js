@@ -51,6 +51,8 @@ router.get('/topic/:topicId/top/:type', pageTopic.getTop);
 router.get('/topic/:topicId/good/:type', pageTopic.getGood);
 // 将某话题加精(取消加精)
 router.get('/topic/:topicId/waste/:type', pageTopic.getWaste);
+// 将某话题私密(取消私密)
+router.get('/topic/:topicId/open/:type', pageTopic.getOpen);
 // 编辑某话题
 // 关注某话题
 // 取消关注某话题

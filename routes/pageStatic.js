@@ -2,6 +2,7 @@ var user = require('./module/user'),
     async = require('async'),
     topic = require('./module/topic'),
     tool = require('./util/tool'),
+    integral = require('./module/integral'),
     config = require('../config');
 
 //跳转到首页页面
@@ -17,7 +18,7 @@ exports.gotoIndex = function(req, res){
 	var topicList = [];
     var count = 0;
     var info = {};
-
+    var userIntegral = 0;
     if('jp' == type){
         info.isGood = true;
     }else if('all' != type){
@@ -59,9 +60,19 @@ exports.gotoIndex = function(req, res){
                 count = Math.ceil(info/config.LIMIT.INDEXPAGENUM);
                 done(err);
             });
+        },
+        findIntegral : function(done){
+            if(!req.session || !req.session.user){
+                done();
+            }else{
+                integral.getById(userInfo._id,function(err, info){
+                    userIntegral = info.integral;
+                    done(err);
+                });
+            }
         }
     }, function(err){
-        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type});  
+        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
     })
 
 

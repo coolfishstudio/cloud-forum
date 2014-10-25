@@ -25,8 +25,15 @@ module.exports = {
 	//限制
 	LIMIT: {
 		//首页一页显示几个文章
-		INDEXPAGENUM: 5,
+		INDEXPAGENUM: 20,
 		//置顶个数
 		INDEXTOPNUM : 3
+	},
+	//积分规则
+	INTEGRAL:{
+		//发帖子 ＋ 1 
+		POSTING : 1,
+		//回复＋ 0.5
+		REPLY : 0.5
 	}
 }

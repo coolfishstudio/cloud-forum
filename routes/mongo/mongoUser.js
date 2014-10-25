@@ -5,7 +5,7 @@ exports.insert = function(userObj, callback){
 	userObj._id = tool.generateUUID();
 	userObj.createTimestamp = new Date().getTime();
 	userObj.createDate = tool.getThisTime();
-	userObj.integral = 0;//积分
+	userObj.power = 'a';
 	userObj.headSrc = '/images/face/default.png';//头像
 	userObj.describe = ' 这家伙很懒，什么个性签名都没有留下。';//描述
 	userColl.insert(userObj, callback);
@@ -13,6 +13,7 @@ exports.insert = function(userObj, callback){
 
 exports.update = function(userID, userObj, callback){
 	userObj.updateDate = tool.getThisTime();
+	userObj.updateTimestamp = new Date().getTime();
 	userColl.findAndModify({_id: userID.toLowerCase()}, [], {$set: userObj}, {new: true}, callback);
 };
 

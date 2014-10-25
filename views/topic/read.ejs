@@ -10,12 +10,19 @@
                                 <div class="topic_title"><%- topicInfo.title %></div>
                                 <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览</div>
                                 <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
-                                    <a href="###" title="修改"><i class="uk-icon-pencil-square"></i></a>
+                                    <% if(topicInfo.user){ %>
+                                    <i class="uk-icon-pencil-square" id="iUpdate" title="修改"></i>
                                     <i class="uk-icon-bitbucket" id="iWaste_t" title="删除"></i>
+                                    <i class="uk-icon-eye <%- topicInfo.isOpen ? 'uk-hidden' : '' %>" id="isOpen_t" title="公开"></i>
+                                    <i class="uk-icon-eye-slash <%- topicInfo.isOpen ? '' : 'uk-hidden'  %>" id="isOpen_f" title="私人"></i>
+
+                                    <% } %>
+                                    <% if(topicInfo.power){ %>
                                     <i class="uk-icon-star <%- topicInfo.isGood ? 'uk-hidden' : '' %>" id="iGood_t" title="加精"></i>
                                     <i class="uk-icon-star-o <%- topicInfo.isGood ? '' : 'uk-hidden'  %>" id="iGood_f" title="取消加精"></i>
                                     <i class="uk-icon-arrow-circle-up <%- topicInfo.isTop ? 'uk-hidden' : '' %>" id="iTop_t" title="置顶"></i>
                                     <i class="uk-icon-arrow-circle-o-up <%- topicInfo.isTop ? '' : 'uk-hidden'  %>" id="iTop_f" title="取消置顶"></i>
+                                    <% } %>
                                 </div>
                             </div>
                             <div class="topic_box">
@@ -158,5 +165,41 @@
             }
         });
     });
+
+    $('#isOpen_t').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/open/1',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $('#isOpen_t').addClass('uk-hidden');
+                    $('#isOpen_f').removeClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    $('#isOpen_f').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/open/0',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $('#isOpen_t').removeClass('uk-hidden');
+                    $('#isOpen_f').addClass('uk-hidden');
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+
+    $('#iUpdate').click(function(){
+        $.UIkit.notify('那个该死的程序猿居然没有做这个修改功能，等他睡醒了再收拾他。', {pos:'top-right',status:'success',timeout: 1000});            
+    });
+
 })();
 </script>

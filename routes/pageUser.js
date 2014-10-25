@@ -1,5 +1,6 @@
 var user = require('./module/user'),
     async = require('async'),
+    integral = require('./module/integral'),
     tool = require('./util/tool');
 
 //跳转到注册页面
@@ -67,6 +68,14 @@ exports.signin = function(req, res){
                     done(err);
                 }
             });
+        },
+        insertIntegral : function(done){
+            integral.insert({
+                userId : req.session.user._id,
+                integral : 0
+            },function(err, info){
+                done(err);
+            });    
         }
     }, function(err){
         if(err){
@@ -99,8 +108,7 @@ exports.login = function(req, res){
         },
         //判断找到的数据是否密码一样
         contrastPassword: function(done){
-            if(tool.getMD5(passWord) == userInfo.passWord){
-            	
+            if(tool.getMD5(passWord) == userInfo.passWord){       	
             	userInfo.passWord = '';
                 req.session.user = userInfo;//用户信息存入 session
                 console.log(req.session.user);
