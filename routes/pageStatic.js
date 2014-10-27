@@ -66,7 +66,7 @@ exports.gotoIndex = function(req, res){
                 done();
             }else{
                 integral.getById(userInfo._id,function(err, info){
-                    userIntegral = info.integral;
+                    userIntegral = info.integral || 0;
                     done(err);
                 });
             }
@@ -94,7 +94,7 @@ exports.getSite = function(req, res){
     
     async.series({
         //修改话题属性
-        
+
     }, function(err){
         if(err){
             res.send({status: -1, content: err});
