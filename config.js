@@ -11,6 +11,8 @@ module.exports = {
 		qq: '461836324',
 		email: '461836324@qq.com'
 	},
+	// 发布时间
+	RELEASEtIME : '2014-10-25',
 	// 域名
 	HOST: 'localhost',
 	// 邮箱配置
