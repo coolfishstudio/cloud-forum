@@ -123,14 +123,22 @@ exports.login = function(req, res){
             if(tool.getMD5(passWord) == userInfo.passWord){       	
             	userInfo.passWord = '';
                 req.session.user = userInfo;//用户信息存入 session
-                console.log(req.session.user);
+                // console.log(req.session.user);
                 done();
             }else{
                 done('密码不正确，请重新输入。');
             }
+        },
+        //纪录最后一次登陆的时间
+        updateLastLoginDate : function(done){
+            user.update(userInfo._id,{
+                lastLoginDate : tool.getThisTime()
+            },function(err, info){
+                done(err);
+            });
         }
     },function(err){
-        console.log(err);
+        // console.log(err);
         if(err){
             res.send({status: -1, content: err});
         }else{
