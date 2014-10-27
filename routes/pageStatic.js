@@ -74,9 +74,6 @@ exports.gotoIndex = function(req, res){
     }, function(err){
         res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
     })
-
-
-	
 };
 
 //跳转到静态工具页面
@@ -90,4 +87,19 @@ exports.gotoStatic = function(req, res){
 		userInfo = req.session.user;	
 	}
     res.render('static/' + toolName, {titleName : name + ' -- ' + config.NAME, user : userInfo});
+};
+
+//获取站点状态
+exports.getSite = function(req, res){
+    
+    async.series({
+        //修改话题属性
+        
+    }, function(err){
+        if(err){
+            res.send({status: -1, content: err});
+        }else{
+            res.send({status: 0, content: (!!type ? '':'取消')+'加精操作成功。'});
+        }      
+    });
 };
