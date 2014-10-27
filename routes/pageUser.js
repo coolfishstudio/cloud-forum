@@ -25,6 +25,11 @@ exports.signin = function(req, res){
     if('default' == userName){
     	return res.send({status: -1, content: '该用户名已经存在了。'});
     }
+    for(var i = 0; i < config.LIMIT.NAME.length; i++){
+        if(userName == config.LIMIT.NAME[i]){
+            return res.send({status: -1, content: '该用户名已经存在了。'});
+        }
+    }
     async.series({
     	//查看是否有这个用户
         findEmail: function(done){
@@ -41,24 +46,13 @@ exports.signin = function(req, res){
         	});
         },
         //查看是否有这个用户名
-        findEmail: function(done){
+        findName: function(done){
             user.getByUserName(userName, function(err, info){
                 if(!err){
                     if(null != info){
-                        done('该昵称已经被人抢占了。');
+                        done('该用户名已经存在了。');
                     }else{
-                        var i = true;
-                        for(var i = 0; i < config.LIMIT.NAME.length; i++){
-                            if(userName == config.LIMIT.NAME[i]){
-                                i = false;
-                                break;
-                            }
-                        }
-                        if(i){
-                            done();
-                        }else{
-                            done('该昵称已经被人抢占了。');
-                        } 
+                        done();
                     }
                 }else{
                     done(err);
