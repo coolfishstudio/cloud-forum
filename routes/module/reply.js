@@ -6,3 +6,5 @@ exports.update = mongoReply.update;
 exports.remove = mongoReply.remove;
 exports.getAll = mongoReply.getAll;
 exports.getById = mongoReply.getById;
+
+exports.getAllByTopicId = mongoReply.getAllByTopicId;

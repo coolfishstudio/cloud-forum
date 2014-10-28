@@ -80,11 +80,11 @@
         title = $('#topic_title').val();
         content = editor.constructor.markdown(editor.codemirror.getValue());
         tag = $('#topic_tag').val();
-        if('' == title){
+        if('' == $.trim(title)){
             $.UIkit.notify('请输入标题', {pos:'top-right',status:'danger',timeout: 1000});
             return;   
         }
-        if('' == content){
+        if('' == $.trim(content)){
             $.UIkit.notify('请不要发空内容的帖子', {pos:'top-right',status:'danger',timeout: 1000});
             return;   
         }

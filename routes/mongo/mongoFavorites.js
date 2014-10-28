@@ -1,6 +1,7 @@
 var favoritesColl = require('./mongo').getCollection('forum_favorites');
 var tool = require('../util/tool');
 
+/*收藏*/
 exports.insert = function(favoritesObj, callback){
 	favoritesObj._id = tool.generateUUID();
 	favoritesObj.createTimestamp = new Date().getTime();

@@ -1,6 +1,7 @@
 var integralColl = require('./mongo').getCollection('forum_integral');
 var tool = require('../util/tool');
 
+/*积分*/
 exports.insert = function(integralObj, callback){
 	integralObj._id = tool.generateUUID();
 	integralObj.createTimestamp = new Date().getTime();

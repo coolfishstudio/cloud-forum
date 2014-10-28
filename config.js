@@ -31,13 +31,15 @@ module.exports = {
 		//置顶个数
 		INDEXTOPNUM : 3,
 		//不能使用的用户名字
-		NAME : ['admin', 'administrator','coolfish','管理员','系统管理员','system','系统消息']
+		NAME : ['admin', 'administrator','coolfish','管理员','系统管理员','system','系统消息'],
+		//一页显示几个评论
+		REPLYPAGENUM: 15
 	},
 	//积分规则
 	INTEGRAL:{
-		//发帖子 ＋ 1 
-		POSTING : 1,
+		//发帖子 ＋ 2 
+		POSTING : 2,
 		//回复＋ 0.5
-		REPLY : 0.5
+		REPLY : 1
 	}
 }

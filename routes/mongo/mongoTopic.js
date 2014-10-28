@@ -12,6 +12,8 @@ exports.insert = function(topicObj, callback){
 	topicObj.isTop = false;//是否置顶
 	topicObj.isGood = false;//是否加精
 	topicObj.isWaste = false;//是否废弃
+	topicObj.ups = [];//赞
+	topicObj.downs = [];//损
 	topicObj.lastUser = topicObj.userId;//最后一个回复的人
 	topicObj.lastTimestamp = new Date().getTime();//最后一个回复时间
 	topicColl.insert(topicObj, callback);

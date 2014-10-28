@@ -8,7 +8,7 @@
                         <div class="uk-panel uk-panel-header pd5">
                             <div class="uk-panel-title pd10">
                                 <div class="topic_title"><%- topicInfo.title %></div>
-                                <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览</div>
+                                <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览 - <%- topicInfo.replyQuantity%> 次评论</div>
                                 <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
                                     <% if(topicInfo.user){ %>
                                     <i class="uk-icon-pencil-square" id="iUpdate" title="修改"></i>
@@ -40,19 +40,19 @@
 
                     </div>
 
-                    <!-- <div class="panel panel_border mb10">
+                    <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">回复</h3>
                             <ul class="uk-list uk-list-line">
-                                <li>11111</li>
-                                <li>1111</li>
-                                <li>1111</li>
+                                <% replyInfo.forEach(function(content){ %>
+                                <li><%- content.content %></li>
+                                <% }) %>
                             </ul>
                         </div>
 
-                    </div> -->
+                    </div>
 
-                    <!-- <div class="panel panel_border mb10">
+                    <div class="panel panel_border mb10 <%- user=='' ? 'uk-hidden' : '' %>">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">发言</h3>
                             <div class="topic_content uk-form">
@@ -63,13 +63,13 @@
                             </div>
                             <div class="uk-clearfix topic_box">
                                 <div class="uk-float-right">
-                                    <a href="###" class="uk-button uk-button-success uk-vertical-align-middle" id="createTopic"><i class="uk-icon-location-arrow"></i>&nbsp;我要发言</a>
+                                    <a href="###" class="uk-button uk-button-success uk-vertical-align-middle" id="createReply"><i class="uk-icon-location-arrow"></i>&nbsp;我要发言</a>
                                 </div>
                             </div>
                         </div>
 
                     </div>
- -->
+
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
                     <%- include ../goHome %>
@@ -89,8 +89,8 @@
 <script type="text/javascript" src="/js/marked.js"></script>
 <script type="text/javascript">
 (function(){
-    // var editor = new Editor();
-    // editor.render($('.editor')[0]);
+    var editor = new Editor();
+    editor.render($('.editor')[0]);
     $('#iGood_t').click(function(){
         $.ajax({
             type: 'GET',
@@ -200,6 +200,28 @@
     $('#iUpdate').click(function(){
         $.UIkit.notify('那个该死的程序猿居然没有做这个修改功能，等他睡醒了再收拾他。', {pos:'top-right',status:'success',timeout: 1000});            
     });
-
+    //发表评论
+    var content;
+    $('#createReply').click(function(){
+        content = editor.constructor.markdown(editor.codemirror.getValue());
+        topicId = '<%- topicInfo._id %>';
+        if('' == $.trim(content)){
+            $.UIkit.notify('请不要发空内容的评论', {pos:'top-right',status:'danger',timeout: 1000});
+            return;   
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/reply/create',
+            data: {topicId : topicId, content : content},
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    // window.location.reload();
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
 })();
 </script>

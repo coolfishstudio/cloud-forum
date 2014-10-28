@@ -1,6 +1,7 @@
 var relationColl = require('./mongo').getCollection('forum_relation');
 var tool = require('../util/tool');
 
+/*关注*/
 exports.insert = function(relationObj, callback){
 	relationObj._id = tool.generateUUID();
 	relationObj.createTimestamp = new Date().getTime();

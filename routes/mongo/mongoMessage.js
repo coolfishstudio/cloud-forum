@@ -1,6 +1,7 @@
 var messageColl = require('./mongo').getCollection('forum_message');
 var tool = require('../util/tool');
 
+/*消息*/
 exports.insert = function(messageObj, callback){
 	messageObj._id = tool.generateUUID();
 	messageObj.createTimestamp = new Date().getTime();

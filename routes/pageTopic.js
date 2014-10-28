@@ -1,5 +1,6 @@
 var topic = require('./module/topic'),
 	user = require('./module/user'),
+    reply = require('./module/reply'),
     integral = require('./module/integral'),
     async = require('async'),
     tool = require('./util/tool'),
@@ -15,6 +16,8 @@ exports.gotoTopic = function(req, res){
 	}
 	var topicId = req.params.topicId;
 	var topicInfo = {};
+    var page = req.query.page || 1;
+    var replyInfo = {};
 	async.series({
     	//获取话题信息,修改浏览纪录次数
         findTopicList: function(done){
@@ -43,9 +46,17 @@ exports.gotoTopic = function(req, res){
                 topicInfo.userHeadSrc = dbUserInfo.headSrc;
                 done(err);
             });
+        },
+        //获取评论
+        findReply : function(done){
+            reply.getAllByTopicId(config.LIMIT.REPLYPAGENUM, page, {topicId: topicInfo._id}, function(err, dbReply){
+                console.log(err,'---',dbReply);
+                replyInfo = dbReply;
+                done(err);
+            });
         }  
     }, function(err){
-        res.render('topic/read', { titleName: topicInfo.title + ' -- ' +config.NAME, user: userInfo, topicInfo : topicInfo});
+        res.render('topic/read', { titleName: topicInfo.title + ' -- ' +config.NAME, user: userInfo, topicInfo : topicInfo, replyInfo : replyInfo});
     });
 };
 
@@ -86,13 +97,9 @@ exports.createTopic = function(req, res){
         },
         findIntegral : function(done){
             integral.getById(userInfo._id,function(err, info){
-                userIntegral = info.integral;
-                done(err);
-            });
-        },
-        updateUserIntegral : function(done){
-            integral.update(userInfo._id,{integral : userIntegral + config.INTEGRAL.POSTING},function(err,info){
-                done(err);
+                integral.update(info._id,{integral : info.userIntegral + config.INTEGRAL.POSTING},function(err,info){
+                    done(err);
+                });
             });
         }
     }, function(err){

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pageUser = require('./pageUser'),
 	pageTopic = require('./pageTopic'),
+	pageReply = require('./pageReply'),
 	pageStatic = require('./pageStatic');
 
 /* GET home page. */
@@ -60,7 +61,8 @@ router.get('/topic/:topicId/open/:type', pageTopic.getOpen);
 
 /* reply */
 // 修改自己的评论页
-// 提交一级回复
+// 发表回复
+router.post('/reply/create', pageReply.createReply);
 // 提交二级回复
 // 为评论点赞
 // 修改某评论
