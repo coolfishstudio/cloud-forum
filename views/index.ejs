@@ -45,7 +45,7 @@
                                 <a href='/topic/<%= content._id %>'>
                                     <div class="uk-clearfix">
                                         <div class="uk-float-left card_list_image uk-hidden-small">
-                                            <img src="<%= content.userHeadSrc %>" alt="yves">
+                                            <img src="<%= content.userHeadSrc %>" alt="<%= content.userName%>">
                                         </div>
                                         <div class="uk-float-left card_list_num uk-hidden-small">
                                             <code><%= content.replyQuantity %>/<%= content.visitQuantity %></code>
@@ -64,7 +64,7 @@
                                         <div class="uk-float-left card_list_title"><%= content.title %></div>
                                         <div class="uk-float-right card_list_time"><%= content.lastTime %></div>
                                         <div class="uk-float-right card_list_user">
-                                            <img src="<%= content.lastUserHeadSrc %>" alt="yves">
+                                            <img src="<%= content.lastUserHeadSrc %>" alt="<%= content.lastUserName %>">
                                         </div>
                                     </div>
                                 </a>

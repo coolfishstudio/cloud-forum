@@ -117,7 +117,6 @@ exports.login = function(req, res){
             if(tool.getMD5(passWord) == userInfo.passWord){       	
             	userInfo.passWord = '';
                 req.session.user = userInfo;//用户信息存入 session
-                // console.log(req.session.user);
                 done();
             }else{
                 done('密码不正确，请重新输入。');
@@ -132,7 +131,6 @@ exports.login = function(req, res){
             });
         }
     },function(err){
-        // console.log(err);
         if(err){
             res.send({status: -1, content: err});
         }else{

@@ -43,9 +43,26 @@
                     <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">回复</h3>
-                            <ul class="uk-list uk-list-line">
-                                <% replyInfo.forEach(function(content){ %>
-                                <li><%- content.content %></li>
+                            <ul class="uk-list uk-list-line plr5 reply_list">
+                                <% replyList.forEach(function(content){ %>
+                                <li>
+                                    <div class="uk-clearfix reply_box">
+                                        <div class="uk-float-left card_list_image">
+                                            <img src="<%= content.userHeadSrc %>" alt="<%- content.userName%>">
+                                        </div>
+                                        <div class="uk-float-left card_list_title">
+                                            <div class="topic_content">
+                                                <%- content.content %>
+                                            </div>
+                                        </div>
+                                        <div class="uk-float-right card_list_time">
+                                            <%= content.replyTime%>
+                                        </div>
+                                        <div class="uk-float-right card_list_user">
+                                            <%= content.userName %>
+                                        </div>
+                                    </div>
+                                </li>
                                 <% }) %>
                             </ul>
                         </div>

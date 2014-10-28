@@ -17,7 +17,7 @@ exports.gotoTopic = function(req, res){
 	var topicId = req.params.topicId;
 	var topicInfo = {};
     var page = req.query.page || 1;
-    var replyInfo = {};
+    var replyList = {};
 	async.series({
     	//获取话题信息,修改浏览纪录次数
         findTopicList: function(done){
@@ -50,13 +50,26 @@ exports.gotoTopic = function(req, res){
         //获取评论
         findReply : function(done){
             reply.getAllByTopicId(config.LIMIT.REPLYPAGENUM, page, {topicId: topicInfo._id}, function(err, dbReply){
-                console.log(err,'---',dbReply);
-                replyInfo = dbReply;
+                replyList = dbReply;
                 done(err);
             });
-        }  
+        },
+        //获取评论对应的用户信息
+        findReplyUserInfo: function(done){
+            var iterator = function(replyInfo, eachFinish){
+                user.getById(replyInfo.userId, function(err, dbUserInfo){
+                    replyInfo.userName = dbUserInfo.name;
+                    replyInfo.userHeadSrc = dbUserInfo.headSrc;
+                    replyInfo.replyTime = tool.getDateDiff(replyInfo.createTimestamp);
+                    eachFinish(); 
+                });
+            };
+            async.forEach(replyList, iterator, function(err){
+                done(err);
+            });
+        }
     }, function(err){
-        res.render('topic/read', { titleName: topicInfo.title + ' -- ' +config.NAME, user: userInfo, topicInfo : topicInfo, replyInfo : replyInfo});
+        res.render('topic/read', { titleName: topicInfo.title + ' -- ' +config.NAME, user: userInfo, topicInfo : topicInfo, replyList : replyList});
     });
 };
 
@@ -124,7 +137,6 @@ exports.getTop = function(req, res){
 			topic.getCount({
 				isTop:true
 			}, function(err,info){
-				console.log(err,'-=-=',info);
 				if(info >= config.LIMIT.INDEXTOPNUM && !!type){
 					done('最多有' + config.LIMIT.INDEXTOPNUM + '个置顶');
 				}else{

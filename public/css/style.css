@@ -47,6 +47,9 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .pd10{
 	padding: 10px;
 }
+.plr5{
+	padding: 0 5px 0 5px;
+}
 .mb10{
 	margin-bottom: 10px;
 }
@@ -109,13 +112,24 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	background-image: linear-gradient(to bottom,#666666,#222);
 }
 
+.reply_list li .reply_box{border-left: 4px #666 solid;padding: 2px;}
+.reply_list li:hover .reply_box{background: #eee;border-left: 4px #000 solid;}
+.reply_list .uk-badge{padding: 2px;margin:2px;}
+.reply_list .card_list_image img{margin:0 2px 0 2px;height: 40px;border: 1px solid #ddd; padding: 2px;background: #fff;border-radius: 5px;}
+.reply_list .card_list_num code{padding: 2px;margin:2px;}
+.reply_list .card_list_title{font-size: 16px;font-family: '微软雅黑'}
+.reply_list .card_list_user{margin:0 6px 0 2px;height: 20px;border-radius: 5px;padding-right:2px; }
+.reply_list .card_list_time{font-size: 12px;width:50px;padding-right:2px; }
+
+
+
 .card_list li{height: 40px;line-height: 40px;}
 .card_list li:hover{background: #eee;}
 .card_list li a{width: 100%;height: 100%;display: inline-block;}
 .card_list .uk-badge{padding: 2px;margin:2px;}
 .card_list .card_list_image img{margin:0 2px 0 2px;height: 40px;border: 1px solid #ddd; padding: 2px;background: #fff;border-radius: 50%;}
 .card_list .card_list_num code{padding: 2px;margin:2px;}
-.card_list .card_list_title{font-size: 16px;font-family: '微软雅黑'}
+.card_list .card_list_title{padding: 0 10px 10px 10px; font-size: 16px;font-family: '微软雅黑'}
 .card_list .card_list_user img{margin:0 6px 0 2px;height: 20px;border-radius: 5px;}
 .card_list .card_list_time{font-size: 12px;width:50px;}
 
