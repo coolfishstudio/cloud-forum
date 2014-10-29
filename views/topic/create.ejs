@@ -46,13 +46,42 @@
                 <div class="uk-width-large-1-4 uk-hidden-small">
                     <div class="panel mb10 panel_border">
                         <div class="uk-panel uk-panel-header pd5">
-                            <h3 class="uk-panel-title">Markdown 语法参考</h3>
-                            ### 单行的标题<br />
-                            **粗体**<br />
-                            `console.log('行内代码')`<br />
-                            ```js\n code \n``` 标记代码块<br />
-                            [内容](链接)<br />
-                            ![文字说明](图片链接)<br />
+                            <h3 class="uk-panel-title">Markdown编辑器说明</h3>
+                            <div class="uk-width-medium-1-1 mb10">
+                                <ul id="tab-help-content" class="uk-switcher uk-margin">
+                                    <li>
+                                        ### 单行的标题<br />
+                                        **粗体**<br />
+                                        *斜体*<br />
+                                        `console.log('行内代码')`<br />
+                                        ```js\n code \n``` 标记代码块<br />
+                                        [内容](链接)<br />
+                                        ![文字说明](图片链接)<br />
+                                    </li>
+                                    <li>
+                                        'Cmd-B': 粗体<br />
+                                        'Cmd-I': 斜体<br />
+                                        'Cmd-K': 链接<br />
+                                        'Cmd-Alt-I': 上传图片<br />
+                                        "Cmd-'": 引用文字<br />
+                                        'Cmd-Alt-L': 有序列表<br />
+                                        'Cmd-L': 无序列表<br />
+                                    </li>
+                                    <li>
+                                        <b><i>简单：</i></b>语法非常简单，只需要多打几个符号，剩下的都交给编辑器了。<br />
+                                        <b><i>干净：</i></b>文章非常干净和整齐，排版良好的典范。<br />
+                                        <b><i>快捷：</i></b>不需要任何设置，能快速编写一篇文章结构整齐、重点突出的文字。<br />
+                                        <b><i>跨平台：</i></b>只需要操作系统支持文本编辑器就可以编写，而且文档体积非常小。<br />
+                                    </li>
+                                </ul>
+
+                                <ul class="uk-tab uk-tab-bottom uk-active" data-uk-tab="{connect:'#tab-help-content'}">
+                                    <li class="uk-active"><a href="#">语&nbsp;&nbsp;法</a></li>
+                                    <li><a href="#">快捷键</a></li>
+                                    <li><a href="#">优&nbsp;&nbsp;点</a></li>  
+                                </ul>
+
+                            </div>  
                         </div>
                     </div>
                     <%- include ../goHome %>
@@ -69,9 +98,11 @@
     <div class="uk-modal-dialog">
         <div class="uk-panel uk-panel-header">
             <h3 class="uk-panel-title">上传图片</h3>
-            <div class="uk-form-file">
-                <button class="uk-button uk-button-success">上传图片</button>
-                <input class="" id="fileupload" type="file" />
+            <div class="uk-panel uk-panel-box uk-width-1-1 uk-container-center uk-text-center">
+                <div class="uk-form-file">
+                    <button class="uk-button uk-button-success">上传图片</button>
+                    <input class="" id="fileupload" type="file" />
+                </div>
             </div>
         </div>
     </div>
