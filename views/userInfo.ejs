@@ -55,15 +55,15 @@
             </div>
             <div class="uk-width-1-2"><%- user.name ? user.name : ''%></div>
             <div class="uk-width-1-2">发帖: <%- user.topicCount %> 贴</div>
-            <div class="uk-width-1-2">吧龄: <%- (103/30).toFixed(2) %> 月</div>
+            <div class="uk-width-1-2">吧龄: <%- (((new Date().getTime() - user.createTimestamp)/(1000*60*60*24)).toFixed(2)/30).toFixed(2) %> 月</div>
             <div class="uk-width-1-2">收藏: 0 贴</div>
             <div class="uk-width-1-2">关注: 0 人</div>
             <div class="uk-width-1-1 jybfb">
                 <div class="uk-progress uk-progress-small uk-progress-success uk-progress-striped uk-active">
-                    <div class="uk-progress-bar" style="width: <%- (userIntegral/999)*100 %>%;"></div>
+                    <div class="uk-progress-bar" style="width: <%- (Math.floor(userIntegral)/999)*100 %>%;"></div>
                 </div>
                 <div class="jybfb_bar">
-                    <%- userIntegral %>/999
+                    <%- Math.floor(userIntegral) %>/999
                 </div>
             </div>
             <div class="uk-width-1-1"><%- user.describe %></div>

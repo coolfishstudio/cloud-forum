@@ -44,6 +44,7 @@ exports.gotoTopic = function(req, res){
                 }
                 topicInfo.userName = dbUserInfo.name;
                 topicInfo.userHeadSrc = dbUserInfo.headSrc;
+                topicInfo.userCreateTimestamp = dbUserInfo.createTimestamp;
                 done(err);
             });
         },
@@ -109,7 +110,6 @@ exports.createTopic = function(req, res){
 	var content = req.body.content;
 	var tag = req.body.tag;
 	var isOpen = !!parseInt(req.body.isOpen);//是否公开
-    var userIntegral = 0;
 	async.series({
     	//发帖
         createTopic: function(done){
@@ -125,7 +125,7 @@ exports.createTopic = function(req, res){
         },
         findIntegral : function(done){
             integral.getById(userInfo._id,function(err, info){
-                integral.update(info._id,{integral : info.integral + config.INTEGRAL.POSTING},function(err,info){
+                integral.update(userInfo._id,{integral : info.integral + config.INTEGRAL.POSTING},function(err,info){
                     done(err);
                 });
             });

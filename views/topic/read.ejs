@@ -104,7 +104,8 @@
                                     <img class="uk-border-circle" id="user_headSrc" width="120" height="120" src="<%- topicInfo.userHeadSrc %>" alt="">
                                 </div>
                                 <div class="uk-width-1-2"><%- topicInfo.userName ? topicInfo.userName : ''%></div>
-                                <div class="uk-width-1-2">发帖: <%- user.topicCount %> 贴</div>
+                                <div class="uk-width-1-2">发帖: <%- topicInfo.topicCount %> 贴</div>
+                                <div class="uk-width-1-2">吧龄: <%- (((new Date().getTime() - topicInfo.userCreateTimestamp)/(1000*60*60*24)).toFixed(2)/30).toFixed(2) %> 月</div>
                                 <div class="uk-width-1-2">吧龄: <%- (103/30).toFixed(2) %> 月</div>
                                 <div class="uk-width-1-2">收藏: 0 贴</div>
                                 <div class="uk-width-1-2">关注: 0 人</div>

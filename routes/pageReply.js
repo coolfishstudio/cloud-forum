@@ -16,7 +16,6 @@ exports.createReply = function(req, res){
     var topicInfo = {};
 	var topicId = req.body.topicId;
 	var content = req.body.content;
-    var userIntegral = 0;
     var floor = 0;
 	async.series({
         //获取楼数
@@ -50,19 +49,22 @@ exports.createReply = function(req, res){
         },
         //增加自己经验
         findIntegral : function(done){
-            integral.getById(userInfo._id,function(err, info){
-                integral.update(info._id,{integral : info.integral + config.INTEGRAL.REPLY},function(err,info){
-                    console.log('[findIntegral]',info);
-                    done(err);
+            if(userInfo._id != topicInfo.userId){
+                integral.getById(userInfo._id,function(err, info){
+                    integral.update(userInfo._id,{integral : info.integral + config.INTEGRAL.REPLY},function(err,info){
+                        done(err);
+                    });
                 });
-            });
+            }else{
+                done();
+            }
+            
         },
         //增加帖子主人经验
         findTopicIntegral : function(done){
             if(userInfo._id != topicInfo.userId){
                 integral.getById(topicInfo.userId,function(err, info){
-                    integral.update(info._id,{integral : info.integral + config.INTEGRAL.BEREPLY},function(err,info){
-                        console.log('[findTopicIntegral]',info);
+                    integral.update(topicInfo.userId,{integral : info.integral + config.INTEGRAL.BEREPLY},function(err,info){
                         done(err);
                     });
                 });

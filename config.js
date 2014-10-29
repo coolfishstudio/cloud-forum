@@ -37,11 +37,11 @@ module.exports = {
 	},
 	//积分规则
 	INTEGRAL:{
-		//发帖子 ＋ 2 
-		POSTING : 2,
-		//回复＋ 0.5
-		REPLY : 1,
-		//被回复＋ 0.5
-		BEREPLY : 0.5
+		//发帖子 ＋ 1 
+		POSTING : 1,
+		//回复＋ 0.4
+		REPLY : 0.4,
+		//被回复＋ 0.2
+		BEREPLY : 0.2
 	}
 }
