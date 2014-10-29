@@ -216,7 +216,7 @@
             success: function(result){
                 if(0 == result.status){
                     $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-                    setTimeout('window.location.reload()',1000);
+                    setTimeout('window.location.href = "/"',1000);
                 }else{
                     $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                 }
