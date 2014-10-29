@@ -3,7 +3,8 @@ var router = express.Router();
 var pageUser = require('./pageUser'),
 	pageTopic = require('./pageTopic'),
 	pageReply = require('./pageReply'),
-	pageStatic = require('./pageStatic');
+	pageStatic = require('./pageStatic'),
+	pageFile = require('./pageFile');
 
 /* GET home page. */
 router.get('/', pageStatic.gotoIndex);
@@ -58,6 +59,7 @@ router.get('/topic/:topicId/open/:type', pageTopic.getOpen);
 // 关注某话题
 // 取消关注某话题
 // 上传图片
+router.post('/imgSaveToFile',pageFile.imgSaveToFile);
 
 /* reply */
 // 修改自己的评论页

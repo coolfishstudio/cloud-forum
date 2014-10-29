@@ -13,8 +13,8 @@ module.exports = {
 	},
 	// 发布时间
 	RELEASEtIME : '2014-10-25',
-	// 域名
-	HOST: 'localhost',
+	//图片上传路径
+	FILEPATH:'/Users/yves/MyGitHub/cloud-forum',
 	// 邮箱配置
 	MAIL_OPTS: {
 	    host: 'smtp.126.com',

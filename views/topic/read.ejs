@@ -127,9 +127,19 @@
         </div>
     </div>
 </div>
-
+<!-- 这是模态对话框 -->
+<div id="upImagePanel" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <div class="uk-panel uk-panel-header">
+            <h3 class="uk-panel-title">上传图片</h3>
+            <div class="uk-form-file">
+                <button class="uk-button uk-button-success">上传图片</button>
+                <input class="" id="fileupload" type="file" />
+            </div>
+        </div>
+    </div>
+</div>
 <%- include ../footer %>
-
 <link rel="stylesheet" href="/css/editor.css" />
 <script type="text/javascript" src="/js/editor.js"></script>
 <script type="text/javascript" src="/js/marked.js"></script>
@@ -137,6 +147,8 @@
 (function(){
     var editor = new Editor();
     editor.render($('.editor')[0]);
+
+    //--
     $('#iGood_t').click(function(){
         $.ajax({
             type: 'GET',
@@ -284,6 +296,5 @@
             }
         });
     });
-
 })();
 </script>

@@ -5,7 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
-
+var multer  = require('multer');
+var config = require('./config.js');
 var routes = require('./routes/index');
 
 var app = express();
@@ -14,6 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(multer({ dest: config.FILEPATH + '/public/image'}));
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
