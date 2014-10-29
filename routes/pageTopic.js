@@ -47,6 +47,12 @@ exports.gotoTopic = function(req, res){
                 done(err);
             });
         },
+        findTopicCount : function(done){
+            topic.getCount({userId : topicInfo.userId,isOpen : true}, function(err, info){
+                topicInfo.topicCount = info;
+                done(err);
+            });
+        },
         //获取评论
         findReply : function(done){
             reply.getAllByTopicId(config.LIMIT.REPLYPAGENUM, page, {topicId: topicInfo._id}, function(err, dbReply){
@@ -58,6 +64,15 @@ exports.gotoTopic = function(req, res){
         findReplyUserInfo: function(done){
             var iterator = function(replyInfo, eachFinish){
                 user.getById(replyInfo.userId, function(err, dbUserInfo){
+                    if(topicInfo.user){
+                        replyInfo.user = true;
+                    }else{
+                        if(userInfo != '' && userInfo.name == dbUserInfo.name){
+                            replyInfo.user = true;
+                        }else{
+                            replyInfo.user = false;
+                        }
+                    }
                     replyInfo.userName = dbUserInfo.name;
                     replyInfo.userHeadSrc = dbUserInfo.headSrc;
                     replyInfo.replyTime = tool.getDateDiff(replyInfo.createTimestamp);
@@ -110,7 +125,7 @@ exports.createTopic = function(req, res){
         },
         findIntegral : function(done){
             integral.getById(userInfo._id,function(err, info){
-                integral.update(info._id,{integral : info.userIntegral + config.INTEGRAL.POSTING},function(err,info){
+                integral.update(info._id,{integral : info.integral + config.INTEGRAL.POSTING},function(err,info){
                     done(err);
                 });
             });

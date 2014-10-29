@@ -118,9 +118,10 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .reply_list .card_list_image img{margin:0 2px 0 2px;height: 40px;border: 1px solid #ddd; padding: 2px;background: #fff;border-radius: 5px;}
 .reply_list .card_list_num code{padding: 2px;margin:2px;}
 .reply_list .card_list_title{font-size: 16px;font-family: '微软雅黑'}
-.reply_list .card_list_user{margin:0 6px 0 2px;height: 20px;border-radius: 5px;padding-right:2px; }
+.reply_list .card_list_user{font-size: 12px;padding-right:2px; }
 .reply_list .card_list_time{font-size: 12px;width:50px;padding-right:2px; }
-
+.reply_list .reply_icon{padding-right:2px; }
+.reply_list .reply_icon i{cursor: pointer;padding-right:1px; }
 
 
 .card_list li{height: 40px;line-height: 40px;}
@@ -135,7 +136,7 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 
 .topic_title{font-weight: bold;}
 .topic_info{font-size: 13px;color:#999;}
-.topic_icon{cursor: pointer;}
+.topic_icon i{cursor: pointer;}
 .topic_box{padding: 0 10px 10px 10px; }
 .topic_speech .CodeMirror{height:150px;}
 .topic_content{}
@@ -157,6 +158,6 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 }
 .user_info img{margin:0;border: 1px solid #ddd; padding: 4px;background: #fff;border-radius: 50%;}
 
-.jybfb{position: relative;}
+.jybfb{position: relative; margin-top: 4px; margin-bottom: 2px;}
 .jybfb_bar{position: absolute;top: -3px;left: 50%;color:#f90;font-size: 11px;width:120px;margin-left: -55px;text-align: center;}
 .jybfb .uk-progress{margin-bottom: 0px;}

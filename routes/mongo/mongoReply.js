@@ -31,5 +31,9 @@ exports.getById = function(replyID, callback){
 
 exports.getAllByTopicId = function(pageNum, page, info, callback){
 	info.isWaste = false;
-	replyColl.find({'topicId' : info.topicId}).sort({'createTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
+	replyColl.find(info).sort({'createTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
+};
+
+exports.getCount = function(info, callback){
+	replyColl.count(info, callback);
 };

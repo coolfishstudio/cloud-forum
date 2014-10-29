@@ -39,7 +39,7 @@
                         </div>
 
                     </div>
-
+                    <% if(replyList.length > 0){ %>
                     <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">回复</h3>
@@ -61,14 +61,21 @@
                                         <div class="uk-float-right card_list_user">
                                             <%= content.userName %>
                                         </div>
+                                        <div class="uk-float-right card_list_user">
+                                            <%= content.floor %>楼
+                                        </div>
+                                        <% if(content.user){ %>
+                                        <div class="uk-float-right reply_icon">
+                                            <i class="uk-icon-bitbucket iWaste_r" id='<%= content._id %>' title="删除"></i>
+                                        </div>
+                                        <% } %>
                                     </div>
                                 </li>
                                 <% }) %>
                             </ul>
                         </div>
-
                     </div>
-
+                    <% } %>
                     <div class="panel panel_border mb10 <%- user=='' ? 'uk-hidden' : '' %>">
                         <div class="uk-panel uk-panel-header pd5">
                             <h3 class="uk-panel-title">发言</h3>
@@ -89,6 +96,28 @@
 
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
+                    <div class="panel mb10 panel_border">
+                        <div class="uk-panel uk-panel-header pd5">
+                            <h3 class="uk-panel-title">作者</h3>
+                            <div class="uk-grid user_info">
+                                <div class="uk-width-medium-1-2">
+                                    <img class="uk-border-circle" id="user_headSrc" width="120" height="120" src="<%- topicInfo.userHeadSrc %>" alt="">
+                                </div>
+                                <div class="uk-width-1-2"><%- topicInfo.userName ? topicInfo.userName : ''%></div>
+                                <div class="uk-width-1-2">发帖: <%- user.topicCount %> 贴</div>
+                                <div class="uk-width-1-2">吧龄: <%- (103/30).toFixed(2) %> 月</div>
+                                <div class="uk-width-1-2">收藏: 0 贴</div>
+                                <div class="uk-width-1-2">关注: 0 人</div>
+                                <div class="uk-width-1-1">“ 这家伙很懒，什么个性签名都没有留下。 ”</div>
+                                <div class="uk-width-1-1 uk-clearfix">
+                                    <div class="uk-button-group uk-float-right">
+                                        <a class="uk-button uk-button-success" href="###">关注</a>
+                                        <a class="uk-button uk-button-success" href="###">详情</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <%- include ../goHome %>
                     <%- include ../works %>
                     <%- include ../tool %>
@@ -175,7 +204,7 @@
             success: function(result){
                 if(0 == result.status){
                     $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-                    window.location.href = '/';
+                    setTimeout('window.location.reload()',1000);
                 }else{
                     $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                 }
@@ -233,12 +262,28 @@
             success: function(result){
                 if(0 == result.status){
                     $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-                    // window.location.reload();
+                    setTimeout('window.location.reload()',1000);
                 }else{
                     $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                 }
             }
         });
     });
+    //删除评论
+    $('.iWaste_r').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/reply/' + $(this).attr('id') + '/waste/1',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    setTimeout('window.location.reload()',1000);
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+
 })();
 </script>

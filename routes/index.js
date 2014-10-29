@@ -50,7 +50,7 @@ router.get('/topic/:topicId', pageTopic.gotoTopic);
 router.get('/topic/:topicId/top/:type', pageTopic.getTop);
 // 将某话题加精(取消加精)
 router.get('/topic/:topicId/good/:type', pageTopic.getGood);
-// 将某话题加精(取消加精)
+// 将某话题删除(取消删除)
 router.get('/topic/:topicId/waste/:type', pageTopic.getWaste);
 // 将某话题私密(取消私密)
 router.get('/topic/:topicId/open/:type', pageTopic.getOpen);
@@ -67,5 +67,6 @@ router.post('/reply/create', pageReply.createReply);
 // 为评论点赞
 // 修改某评论
 // 删除某评论
+router.get('/reply/:replyId/waste/:type', pageReply.getWaste);
 
 module.exports = router;

@@ -49,25 +49,24 @@
     </div>
     <div class="uk-panel uk-panel-header pd5 <%- user=='' ? 'uk-hidden' : '' %> ">
         <h3 class="uk-panel-title">用户信息</h3>
-        <div class="uk-grid user_info" data-uk-grid-margin>
+        <div class="uk-grid user_info">
             <div class="uk-width-medium-1-2">
                 <img class="uk-border-circle" id="user_headSrc" width="120" height="120" src="<%- user.headSrc %>" alt="">
             </div>
             <div class="uk-width-1-2"><%- user.name ? user.name : ''%></div>
-            <div class="uk-width-1-2">排名: 1</div>
-            <div class="uk-width-1-2">收藏: 0 帖</div>
+            <div class="uk-width-1-2">发帖: <%- user.topicCount %> 贴</div>
+            <div class="uk-width-1-2">吧龄: <%- (103/30).toFixed(2) %> 月</div>
+            <div class="uk-width-1-2">收藏: 0 贴</div>
             <div class="uk-width-1-2">关注: 0 人</div>
-            <!-- <div class="uk-width-1-1">等级: 12级 -->
-            <!-- </div> -->
             <div class="uk-width-1-1 jybfb">
                 <div class="uk-progress uk-progress-small uk-progress-success uk-progress-striped uk-active">
-                    <div class="uk-progress-bar" style="width: <%- (userIntegral/9999)*100 %>%;"></div>
+                    <div class="uk-progress-bar" style="width: <%- (userIntegral/999)*100 %>%;"></div>
                 </div>
                 <div class="jybfb_bar">
-                    <%- userIntegral %>/9999
+                    <%- userIntegral %>/999
                 </div>
             </div>
-            <div class="uk-width-1-1" id="user_describe">“ 这家伙很懒，什么个性签名都没有留下。 ”</div>
+            <div class="uk-width-1-1"><%- user.describe %></div>
             <div class="uk-width-1-1 uk-clearfix">
                 <div class="uk-button-group uk-float-right">
                     <a class="uk-button uk-button-success" href="/topic/create">发帖</a>
@@ -98,7 +97,7 @@ $(function(){
                 success: function(result){
                     if(0 == result.status){
                         $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-                        window.location.href = '/';
+                        setTimeout('window.location.reload()',1000);
                     }else{
                         $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                     }
@@ -119,7 +118,7 @@ $(function(){
                 success: function(result){
                     if(0 == result.status){
                         $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-                        window.location.href = '/';
+                        setTimeout('window.location.reload()',1000);
                     }else{
                         $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                     }

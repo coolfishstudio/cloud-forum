@@ -40,6 +40,8 @@ module.exports = {
 		//发帖子 ＋ 2 
 		POSTING : 2,
 		//回复＋ 0.5
-		REPLY : 1
+		REPLY : 1,
+		//被回复＋ 0.5
+		BEREPLY : 0.5
 	}
 }

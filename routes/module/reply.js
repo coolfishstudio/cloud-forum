@@ -8,3 +8,4 @@ exports.getAll = mongoReply.getAll;
 exports.getById = mongoReply.getById;
 
 exports.getAllByTopicId = mongoReply.getAllByTopicId;
+exports.getCount = mongoReply.getCount;

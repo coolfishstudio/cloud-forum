@@ -70,6 +70,12 @@ exports.gotoIndex = function(req, res){
                     done(err);
                 });
             }
+        },
+        findTopicCount : function(done){
+            topic.getCount({userId : userInfo._id,isOpen : true}, function(err, info){
+                userInfo.topicCount = info;
+                done(err);
+            });
         }
     }, function(err){
         res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
