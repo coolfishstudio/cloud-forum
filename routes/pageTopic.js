@@ -34,7 +34,8 @@ exports.gotoTopic = function(req, res){
                     topicInfo.handle_up_f = false;//取消点赞
                     if(userInfo != '' && userInfo.name != topicInfo.userId){
                         var re = new RegExp('' + userInfo._id + '');
-                        if(re.test(dbTopic.ups.join(','))){
+                        var topicInfo.ups = topicInfo.ups || [];
+                        if(re.test(topicInfo.ups.join(','))){
                             topicInfo.handle_up_t = true;
                         }else{
                             topicInfo.handle_up_f = true;
@@ -268,7 +269,7 @@ exports.getUp = function(req, res){
                 if(info.userId == req.session.user._id){//去掉自己
                     done('骚年，给自己点赞可不好哦。');
                 }else{
-                    upsList = info.ups;
+                    upsList = info.ups || [];
                     if(type){//点赞
                         var re = new RegExp('' + req.session.user._id + '');
                         if(re.test(upsList.join(','))){
