@@ -34,12 +34,13 @@ exports.gotoTopic = function(req, res){
                     topicInfo.handle_up_f = false;//取消点赞
                     if(userInfo != '' && userInfo.name != topicInfo.userId){
                         var re = new RegExp('' + userInfo._id + '');
-                        topicInfo[ups] = topicInfo[ups] || [];
-                        if(re.test(topicInfo.ups.join(','))){
-                            topicInfo.handle_up_t = true;
-                        }else{
-                            topicInfo.handle_up_f = true;
-                        }
+                        if(topicInfo.ups){
+                            if(re.test(topicInfo.ups.join(','))){
+                                topicInfo.handle_up_t = true;
+                            }else{
+                                topicInfo.handle_up_f = true;
+                            }
+                        } 
                     }
 	        		done(err);
 	        	});	
