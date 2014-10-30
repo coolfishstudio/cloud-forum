@@ -322,37 +322,5 @@
             }
         });
     });
-    // //踩贴
-    // $('#isDown_t').click(function(){
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: '/topic/<%= topicInfo._id %>/down/1',
-    //         success: function(result){
-    //             if(0 == result.status){
-    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-    //                 $('#isDown_f').removeClass('uk-hidden');
-    //                 $('#isDown_t').addClass('uk-hidden');
-    //             }else{
-    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
-    //             }
-    //         }
-    //     });
-    // });
-    // //取消踩贴
-    // $('#isDown_f').click(function(){
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: '/topic/<%= topicInfo._id %>/down/0',
-    //         success: function(result){
-    //             if(0 == result.status){
-    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
-    //                 $('#isDown_t').removeClass('uk-hidden');
-    //                 $('#isDown_f').addClass('uk-hidden');
-    //             }else{
-    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
-    //             }
-    //         }
-    //     });
-    // });
 })();
 </script>
