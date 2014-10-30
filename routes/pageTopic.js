@@ -40,7 +40,8 @@ exports.gotoTopic = function(req, res){
                             }else{
                                 topicInfo.handle_up_f = true;
                             }
-                        } 
+                        }
+                        topicInfo.handle_up_f = true;
                     }
 	        		done(err);
 	        	});	
