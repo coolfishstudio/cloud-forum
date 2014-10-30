@@ -34,7 +34,7 @@
                                         <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###" id="isUp">
                                             <i class="uk-icon-thumbs-up <%- topicInfo.handle_up_f ? 'uk-hidden' : 'uk-show' %>" id="isUp_f" title="取消点赞"></i>
                                             <i class="uk-icon-thumbs-o-up <%- topicInfo.handle_up_t ? 'uk-hidden' : 'uk-show' %>" id="isUp_t" title="点赞"></i>
-                                             ＋ <b><%- topicInfo.ups.length %></b></a>
+                                             ＋ <b><%- topicInfo.ups ? topicInfo.ups.length : '0' %></b></a>
                                         <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###">收藏</a>
                                         <!-- <a class="uk-button uk-button-success" href="###">分享</a> -->
                                     </div>
