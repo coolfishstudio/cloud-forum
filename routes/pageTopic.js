@@ -34,7 +34,7 @@ exports.gotoTopic = function(req, res){
                     topicInfo.handle_up_f = false;//取消点赞
                     if(userInfo != '' && userInfo.name != topicInfo.userId){
                         var re = new RegExp('' + userInfo._id + '');
-                        var topicInfo.ups = topicInfo.ups || [];
+                        topicInfo[ups] = topicInfo[ups] || [];
                         if(re.test(topicInfo.ups.join(','))){
                             topicInfo.handle_up_t = true;
                         }else{
