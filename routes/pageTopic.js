@@ -24,7 +24,22 @@ exports.gotoTopic = function(req, res){
         	topic.getById(topicId, function(err, info){
         		topic.update(info._id, {visitQuantity: info.visitQuantity + 1},function(err,dbTopic){
 	        		dbTopic.lastTime = tool.getDateDiff(dbTopic.lastTimestamp);
-	        		topicInfo = dbTopic;
+                    topicInfo = dbTopic;
+                    if(userInfo != '' && userInfo._id == topicInfo.userId){
+                        topicInfo.user = true;
+                    }else{
+                        topicInfo.user = false;
+                    }
+                    topicInfo.handle_up_t = false;//点赞
+                    topicInfo.handle_up_f = false;//取消点赞
+                    if(userInfo != '' && userInfo.name != topicInfo.userId){
+                        var re = new RegExp('' + userInfo._id + '');
+                        if(re.test(dbTopic.ups.join(','))){
+                            topicInfo.handle_up_t = true;
+                        }else{
+                            topicInfo.handle_up_f = true;
+                        }
+                    }
 	        		done(err);
 	        	});	
 			});
@@ -32,11 +47,6 @@ exports.gotoTopic = function(req, res){
         //获取对应的用户信息
         findUserInfo: function(done){
             user.getById(topicInfo.userId, function(err, dbUserInfo){
-            	if(userInfo != '' && userInfo.name == dbUserInfo.name){
-            		topicInfo.user = true;
-            	}else{
-            		topicInfo.user = false;
-            	}
                 if(userInfo != '' && userInfo.power == 'a'){
                    topicInfo.power = true;
                 }else{
@@ -242,3 +252,109 @@ exports.getOpen = function(req, res){
         }      
     });
 };
+
+//顶贴(取消顶贴)
+exports.getUp = function(req, res){
+    if(!req.session || !req.session.user){
+        return res.send({status: -2, content: '非法操作'});
+    }
+    var topicId = req.params.topicId;
+    var type = parseInt(req.params.type) || 0;
+    var upsList = [];
+    async.series({
+        //获取话题信息
+        findTopicList: function(done){
+            topic.getById(topicId, function(err, info){
+                if(info.userId == req.session.user._id){//去掉自己
+                    done('骚年，给自己点赞可不好哦。');
+                }else{
+                    upsList = info.ups;
+                    if(type){//点赞
+                        var re = new RegExp('' + req.session.user._id + '');
+                        if(re.test(upsList.join(','))){
+                            done('骚年，重复点赞可不好哦。');
+                        }else{
+                            upsList.push(req.session.user._id);
+                            done(err);
+                        }
+                    }else{//取消
+                        var re = new RegExp('' + req.session.user._id + '');
+                        if(re.test(upsList.join(','))){
+                            var str = (upsList.join(',') + ',').replace(req.session.user._id + ',','');
+                            upsList = (str == '') ? [] : (str.substring(0,str.length-1).split(','));
+                            done(err);
+                        }else{
+                            done('骚年，你还没有点赞呢。');
+                        }
+                    }
+                }
+            });
+        },
+        //修改话题属性
+        updateTopic: function(done){
+            topic.handle(topicId, {ups : upsList}, function(err, info){
+                done(err);
+            });
+        }
+    }, function(err){
+        if(err){
+            res.send({status: -1, content: err});
+        }else{
+            res.send({status: 0, content: (!!type ? '':'取消')+'点赞操作成功。'});
+        }      
+    });
+};
+
+// //踩贴(取消踩贴)
+// exports.getDown = function(req, res){
+//     if(!req.session || !req.session.user){
+//         return res.send({status: -2, content: '非法操作'});
+//     }
+//     var topicId = req.params.topicId;
+//     var type = parseInt(req.params.type) || 0;
+//     var downsList = [];
+//     async.series({
+//         //获取话题信息
+//         findTopicList: function(done){
+//             topic.getById(topicId, function(err, info){
+//                 if(info.userId == req.session.user._id){//去掉自己
+//                     done('骚年，你居然觉得自己写的很烂么。');
+//                 }else{
+//                     downsList = info.ups;
+//                     if(type){
+//                         var re = new RegExp('' + req.session.user._id + '');
+//                         console.log(downsList,'---',re.test(downsList.join(',')));
+//                         if(re.test(downsList.join(','))){
+//                             done('骚年，重复踩贴可不好哦。');
+//                         }else{
+//                             downsList.push(req.session.user._id);
+//                             done(err);
+//                         }
+//                     }else{//取消
+//                         var re = new RegExp('' + req.session.user._id + '');
+//                         if(re.test(downsList.join(','))){
+//                             var str = (downsList.join(',') + ',').replace(req.session.user._id + ',','');
+//                             downsList = str.substring(0,str.length-1).split(',')
+//                             done(err);
+//                         }else{
+//                             done('骚年，你还没有踩贴呢。');
+//                         }
+//                     }
+//                 }
+//             });
+//         },
+//         //修改话题属性
+//         updateTopic: function(done){
+//             topic.handle(topicId, {downs : downsList}, function(err, info){
+//                 done(err);
+//             });
+//         }
+//     }, function(err){
+//         if(err){
+//             res.send({status: -1, content: err});
+//         }else{
+//             console.log(downsList);
+//             res.send({status: 0, content: (!!type ? '':'取消')+'踩贴操作成功。'});
+//         }      
+//     });
+// };

@@ -8,14 +8,14 @@
                         <div class="uk-panel uk-panel-header pd5">
                             <div class="uk-panel-title pd10">
                                 <div class="topic_title"><%- topicInfo.title %></div>
-                                <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览 - <%- topicInfo.replyQuantity%> 次评论</div>
+                                <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览 - <%- topicInfo.replyQuantity%> 次评论
+                                </div>
                                 <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
                                     <% if(topicInfo.user){ %>
                                     <i class="uk-icon-pencil-square" id="iUpdate" title="修改"></i>
                                     <i class="uk-icon-bitbucket" id="iWaste_t" title="删除"></i>
                                     <i class="uk-icon-eye <%- topicInfo.isOpen ? 'uk-hidden' : '' %>" id="isOpen_t" title="公开"></i>
                                     <i class="uk-icon-eye-slash <%- topicInfo.isOpen ? '' : 'uk-hidden'  %>" id="isOpen_f" title="私人"></i>
-
                                     <% } %>
                                     <% if(topicInfo.power){ %>
                                     <i class="uk-icon-star <%- topicInfo.isGood ? 'uk-hidden' : '' %>" id="iGood_t" title="加精"></i>
@@ -30,7 +30,11 @@
                                     <%- topicInfo.content %>
                                 </div>
                                 <div class="uk-clearfix">
-                                    <div class="uk-float-right">
+                                    <div class="uk-float-right uk-button-group">
+                                        <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###" id="isUp">
+                                            <i class="uk-icon-thumbs-up <%- topicInfo.handle_up_f ? 'uk-hidden' : 'uk-show' %>" id="isUp_f" title="取消点赞"></i>
+                                            <i class="uk-icon-thumbs-o-up <%- topicInfo.handle_up_t ? 'uk-hidden' : 'uk-show' %>" id="isUp_t" title="点赞"></i>
+                                             ＋ <b><%- topicInfo.ups.length %></b></a>
                                         <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###">收藏</a>
                                         <!-- <a class="uk-button uk-button-success" href="###">分享</a> -->
                                     </div>
@@ -132,9 +136,11 @@
     <div class="uk-modal-dialog">
         <div class="uk-panel uk-panel-header">
             <h3 class="uk-panel-title">上传图片</h3>
-            <div class="uk-form-file">
-                <button class="uk-button uk-button-success">上传图片</button>
-                <input class="" id="fileupload" type="file" />
+            <div class="uk-panel uk-panel-box uk-width-1-1 uk-container-center uk-text-center">
+                <div class="uk-form-file">
+                    <button class="uk-button uk-button-success">上传图片</button>
+                    <input class="" id="fileupload" type="file" />
+                </div>
             </div>
         </div>
     </div>
@@ -296,5 +302,57 @@
             }
         });
     });
+    //顶贴
+    $('#isUp').click(function(){
+        var $upShowObj = $(this).find('i.uk-show');//位置固定
+        var $upHiddenObj = $(this).find('i.uk-hidden');
+        var $textObj = $(this).find('b');
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/up/' + $upShowObj.index(),
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+                    $upHiddenObj.removeClass('uk-hidden').addClass('uk-show');
+                    $upShowObj.addClass('uk-hidden').removeClass('uk-show');
+                    $textObj.text($upShowObj.index() ? (parseInt($textObj.text()) + 1) : (parseInt($textObj.text()) - 1));
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    // //踩贴
+    // $('#isDown_t').click(function(){
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '/topic/<%= topicInfo._id %>/down/1',
+    //         success: function(result){
+    //             if(0 == result.status){
+    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+    //                 $('#isDown_f').removeClass('uk-hidden');
+    //                 $('#isDown_t').addClass('uk-hidden');
+    //             }else{
+    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+    //             }
+    //         }
+    //     });
+    // });
+    // //取消踩贴
+    // $('#isDown_f').click(function(){
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '/topic/<%= topicInfo._id %>/down/0',
+    //         success: function(result){
+    //             if(0 == result.status){
+    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
+    //                 $('#isDown_t').removeClass('uk-hidden');
+    //                 $('#isDown_f').addClass('uk-hidden');
+    //             }else{
+    //                 $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+    //             }
+    //         }
+    //     });
+    // });
 })();
 </script>

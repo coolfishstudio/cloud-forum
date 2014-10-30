@@ -55,6 +55,10 @@ router.get('/topic/:topicId/good/:type', pageTopic.getGood);
 router.get('/topic/:topicId/waste/:type', pageTopic.getWaste);
 // 将某话题私密(取消私密)
 router.get('/topic/:topicId/open/:type', pageTopic.getOpen);
+// 将某话题顶贴(取消顶贴)
+router.get('/topic/:topicId/up/:type', pageTopic.getUp);
+// 将某话题踩贴(取消踩贴)
+// router.get('/topic/:topicId/down/:type', pageTopic.getDown);
 // 编辑某话题
 // 关注某话题
 // 取消关注某话题

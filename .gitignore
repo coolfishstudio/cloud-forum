@@ -1,6 +1,5 @@
 node_modules/
+config.js
 .DS_Store
 public/.DS_Store
-public/image/
-
-config.js
+public/image
