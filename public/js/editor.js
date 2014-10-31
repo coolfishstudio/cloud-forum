@@ -6958,38 +6958,39 @@ function drawImage(editor) {
   _replaceSelection(cm, stat.image, '![', '](http://)');
 }
 /* yves update by uikit */
+var modal = $.UIkit.modal('#upImagePanel');
+var _editor = null;
 function upImage(editor){
-  var modal = $.UIkit.modal('#upImagePanel');
+  _editor = editor;
   if ( modal.isActive() ) {
     modal.hide();
   } else {
     modal.show();
   }
-  $('#fileupload').change(function(){
-    var fileObj = document.getElementById('fileupload').files[0]; // 获取文件对象
-    var FileController = '/imgSaveToFile';                    // 接收上传文件的后台地址 
-    // FormData 对象
-    var form = new FormData();
-    form.append('author', 'hooyes');                        // 可以增加表单数据
-    form.append('file', fileObj);                           // 文件对象
-    // XMLHttpRequest 对象
-    var xhr = new XMLHttpRequest();
-    xhr.open('post', FileController, true);
-    xhr.onload = function (info) {
-        if(eval('(' + info.target.response + ')').status == 0){
-          modal.hide();
-          var cm = editor.codemirror;
-          var stat = getState(cm);
-          var host = window.location.host;
-          _replaceSelection(cm, stat.image, '![', '](http://' + host + eval('(' + info.target.response + ')').url + ')');
-        }else{
-          $.UIkit.notify(eval('(' + info.target.response + ')').content, {pos:'top-right',status:'danger',timeout: 1000});
-        }
-    };
-    xhr.send(form);
-  });
 }
-
+$('#fileupload').change(function(){
+  var fileObj = document.getElementById('fileupload').files[0]; // 获取文件对象
+  var FileController = '/imgSaveToFile';                    // 接收上传文件的后台地址 
+  // FormData 对象
+  var form = new FormData();
+  form.append('author', 'hooyes');                        // 可以增加表单数据
+  form.append('file', fileObj);                           // 文件对象
+  // XMLHttpRequest 对象
+  var xhr = new XMLHttpRequest();
+  xhr.open('post', FileController, true);
+  xhr.onload = function (info) {
+      if(eval('(' + info.target.response + ')').status == 0){
+        modal.hide();
+        var cm = _editor.codemirror;
+        var stat = getState(cm);
+        var host = window.location.host;
+        _replaceSelection(cm, stat.image, '![', '](http://' + host + eval('(' + info.target.response + ')').url + ')');
+      }else{
+        $.UIkit.notify(eval('(' + info.target.response + ')').content, {pos:'top-right',status:'danger',timeout: 1000});
+      }
+  };
+  xhr.send(form);
+});
 /**
  * Undo action.
  */
