@@ -41,7 +41,11 @@ exports.createReply = function(req, res){
         //获取话题信息,修改浏览纪录次数
         findTopicList: function(done){
             topic.getById(topicId, function(err, info){
-                topic.update(info._id, {replyQuantity: info.replyQuantity + 1},function(err,dbTopic){
+                topic.update(info._id, {
+                    replyQuantity : info.replyQuantity + 1,
+                    lastUser : userInfo._id,
+                    lastTimestamp : new Date().getTime()
+                },function(err,dbTopic){
                     topicInfo = dbTopic;
                     done(err);
                 }); 
