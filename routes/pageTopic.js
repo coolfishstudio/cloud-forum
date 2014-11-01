@@ -217,12 +217,23 @@ exports.getWaste = function(req, res){
 	}
 	var topicId = req.params.topicId;
 	var type = parseInt(req.params.type) || 0;
+    var topicInfo = {};
 	async.series({
     	//修改话题属性
         updateTopic: function(done){
         	topic.handle(topicId, {isWaste : !!type}, function(err, info){
+                topicInfo = info;
         		done(err);
         	});
+        },
+        //修改经验
+        findIntegral : function(done){
+            integral.getById(topicInfo.userId,function(err, info){
+                var tempIntegral = ((info.integral - config.INTEGRAL.DELTOPIC) > 0 ? (info.integral - config.INTEGRAL.DELTOPIC) : 0);
+                integral.update(topicInfo.userId,{integral : tempIntegral},function(err,info){
+                    done(err);
+                });
+            });
         }
     }, function(err){
         if(err){

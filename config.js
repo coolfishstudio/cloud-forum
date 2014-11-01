@@ -43,6 +43,8 @@ module.exports = {
 		//回复＋ 0.4
 		REPLY : 0.4,
 		//被回复＋ 0.2
-		BEREPLY : 0.2
+		BEREPLY : 0.2,
+		//删除帖子
+		DELTOPIC : 3
 	}
 }
