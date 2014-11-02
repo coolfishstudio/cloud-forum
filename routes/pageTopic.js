@@ -119,7 +119,10 @@ exports.createTopic = function(req, res){
         return res.send({status: -2, content: '非法操作'});
     }
     var userInfo = req.session.user;
-	var title = req.body.title;
+	var title = tool.removeHTMLTag(req.body.title);
+    if('' == title){
+        res.send({status: -1, content: '标题含有非法参数。'});
+    }
 	var content = req.body.content;
 	var tag = req.body.tag;
 	var isOpen = !!parseInt(req.body.isOpen);//是否公开

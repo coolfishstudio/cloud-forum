@@ -119,9 +119,13 @@
     var title, content, tag;
     var isOpen = 1;
     $('#createTopic').click(function(){
-        title = $('#topic_title').val();
+        title = removeHTMLTag($('#topic_title').val());
         content = editor.constructor.markdown(editor.codemirror.getValue());
         tag = $('#topic_tag').val();
+        if($('#topic_title').val() != title){
+            $.UIkit.notify('标题含有非法参数。', {pos:'top-right',status:'danger',timeout: 1000});
+            return;   
+        }
         if('' == $.trim(title)){
             $.UIkit.notify('请输入标题', {pos:'top-right',status:'danger',timeout: 1000});
             return;   
@@ -152,8 +156,12 @@
             $('#eyeBtn').addClass('uk-button-primary').html('<i class="uk-icon-eye-slash">&nbsp;私人</i>');
             isOpen = 0;
         }
-        
-        
     });
+    function removeHTMLTag(str){
+        str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
+        str = str.replace(/[ | ]*\n/g,'\n'); //去除行尾空白
+        str = str.replace(/&nbsp;/ig,'');//去掉&nbsp;
+        return str;
+    }
 })();
 </script>
