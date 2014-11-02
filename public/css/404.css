@@ -5,6 +5,7 @@ body, html{
   display: table;
   text-align: center;
   overflow: hidden;
+  background: #e2e2e2;background-image: url('../images/bg.png');
 }
 a{text-decoration:none;color: #666;}
 .wrapper_box{
