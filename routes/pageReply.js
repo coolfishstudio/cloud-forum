@@ -105,7 +105,6 @@ exports.getWaste = function(req, res){
         updateTopic: function(done){
             topic.getById(replyInfo.topicId, function(err, info){
                 topic.update(info._id, {
-                    isWaste : !!type,
                     replyQuantity : info.replyQuantity - 1,
                     lastUser : req.session.user._id,
                     lastTimestamp : new Date().getTime()
