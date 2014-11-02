@@ -95,11 +95,22 @@ exports.getWaste = function(req, res){
     var type = parseInt(req.params.type) || 0;
     async.series({
         //修改评论属性
-        updateTopic: function(done){
+        updateReply: function(done){
             reply.update(replyId, {isWaste : !!type}, function(err, info){
                 replyInfo = info;
                 done(err);
             });
+        },
+        //修改话题属性
+        updateTopic: function(done){
+            topic.update(replyInfo.topicId, {
+                isWaste : !!type,
+                replyQuantity : info.replyQuantity - 1,
+                lastUser : req.session.user._id,
+                lastTimestamp : new Date().getTime()
+            }, function(err, info){
+                done(err);
+            }); 
         },
         //修改经验
         findIntegral : function(done){

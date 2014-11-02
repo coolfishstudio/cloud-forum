@@ -69,7 +69,7 @@ exports.gotoTopic = function(req, res){
         },
         //获取评论
         findReply : function(done){
-            reply.getAllByTopicId(config.LIMIT.REPLYPAGENUM, page, {topicId: topicInfo._id, isWaste : false}, function(err, dbReply){
+            reply.getAllByTopicId(config.LIMIT.REPLYPAGENUM, page, {topicId: topicInfo._id}, function(err, dbReply){
                 replyList = dbReply;
                 done(err);
             });
