@@ -91,12 +91,23 @@ exports.getWaste = function(req, res){
         return res.send({status: -2, content: '非法操作'});
     }
     var replyId = req.params.replyId;
+    var replyInfo = {};
     var type = parseInt(req.params.type) || 0;
     async.series({
         //修改评论属性
         updateTopic: function(done){
             reply.update(replyId, {isWaste : !!type}, function(err, info){
+                replyInfo = info;
                 done(err);
+            });
+        },
+        //修改经验
+        findIntegral : function(done){
+            integral.getById(replyInfo.userId,function(err, info){
+                var tempIntegral = ((info.integral - config.INTEGRAL.DELREPLY) > 0 ? (info.integral - config.INTEGRAL.DELREPLY) : 0);
+                integral.update(replyInfo.userId,{integral : tempIntegral},function(err,info){
+                    done(err);
+                });
             });
         }
     }, function(err){
