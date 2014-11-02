@@ -6970,6 +6970,9 @@ function upImage(editor){
 }
 $('#fileupload').change(function(){
   var fileObj = document.getElementById('fileupload').files[0]; // 获取文件对象
+  if(fileObj.size > 1000000){
+    return $.UIkit.notify('上传图片过大，请换张小的。', {pos:'top-right',status:'danger',timeout: 1000});
+  }
   var FileController = '/imgSaveToFile';                    // 接收上传文件的后台地址 
   // FormData 对象
   var form = new FormData();
@@ -7123,8 +7126,8 @@ var toolbar = [
   '|',
 
   {name: 'info', action: 'http://lab.lepture.com/editor/markdown'},
-  {name: 'preview', action: togglePreview},
-  {name: 'fullscreen', action: toggleFullScreen}
+  {name: 'preview', action: togglePreview}
+  //{name: 'fullscreen', action: toggleFullScreen}
 ];
 
 /**
