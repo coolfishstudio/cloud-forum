@@ -97,15 +97,27 @@ exports.gotoStatic = function(req, res){
 
 //获取站点状态
 exports.getSite = function(req, res){
-    
+    var siteInfo = {};
     async.series({
-        //修改话题属性
-
+        //获取总人数
+        getUsersCount : function(done){
+            user.getCount({},function(err, info){
+                siteInfo.usersCount = info;
+                done(err);
+            });
+        },       
+        //获取总贴数
+        getTopicsCount : function(done){
+            topic.getCount({},function(err, info){
+                siteInfo.topicsCount = info;
+                done(err);
+            });
+        }
     }, function(err){
         if(err){
             res.send({status: -1, content: err});
         }else{
-            res.send({status: 0, content: (!!type ? '':'取消')+'加精操作成功。'});
+            res.send({status: 0, content: siteInfo});
         }      
     });
 };

@@ -2,24 +2,39 @@
     <div class="uk-panel uk-panel-header pd5 pb10">
         <h3 class="uk-panel-title">站点状态</h3>
         <ul class="uk-list">
+			<!-- <li>
+				今天新增用户：12 人
+			</li> -->
+			<!-- <li>
+				今天新增话题：122 个
+			</li> -->
 			<li>
-				新增用户：12 人
+				用户总数：<b id="s_usersCount"></b> 人
 			</li>
 			<li>
-				新增话题：122 个
+				话题总数：<b id="s_topicsCount"></b> 个
+			</li>
+			<!-- <li>
+				本站访问总数：12844 次
 			</li>
 			<li>
-				用户总数：98 人
-			</li>
-			<li>
-				话题总数：3652 个
-			</li>
-			<li>
-				访问总数：12844 次
-			</li>
-			<li>
-				运行时间：5 天
-			</li>
+				本站运行时间：5 天
+			</li> -->
 		</ul>
     </div>
 </div>
+<script type="text/javascript">
+$(function(){
+    $.ajax({
+        type: 'GET',
+        url: '/site/stat',
+        success: function(result){
+            if(0 == result.status){
+            	$('#s_usersCount').text(result.content.usersCount);
+            	$('#s_topicsCount').text(result.content.topicsCount);
+            }else{
+            }
+        }
+    });
+});
+</script>

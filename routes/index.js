@@ -24,6 +24,8 @@ router.get('/tool/:toolName', pageStatic.gotoStatic);
 /* password */
 // 找回密码
 // 修改密码
+// 获取站点信息
+router.get('/site/stat', pageStatic.getSite);
 
 /* user */
 // 用户个人主页

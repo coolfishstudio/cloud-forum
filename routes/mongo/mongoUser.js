@@ -32,6 +32,9 @@ exports.getById = function(userID, callback){
 	userColl.findOne({_id:userID},callback);
 };
 
+exports.getCount = function(info, callback){
+	userColl.count(info, callback);
+};
 exports.getByUserName = function(userName, callback){
 	userColl.findOne({name : userName},callback);
 };

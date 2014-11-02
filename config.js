@@ -45,6 +45,8 @@ module.exports = {
 		//被回复＋ 0.2
 		BEREPLY : 0.2,
 		//删除帖子
-		DELTOPIC : 3
+		DELTOPIC : 3,
+		//删除回复
+		DELREPLY : 2
 	}
 }
