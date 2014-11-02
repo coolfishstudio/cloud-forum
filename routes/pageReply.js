@@ -103,13 +103,15 @@ exports.getWaste = function(req, res){
         },
         //修改话题属性
         updateTopic: function(done){
-            topic.update(replyInfo.topicId, {
-                isWaste : !!type,
-                replyQuantity : info.replyQuantity - 1,
-                lastUser : req.session.user._id,
-                lastTimestamp : new Date().getTime()
-            }, function(err, info){
-                done(err);
+            topic.getById(replyInfo.topicId, function(err, info){
+                topic.update(info._id, {
+                    isWaste : !!type,
+                    replyQuantity : info.replyQuantity - 1,
+                    lastUser : req.session.user._id,
+                    lastTimestamp : new Date().getTime()
+                },function(err,dbTopic){
+                    done(err);
+                }); 
             }); 
         },
         //修改经验
