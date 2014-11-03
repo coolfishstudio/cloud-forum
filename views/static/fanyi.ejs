@@ -1,0 +1,80 @@
+<%- include ../header %>
+<div class="tm-middle">
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-bottom">
+    	<div class="uk-width-medium-5-6 uk-container-center">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-3-4">
+                    <div class="panel panel_border mb10">
+                    	<div class="uk-panel uk-panel-header pd5">
+                            <h3 class="uk-panel-title">在线翻译</h3>
+                        	<div class="uk-grid uk-form mb10">
+		                        <div class="uk-form-icon mb10 uk-width-1-1">
+		                            <textarea cols="200" rows="10" placeholder="请输入您要翻译的内容" id="text_query"></textarea>
+		                        </div>
+		                        <div class="uk-form-icon mb10 uk-width-1-1 uk-button-group">
+		                            <button class="uk-button uk-button-success" id="translate_en">英语</button>
+		                            <button class="uk-button uk-button-success" id="translate_jp">日语</button>
+		                            <button class="uk-button uk-button-success" id="translate_kor">韩语</button>
+		                            <button class="uk-button uk-button-success" id="fy_clear">清空</button>
+		                        </div>
+		                    </div>
+		                    <div class="uk-grid uk-form mb10 uk-hidden" id="dst_box">
+		                        <div class="uk-form-icon mb10 uk-width-1-1 ">
+		                            <div class="uk-panel uk-panel-box">
+									    <h3 class="uk-panel-title">翻译结果</h3>
+									    <div id="dst_translate"></div>
+									</div>
+		                        </div>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-large-1-4 uk-hidden-small">
+                	<%- include ../goHome %>
+                    <%- include ../works %>
+                    <%- include ../tool %>
+                    <%- include ../friendship %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ../footer %>
+
+<script type="text/javascript">
+$(function(){
+	$('#fy_clear').click(function(){
+		$('#text_query').val('');
+	});
+	$('#translate_en').click(function(){
+		translate('en');
+	});
+	$('#translate_jp').click(function(){
+		translate('jp');
+	});
+	$('#translate_kor').click(function(){
+		translate('kor');
+	});
+	function translate(type){
+		$('#dst_box').addClass('uk-hidden');
+		var query = $('#text_query').val();
+		$.UIkit.notify('查询中，请等待。。', {pos:'top-right',status:'success',timeout: 1000});
+		$.ajax({
+            type: 'GET',
+            url: '/external/translate',
+            data: {query : query, to : type},
+            success: function(result){
+                if(0 == result.status){
+                	$('#dst_box').removeClass('uk-hidden');
+                	var json = $.parseJSON(result.content);
+                	$('#dst_translate').html(json.trans_result[0].dst);
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+	}
+});
+</script>
+

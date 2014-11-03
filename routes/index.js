@@ -4,7 +4,8 @@ var pageUser = require('./pageUser'),
 	pageTopic = require('./pageTopic'),
 	pageReply = require('./pageReply'),
 	pageStatic = require('./pageStatic'),
-	pageFile = require('./pageFile');
+	pageFile = require('./pageFile'),
+	pageExternal = require('./pageExternal');
 
 /* GET home page. */
 router.get('/', pageStatic.gotoIndex);
@@ -21,6 +22,8 @@ router.get('/logout', pageUser.gotoLogout);
 /* static */
 //工具
 router.get('/tool/:toolName', pageStatic.gotoStatic);
+//翻译
+router.get('/external/translate', pageExternal.getTranslate);
 /* password */
 // 找回密码
 // 修改密码
@@ -77,4 +80,7 @@ router.post('/reply/create', pageReply.createReply);
 // 删除某评论
 router.get('/reply/:replyId/waste/:type', pageReply.getWaste);
 
+/* api */
+/*-- 翻译API */
+router.get('/api/v1/fanyi', pageExternal.getTranslate);
 module.exports = router;

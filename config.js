@@ -25,6 +25,9 @@ module.exports = {
 	      pass: '789512357'
 	    }
 	},
+	CLIENT : {
+		ID : 'zsm1cyNR6abdEg3Wu3IBX4Gb'
+	},
 	//限制
 	LIMIT: {
 		//首页一页显示几个文章
