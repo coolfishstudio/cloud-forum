@@ -11,7 +11,7 @@
                                 <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览 - <%- topicInfo.replyQuantity%> 次评论
                                 </div>
                                 <div class="topic_icon <%- user=='' ? 'uk-hidden' : '' %>">
-                                    <% if(topicInfo.user){ %>
+                                    <% if(topicInfo.user || topicInfo.power){ %>
                                     <i class="uk-icon-pencil-square" id="iUpdate" title="修改"></i>
                                     <i class="uk-icon-bitbucket" id="iWaste_t" title="删除"></i>
                                     <i class="uk-icon-eye <%- topicInfo.isOpen ? 'uk-hidden' : '' %>" id="isOpen_t" title="公开"></i>
