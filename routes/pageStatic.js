@@ -73,7 +73,7 @@ exports.gotoIndex = function(req, res){
             }
         },
         findTopicCount : function(done){
-            topic.getCount({userId : userInfo._id,isOpen : true}, function(err, info){
+            topic.getCount({userId : userInfo._id}, function(err, info){
                 userInfo.topicCount = info;
                 done(err);
             });

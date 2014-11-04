@@ -42,5 +42,6 @@ exports.getById = function(topicID, callback){
 };
 
 exports.getCount = function(info, callback){
+	info.isWaste = false;
 	topicColl.count(info, callback);
 };

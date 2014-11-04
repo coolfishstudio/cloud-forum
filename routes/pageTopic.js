@@ -18,6 +18,7 @@ exports.gotoTopic = function(req, res){
 	var topicInfo = {};
     var page = req.query.page || 1;
     var replyList = {};
+    var userIntegral = 0;
 	async.series({
     	//获取话题信息,修改浏览纪录次数
         findTopicList: function(done){
@@ -61,8 +62,23 @@ exports.gotoTopic = function(req, res){
                 done(err);
             });
         },
+        findIntegral : function(done){
+            if(!req.session || !req.session.user){
+                done();
+            }else{
+                integral.getById(topicInfo.userId,function(err, info){
+                    userIntegral = info.integral || 0;
+                    done(err);
+                });
+            }
+        },
         findTopicCount : function(done){
-            topic.getCount({userId : topicInfo.userId,isOpen : true}, function(err, info){
+            var tempInfo = {};
+            if(topicInfo.userId != req.session.user._id){
+                tempInfo.isOpen = true;
+            }
+            tempInfo.userId = topicInfo.userId;
+            topic.getCount(tempInfo, function(err, info){
                 topicInfo.topicCount = info;
                 done(err);
             });
@@ -98,7 +114,7 @@ exports.gotoTopic = function(req, res){
             });
         }
     }, function(err){
-        res.render('topic/read', { titleName: topicInfo.title + ' -- ' +config.NAME, user: userInfo, topicInfo : topicInfo, replyList : replyList});
+        res.render('topic/read', { titleName: topicInfo.title + ' -- ' +config.NAME, user: userInfo, topicInfo : topicInfo, replyList : replyList,userIntegral : userIntegral});
     });
 };
 
@@ -394,11 +410,18 @@ exports.getTopicByUser = function(req, res){
         info.tag = type;
     }
     info.userId = userId;
-    var userInfo = req.session.user;
-    if(userId != userInfo._id){
+    var userInfo = {};
+    if(userId != req.session.user._id){
         info.isOpen = true;
     }
     async.series({
+        //获取用户信息
+        findUserInfo : function(done){
+            user.getById(userId,function(err,info){
+                userInfo = info;
+                done(err);
+            });
+        },
         //获取列表信息
         findTopicList: function(done){
             topic.getAll(config.LIMIT.INDEXPAGENUM, page, info, function(err, info){
@@ -410,7 +433,7 @@ exports.getTopicByUser = function(req, res){
             });
         },
         //获取对应的用户信息
-        findUserInfo: function(done){
+        findUserList: function(done){
             var iterator = function(topicInfo, eachFinish){
                 user.getById(topicInfo.userId, function(err, dbUserInfo){
                     topicInfo.userName = dbUserInfo.name;
@@ -457,6 +480,6 @@ exports.getTopicByUser = function(req, res){
         }
     }, function(err){
         // console.log('titleName:', config.NAME ,'user :', userInfo, 'topicList :', topicList, 'count :', count, 'currentPage :', page, 'currentType :', type, 'userIntegral :', userIntegral);
-        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
+        res.render('user/user_topic', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
     })
 };
