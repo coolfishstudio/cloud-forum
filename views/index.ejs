@@ -52,13 +52,18 @@
                                         </div>
                                         <div class="uk-float-left card_list_tag">
                                             <% if(content.isTop){ %>
-                                            <div class="uk-badge uk-badge-black">置顶</div>
-                                            <% } %>
-
-                                            <% if(content.isGood){ %>
-                                            <div class="uk-badge uk-badge-danger">精品</div>
+                                                <div class="uk-badge uk-badge-black">置顶</div>
+                                                <% if(content.isGood){ %>
+                                                <div class="uk-badge uk-badge-danger uk-hidden-small">精品</div>
+                                                <% }else{ %>
+                                                <div class="uk-badge uk-hidden-small <%= className[content.tag] %>"><%= type[content.tag] %></div>
+                                                <% } %>
                                             <% }else{ %>
-                                            <div class="uk-badge <%= className[content.tag] %>"><%= type[content.tag] %></div>
+                                                <% if(content.isGood){ %>
+                                                <div class="uk-badge uk-badge-danger">精品</div>
+                                                <% }else{ %>
+                                                <div class="uk-badge <%= className[content.tag] %>"><%= type[content.tag] %></div>
+                                                <% } %>
                                             <% } %>
                                         </div>
                                         <div class="uk-float-left card_list_title"><%= content.title %></div>
