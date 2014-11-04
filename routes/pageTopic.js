@@ -375,3 +375,88 @@ exports.getUp = function(req, res){
 //         }      
 //     });
 // };
+
+//跳转到首页页面
+exports.getTopicByUser = function(req, res){
+    if(!req.session || !req.session.user){
+        return res.send({status: -2, content: '非法操作'});
+    }
+    var userId = req.params.id;
+    var page = req.query.page || 1;
+    var type = req.query.type || 'all';
+    var topicList = [];
+    var count = 0;
+    var info = {};
+    var userIntegral = 0;
+    if('jp' == type){
+        info.isGood = true;
+    }else if('all' != type){
+        info.tag = type;
+    }
+    info.userId = userId;
+    var userInfo = req.session.user;
+    if(userId != userInfo._id){
+        info.isOpen = true;
+    }
+    async.series({
+        //获取列表信息
+        findTopicList: function(done){
+            topic.getAll(config.LIMIT.INDEXPAGENUM, page, info, function(err, info){
+                for(var i = 0; i < info.length; i++){
+                    info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
+                }
+                topicList = info;
+                done(err);
+            });
+        },
+        //获取对应的用户信息
+        findUserInfo: function(done){
+            var iterator = function(topicInfo, eachFinish){
+                user.getById(topicInfo.userId, function(err, dbUserInfo){
+                    topicInfo.userName = dbUserInfo.name;
+                    topicInfo.userHeadSrc = dbUserInfo.headSrc;
+                    user.getById(topicInfo.lastUser, function(err, dbLastUserInfo){
+                        topicInfo.lastUserName = dbLastUserInfo.name;
+                        topicInfo.lastUserHeadSrc = dbLastUserInfo.headSrc;
+                        eachFinish();
+                    });   
+                });
+            };
+            async.forEach(topicList, iterator, function(err){
+                done(err);
+            });
+        },
+        //获取总数
+        findCount : function(done){
+            info.isWaste = false;
+            topic.getCount(info, function(err, info){
+                count = Math.ceil(info/config.LIMIT.INDEXPAGENUM);
+                done(err);
+            });
+        },
+        findIntegral : function(done){
+            if(!req.session || !req.session.user){
+                done();
+            }else{
+                integral.getById(userInfo._id,function(err, info){
+                    userIntegral = info.integral || 0;
+                    done(err);
+                });
+            }
+        },
+        findTopicCount : function(done){
+            var tempInfo = {};
+            if(userId != req.session.user._id){
+                tempInfo.isOpen = true;
+            }
+            tempInfo.userId = userInfo._id;
+            topic.getCount(tempInfo, function(err, info){
+                userInfo.topicCount = info;
+                done(err);
+            });
+        }
+    }, function(err){
+        // console.log('titleName:', config.NAME ,'user :', userInfo, 'topicList :', topicList, 'count :', count, 'currentPage :', page, 'currentType :', type, 'userIntegral :', userIntegral);
+        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
+    })
+};

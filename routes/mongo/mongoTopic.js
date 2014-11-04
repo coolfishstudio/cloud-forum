@@ -34,7 +34,6 @@ exports.remove = function(topicID, callback){
 
 exports.getAll = function(pageNum, page, info, callback){
 	info.isWaste = false;
-	info.isOpen = true
 	topicColl.find(info).sort({'isTop':-1,'lastTimestamp':-1}).limit(pageNum).skip(pageNum * (page - 1)).toArray(callback);
 };
 

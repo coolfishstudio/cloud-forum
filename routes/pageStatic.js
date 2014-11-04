@@ -24,6 +24,7 @@ exports.gotoIndex = function(req, res){
     }else if('all' != type){
         info.tag = type;
     }
+    info.isOpen = true;
 	async.series({
     	//获取列表信息
         findTopicList: function(done){

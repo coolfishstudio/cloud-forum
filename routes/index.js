@@ -41,6 +41,7 @@ router.get('/site/stat', pageStatic.getSite);
 // 用户的粉丝页
 // 用户关注的对象页
 // 用户发布的所有话题页
+router.get('/topic/by/user/:id', pageTopic.getTopicByUser);
 // 用户参与的所有回复页
 // 关注某用户
 // 取消关注某用户
