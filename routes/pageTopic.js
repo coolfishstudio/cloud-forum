@@ -476,6 +476,6 @@ exports.getTopicByUser = function(req, res){
         }
     }, function(err){
         // console.log('titleName:', config.NAME ,'user :', userInfo, 'topicList :', topicList, 'count :', count, 'currentPage :', page, 'currentType :', type, 'userIntegral :', userIntegral);
-        res.render('user/user_topic', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
+        res.render('user/infoList', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral,userId:userId});  
     })
 };
