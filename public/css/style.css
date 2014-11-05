@@ -3,7 +3,7 @@ a:hover{color: #666;}
 body{background: #e2e2e2;background-image: url('../images/bg.png');}
 
 .tm-navbar{
-	background:#2b2b2b;
+	background:#1f262e;
 	padding-top:5px;
 	padding-bottom: 5px;
 	border-bottom: 3px solid #71c400;
@@ -39,7 +39,7 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	box-shadow: 0 0 3px #9B9B9B;
 }
 .panel_border{
-	border-top: 5px solid #2b2b2b;
+	border-top: 5px solid #1f262e;
 }
 .pd5{
 	padding: 5px;
@@ -68,6 +68,9 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .h60{
 	height:60px;
 }
+.h50{
+	height:50px;
+}
 .fs12{
 	font-size: 12px;
 }
@@ -75,36 +78,37 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	padding-bottom: 5px;
 }
 .tag_btn{
-	line-height: 60px;
+	line-height: 50px;
 	position: relative;
 	overflow: hidden;
 }
 .tag_btn i{
 	position: absolute;
-	bottom: -10px;
-	right: -5px;
-	font-size: 65px;	
+	top: 10px;
+	left: 25px;
+	font-size: 30px;	
 }
 .tag_btn b{
 	position: absolute;
-	left: 15px;
-	font-size: 30px;
+	left: 50%;
+	font-size: 14px;
+	color : #43484D;
 }
 .tag_text{
 	color: #CC9933;
-	background: #FFFFCC;	
+	/*background: #FFFFCC;	*/
 }
 .tag_star{
 	color: #3399CC;
-	background: #CCFFFF;
+	/*background: #CCFFFF;*/
 }
 .tag_send{
 	color: #339966;
-	background: #CCFFCC;
+	/*background: #CCFFCC;*/
 }
 .tag_help{
 	color: #CC3366;
-	background: #FFCCFF;
+	/*background: #FFCCFF;*/
 }
 .uk-badge-black{
 	background-color: #222;
