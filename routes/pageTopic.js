@@ -74,7 +74,7 @@ exports.gotoTopic = function(req, res){
         },
         findTopicCount : function(done){
             var tempInfo = {};
-            if(topicInfo.userId != req.session.user._id){
+            if(req.session.user && topicInfo.userId != req.session.user._id){
                 tempInfo.isOpen = true;
             }
             tempInfo.userId = topicInfo.userId;
