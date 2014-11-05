@@ -63,14 +63,10 @@ exports.gotoTopic = function(req, res){
             });
         },
         findIntegral : function(done){
-            if(!req.session || !req.session.user){
-                done();
-            }else{
-                integral.getById(topicInfo.userId,function(err, info){
-                    userIntegral = info.integral || 0;
-                    done(err);
-                });
-            }
+            integral.getById(topicInfo.userId,function(err, info){
+                userIntegral = info.integral || 0;
+                done(err);
+            });
         },
         findTopicCount : function(done){
             var tempInfo = {};

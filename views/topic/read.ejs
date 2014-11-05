@@ -35,7 +35,7 @@
                                             <i class="uk-icon-thumbs-up <%- topicInfo.handle_up_f ? 'uk-hidden' : 'uk-show' %>" id="isUp_f" title="取消点赞"></i>
                                             <i class="uk-icon-thumbs-o-up <%- topicInfo.handle_up_t ? 'uk-hidden' : 'uk-show' %>" id="isUp_t" title="点赞"></i>
                                              ＋ <b><%- topicInfo.ups ? topicInfo.ups.length : '0' %></b></a>
-                                        <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###">收藏</a>
+                                        <a class="uk-button uk-button-success <%- user=='' ? 'uk-hidden' : '' %> " href="###" id="collection">收藏</a>
                                         <!-- <a class="uk-button uk-button-success" href="###">分享</a> -->
                                     </div>
                                 </div>
@@ -324,6 +324,20 @@
                     $upHiddenObj.removeClass('uk-hidden').addClass('uk-show');
                     $upShowObj.addClass('uk-hidden').removeClass('uk-show');
                     $textObj.text($upShowObj.index() ? (parseInt($textObj.text()) + 1) : (parseInt($textObj.text()) - 1));
+                }else{
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
+                }
+            }
+        });
+    });
+    //收藏
+    $('#collection').click(function(){
+        $.ajax({
+            type: 'GET',
+            url: '/topic/<%= topicInfo._id %>/collection',
+            success: function(result){
+                if(0 == result.status){
+                    $.UIkit.notify(result.content, {pos:'top-right',status:'success',timeout: 1000});
                 }else{
                     $.UIkit.notify(result.content, {pos:'top-right',status:'danger',timeout: 1000});
                 }

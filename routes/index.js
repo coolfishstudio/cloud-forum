@@ -5,6 +5,7 @@ var pageUser = require('./pageUser'),
 	pageReply = require('./pageReply'),
 	pageStatic = require('./pageStatic'),
 	pageFile = require('./pageFile'),
+	pageFavorites = require('./pageFavorites'),
 	pageExternal = require('./pageExternal');
 
 /* GET home page. */
@@ -66,8 +67,9 @@ router.get('/topic/:topicId/up/:type', pageTopic.getUp);
 // 将某话题踩贴(取消踩贴)
 // router.get('/topic/:topicId/down/:type', pageTopic.getDown);
 // 编辑某话题
-// 关注某话题
-// 取消关注某话题
+// 收藏某话题
+router.get('/topic/:topicId/collection', pageFavorites.createFavorites);
+// 取消收藏某话题
 // 上传图片
 router.post('/imgSaveToFile',pageFile.imgSaveToFile);
 
