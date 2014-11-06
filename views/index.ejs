@@ -4,12 +4,16 @@
     	<div class="uk-width-medium-5-6 uk-container-center">
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-3-4">
-                    <div class="uk-grid mb10 index_info" data-uk-grid-margin>
+                    <div class="uk-grid mb10 index_info" data-uk-grid-margin id="index_tag_btn">
                         <div class="uk-width-1-2 uk-width-large-1-4">
                             <a href='/'>
                                 <div class="panel h50 tag_text tag_btn">
                                     <b>看帖</b>
-                                    <i class="uk-icon-file-text"></i> 
+                                    <i class="uk-icon-file-text"></i>
+                                    <div class="tag_btn_bg_box">
+                                        <b>看帖</b>
+                                        <i class="uk-icon-file-text-o"></i>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -17,7 +21,11 @@
                             <a href='/?type=jp'>
                                 <div class="panel h50 tag_star tag_btn">
                                     <b>精品</b>
-                                    <i class="uk-icon-star"></i> 
+                                    <i class="uk-icon-star"></i>
+                                    <div class="tag_btn_bg_box">
+                                        <b>精品</b>
+                                        <i class="uk-icon-star-o"></i>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -25,7 +33,11 @@
                             <a href='/?type=fx'>
                                 <div class="panel h50 tag_send tag_btn">
                                     <b>分享</b>
-                                    <i class="uk-icon-send"></i> 
+                                    <i class="uk-icon-send"></i>
+                                    <div class="tag_btn_bg_box">
+                                        <b>分享</b>
+                                        <i class="uk-icon-send-o"></i>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -34,6 +46,10 @@
                                 <div class="panel h50 tag_help tag_btn">
                                     <b>求助</b>
                                     <i class="uk-icon-comment"></i> 
+                                    <div class="tag_btn_bg_box">
+                                        <b>求助</b>
+                                        <i class="uk-icon-comment-o"></i>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -167,6 +183,16 @@
         $('#paging').html(pageHtml);
     }
     init();
+    //--动画
+    $('#index_tag_btn a').hover(function(){
+        $(this).find('.tag_btn_bg_box').stop().animate({ 
+            height: "100%"
+        }, 300 );
+    },function(){
+        $(this).find('.tag_btn_bg_box').stop().animate({ 
+            height: "0%"
+        }, 300 );
+    });
 
 })();
 </script>

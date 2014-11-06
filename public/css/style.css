@@ -81,19 +81,35 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	line-height: 50px;
 	position: relative;
 	overflow: hidden;
+	color : #43484D;
 }
 .index_info .tag_btn i{
 	position: absolute;
 	top: 10px;
 	left: 25px;
+	z-index: 2;
 	font-size: 30px;	
 }
 .index_info .tag_btn b{
 	position: absolute;
 	left: 50%;
 	font-size: 14px;
-	color : #43484D;
+	z-index: 2;
 }
+.index_info .tag_btn .tag_btn_bg_box{
+	position: relative;
+	display: block;
+	z-index: 3;
+	width: 100%;
+	height: 0%;
+	top: 0px;
+	left: 0px;
+	background: #1f262e;
+	color: #fff;
+	overflow: hidden;
+}
+
+
 .index_info .tag_text{
 	color: #CC9933;
 	/*background: #FFFFCC;	*/
