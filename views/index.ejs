@@ -7,7 +7,7 @@
                     <div class="uk-grid mb10 index_info" data-uk-grid-margin id="index_tag_btn">
                         <div class="uk-width-1-2 uk-width-large-1-4">
                             <a href='/'>
-                                <div class="panel h50 tag_text tag_btn">
+                                <div class="panel h50 tag_text tag_btn panel_border">
                                     <b>看帖</b>
                                     <i class="uk-icon-file-text"></i>
                                     <div class="tag_btn_bg_box">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="uk-width-1-2 uk-width-large-1-4">
                             <a href='/?type=jp'>
-                                <div class="panel h50 tag_star tag_btn">
+                                <div class="panel h50 tag_star tag_btn panel_border">
                                     <b>精品</b>
                                     <i class="uk-icon-star"></i>
                                     <div class="tag_btn_bg_box">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="uk-width-1-2 uk-width-large-1-4">
                             <a href='/?type=fx'>
-                                <div class="panel h50 tag_send tag_btn">
+                                <div class="panel h50 tag_send tag_btn panel_border">
                                     <b>分享</b>
                                     <i class="uk-icon-send"></i>
                                     <div class="tag_btn_bg_box">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="uk-width-1-2 uk-width-large-1-4">
                             <a href='/?type=qz'>
-                                <div class="panel h50 tag_help tag_btn">
+                                <div class="panel h50 tag_help tag_btn panel_border">
                                     <b>求助</b>
                                     <i class="uk-icon-comment"></i> 
                                     <div class="tag_btn_bg_box">
@@ -185,11 +185,19 @@
     init();
     //--动画
     $('#index_tag_btn a').hover(function(){
-        $(this).find('.tag_btn_bg_box').stop().animate({ 
+        $(this).find('.tag_btn_bg_box').animate({ 
             height: "100%"
-        }, 300 );
+        }, 250 ).animate({ 
+            height: "80%"
+        }, 200 ).animate({ 
+            height: "100%"
+        }, 150 ).animate({ 
+            height: "90%"
+        }, 100 ).animate({ 
+            height: "100%"
+        }, 50 );
     },function(){
-        $(this).find('.tag_btn_bg_box').stop().animate({ 
+        $(this).find('.tag_btn_bg_box').animate({ 
             height: "0%"
         }, 300 );
     });
