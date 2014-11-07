@@ -41,7 +41,7 @@ router.get('/site/stat', pageStatic.getSite);
 // 用户发布的所有话题页
 router.get('/user/by/topic/:id', pageTopic.getTopicByUser);
 // 用户发布的所有精品页
-router.get('/user/by/good/:id', pageTopic.getTopicByUser);
+router.get('/user/by/good/:id', pageTopic.getTopicByGood);
 // 用户参与的所有回复页
 router.get('/user/by/reply/:id', pageTopic.getTopicByUser);
 // 用户收藏的所有话题页
