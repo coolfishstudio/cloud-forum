@@ -122,9 +122,7 @@
     var isOpen = 1;
     $('#createTopic').click(function(){
         title = removeHTMLTag($('#topic_title').val());
-        var text = editor.codemirror.getValue();
-        // text = text.replace(/[<%3C]/g, "&lt;").replace(/[>%3E]/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-        content = editor.constructor.markdown(text);
+        content = editor.constructor.markdown(editor.codemirror.getValue());
         tag = $('#topic_tag').val();
         if($('#topic_title').val() != title){
             $.UIkit.notify('标题含有非法参数。', {pos:'top-right',status:'danger',timeout: 1000});
