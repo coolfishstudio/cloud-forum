@@ -476,7 +476,7 @@ exports.getTopicByUser = function(req, res){
         }
     }, function(err){
         // console.log('titleName:', config.NAME ,'user :', userInfo, 'topicList :', topicList, 'count :', count, 'currentPage :', page, 'currentType :', type, 'userIntegral :', userIntegral);
-        res.render('user/infoList', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral,userId:userId});  
+        res.render('user/infoList', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, userIntegral : userIntegral,userId:userId});  
     })
 };
 
@@ -564,7 +564,7 @@ exports.getTopicByGood = function(req, res){
         }
     }, function(err){
         // console.log('titleName:', config.NAME ,'user :', userInfo, 'topicList :', topicList, 'count :', count, 'currentPage :', page, 'currentType :', type, 'userIntegral :', userIntegral);
-        res.render('user/infoList', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral,userId:userId});  
+        res.render('user/infoList', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, userIntegral : userIntegral,userId:userId});  
     })
 };
 

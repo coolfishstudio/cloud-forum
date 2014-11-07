@@ -56,6 +56,7 @@
                     </div>
                     <div class="panel panel_border mb10">
                         <ul class="uk-list uk-list-striped pd5 card_list">
+                            <% if(topicList.length > 0){ %>
                             <% var type={xq:'心情',js:'技术',fx:'分享',qz:'求助',rz:'日志',bj:'笔记'}; var className={xq:'',js:'uk-badge-success',fx:'uk-badge-success',qz:'uk-badge-warning',rz:'',bj:'uk-badge-success'}; topicList.forEach(function(content){ %>
                             <li>
                                 <a href='/topic/<%= content._id %>'>
@@ -91,14 +92,14 @@
                                 </a>
                             </li>
                             <% }) %>
-
+                            <% }else{ %>
+                                <li style="text-align: center;">暂无数据</li>
+                            <% }%>
                         </ul>
                         <div class="pd5">
                             <ul class="uk-pagination" id="paging">
                             </ul>
                         </div>
-                        
-
                     </div>
                 </div>
                 <div class="uk-width-large-1-4 uk-hidden-small">
