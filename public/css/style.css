@@ -131,6 +131,7 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	position: relative;
 	overflow: hidden;
 	text-align: center;
+	color : #43484D;
 }
 .user_info .tag_btn i{
 	position: absolute;
@@ -142,7 +143,19 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 	/*position: absolute;*/
 	/*left: 30%;*/
 	font-size: 14px;
-	color : #43484D;
+	/*color : #43484D;*/
+}
+.user_info .tag_btn .tag_btn_bg_box{
+	position: absolute;
+	display: block;
+	z-index: 3;
+	width: 100%;
+	height: 0%;
+	top: 0px;
+	left: 0px;
+	background: #1f262e;
+	color: #fff;
+	overflow: hidden;
 }
 .uk-badge-black{
 	background-color: #222;

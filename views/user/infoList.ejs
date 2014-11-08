@@ -4,45 +4,48 @@
     	<div class="uk-width-medium-5-6 uk-container-center">
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-3-4">
-                    <div class="uk-grid mb10 user_info" data-uk-grid-margin>
+                    <div class="uk-grid mb10 user_info" data-uk-grid-margin id="info_tag_btn">
                         <div class="uk-width-1-3 uk-width-large-1-6">
                             <a href='/user/by/topic/<%- userId %>'>
-                                <div class="panel h50 tag_btn">
+                                <div class="panel h50 tag_btn panel_border">
                                     <b>我的帖子</b>
+                                    <div class="tag_btn_bg_box">
+                                        <b>我的帖子</b>
+                                    </div>
                                 </div>
                             </a>
                         </div>
                         <div class="uk-width-1-3 uk-width-large-1-6">
                             <a href='/user/by/good/<%- userId %>'>
-                                <div class="panel h50 tag_btn">
+                                <div class="panel h50 tag_btn panel_border">
                                     <b>我的精品</b>
                                 </div>
                             </a>
                         </div>
                         <div class="uk-width-1-3 uk-width-large-1-6">
                             <a href='/user/by/collection/<%- userId %>'>
-                                <div class="panel h50 tag_btn">
+                                <div class="panel h50 tag_btn panel_border">
                                     <b>我的收藏</b>
                                 </div>
                             </a>
                         </div>
                         <div class="uk-width-1-3 uk-width-large-1-6">
                             <a href='/user/by/reply/<%- userId %>'>
-                                <div class="panel h50 tag_btn">
+                                <div class="panel h50 tag_btn panel_border">
                                     <b>我的回复</b>
                                 </div>
                             </a>
                         </div>
                         <div class="uk-width-1-3 uk-width-large-1-6">
                             <a href='/user/by/relation/<%- userId %>'>
-                                <div class="panel h50 tag_btn">
+                                <div class="panel h50 tag_btn panel_border">
                                     <b>我的关注</b>
                                 </div>
                             </a>
                         </div>
                         <div class="uk-width-1-3 uk-width-large-1-6">
                             <a href='/user/by/message/<%- userId %>'>
-                                <div class="panel h50 tag_btn">
+                                <div class="panel h50 tag_btn panel_border">
                                     <b>我的消息</b>
                                 </div>
                             </a>
@@ -131,7 +134,24 @@
 <%- include ../footer %>
 <script type="text/javascript">
 (function(){
-
+    //--动画
+    $('#info_tag_btn a').hover(function(){
+        $(this).find('.tag_btn_bg_box').animate({ 
+            height: "100%"
+        }, 250 ).animate({ 
+            height: "80%"
+        }, 200 ).animate({ 
+            height: "100%"
+        }, 150 ).animate({ 
+            height: "90%"
+        }, 100 ).animate({ 
+            height: "100%"
+        }, 50 );
+    },function(){
+        $(this).find('.tag_btn_bg_box').animate({ 
+            height: "0%"
+        }, 300 );
+    });
 
 })();
 </script>
