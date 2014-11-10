@@ -122,3 +122,27 @@ exports.getSite = function(req, res){
         }      
     });
 };
+
+//跳转到活动页面
+exports.gotoBook = function(req, res){
+    var userInfo = '';
+    if(!req.session || !req.session.user){
+        userInfo = '';
+    }else{
+        userInfo = req.session.user;    
+    }
+    // async.series({
+    //     //获取活动列表信息
+    //     findTopicList: function(done){
+    //         topic.getAll(config.LIMIT.INDEXPAGENUM, page, info, function(err, info){
+    //             for(var i = 0; i < info.length; i++){
+    //                 info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
+    //             }
+    //             topicList = info;
+    //             done(err);
+    //         });
+    //     }
+    // }, function(err){
+        res.render('books', { titleName: config.NAME ,user : userInfo});  
+    // })
+};

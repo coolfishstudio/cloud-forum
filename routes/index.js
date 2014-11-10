@@ -89,6 +89,10 @@ router.post('/reply/create', pageReply.createReply);
 // 删除某评论
 router.get('/reply/:replyId/waste/:type', pageReply.getWaste);
 
+/* activity */
+// 跳转到活动页面
+router.get('/books', pageStatic.gotoBook);
+
 /* api */
 /*-- 翻译API */
 router.get('/api/v1/fanyi', pageExternal.getTranslate);
