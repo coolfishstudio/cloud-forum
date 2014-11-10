@@ -17,8 +17,13 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 #goTop{
 	display: none;
 	position: fixed;
-	right: 30px;
-	bottom: 30px;
+	right: 20px;
+	bottom: 55px;
+}
+#goIndex{
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
 }
 
 .tm-footer{
