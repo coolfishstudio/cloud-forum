@@ -6,7 +6,7 @@
                 <div class="uk-width-large-3-4">
                     <div class="panel panel_border mb10">
                         <div class="uk-panel uk-panel-header pd5">
-                            <div class="uk-panel-title pd10">
+                            <div class="uk-panel-title pd10" id="topic_panel">
                                 <div class="topic_title"><%- topicInfo.title %></div>
                                 <div class="topic_info">发布于 <%- topicInfo.lastTime == '刚刚发表' ? '刚刚' : topicInfo.lastTime %> - 作者 <%- topicInfo.userName %> - <%- topicInfo.visitQuantity%> 次浏览 - <%- topicInfo.replyQuantity%> 次评论
                                 </div>
@@ -160,7 +160,8 @@
 (function(){
     var editor = new Editor();
     editor.render($('.editor')[0]);
-
+    // //--处理加载后固定那个位置
+    $('.card_list_title').css({'width':(parseInt($('.reply_list').width()) - 150)});
     //--
     $('#iGood_t').click(function(){
         $.ajax({

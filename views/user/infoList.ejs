@@ -90,7 +90,7 @@
                                             <div class="uk-badge <%= className[content.tag] %>"><%= type[content.tag] %></div>
                                             <% } %>
                                         </div>
-                                        <div class="uk-float-left card_list_title"><%= content.title %></div>
+                                        <div class="uk-float-left card_list_title"><p><span><%= content.title %></span></p></div>
                                         <div class="uk-float-right card_list_time"><%= content.lastTime %></div>
                                         <div class="uk-float-right card_list_user">
                                             <img src="<%= content.lastUserHeadSrc %>" alt="<%= content.lastUserName %>">
@@ -148,6 +148,8 @@
 <%- include ../footer %>
 <script type="text/javascript">
 (function(){
+    //--处理加载后固定那个位置
+    $('.card_list_title').css({'width':($('.card_list').width() - 150) - ($('.card_list_num').width() == 0 ? 0 : 68) - ($('.card_list_image').width() == 0 ? 0 : 44)});
     //--动画
     $('#info_tag_btn a').hover(function(){
         $(this).find('.tag_btn_bg_box').animate({ 
