@@ -127,8 +127,7 @@
             return;
         }
         //--处理加载后固定那个位置
-        // console.log($('.card_list:frist').width());
-
+        $('.card_list_title').css({'width':($('.card_list').width() - 150) - ($('.card_list_num').width() == 0 ? 0 : 68) - ($('.card_list_image').width() == 0 ? 0 : 44)});
         if(countPage == 1){
             return;
         }
