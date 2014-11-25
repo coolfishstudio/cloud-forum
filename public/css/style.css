@@ -220,24 +220,12 @@ body{background: #e2e2e2;background-image: url('../images/bg.png');}
 .jybfb_bar{position: absolute;top: -3px;left: 50%;color:#f90;font-size: 11px;width:120px;margin-left: -55px;text-align: center;}
 .jybfb .uk-progress{margin-bottom: 0px;}
 
-
-.index_info .tag_btn .tag_btn_bg_box{
-	-webkit-animation-name:upTagBtn;
-	-webkit-animation-duration:.4s;
-	-webkit-animation-timing-function: ease-in;
-}
-
 .index_info .tag_btn:hover .tag_btn_bg_box{
 	-webkit-animation-name:downTagBtn;
-	-webkit-animation-duration:.8s;
+	-webkit-animation-duration:.6s;
 	-webkit-animation-timing-function: ease-in;
 	height: 100%;
 	display: block;
-}
-
-@-webkit-keyframes upTagBtn{
-	0%{ height:100%;}
-	100%{ height:0%;display: none;}
 }
 
 @-webkit-keyframes downTagBtn{
