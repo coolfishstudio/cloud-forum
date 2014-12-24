@@ -1,0 +1,214 @@
+<%- include header %>
+<div class="tm-middle">
+    <div class="uk-container uk-container-center uk-margin-top uk-margin-bottom">
+    	<div class="uk-width-medium-5-6 uk-container-center">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-3-4">
+                    <div class="uk-grid mb10 index_info" data-uk-grid-margin id="index_tag_btn">
+                        <div class="uk-width-1-2 uk-width-large-1-4">
+                            <a href='/'>
+                                <div class="panel h50 tag_text tag_btn panel_border">
+                                    <b>看帖</b>
+                                    <i class="uk-icon-file-text"></i>
+                                    <div class="tag_btn_bg_box">
+                                        <b>看帖</b>
+                                        <i class="uk-icon-file-text-o"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="uk-width-1-2 uk-width-large-1-4">
+                            <a href='/?type=jp'>
+                                <div class="panel h50 tag_star tag_btn panel_border">
+                                    <b>精品</b>
+                                    <i class="uk-icon-star"></i>
+                                    <div class="tag_btn_bg_box">
+                                        <b>精品</b>
+                                        <i class="uk-icon-star-o"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="uk-width-1-2 uk-width-large-1-4">
+                            <a href='/books'>
+                                <div class="panel h50 tag_send tag_btn panel_border">
+                                    <b>专题</b>
+                                    <i class="uk-icon-send"></i>
+                                    <div class="tag_btn_bg_box">
+                                        <b>专题</b>
+                                        <i class="uk-icon-send-o"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="uk-width-1-2 uk-width-large-1-4">
+                            <a href='/?type=qz'>
+                                <div class="panel h50 tag_help tag_btn panel_border">
+                                    <b>求助</b>
+                                    <i class="uk-icon-comment"></i> 
+                                    <div class="tag_btn_bg_box">
+                                        <b>求助</b>
+                                        <i class="uk-icon-comment-o"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel panel_border mb10">
+                        <ul class="uk-list uk-list-striped pd5 card_list">
+                            <% if(topicList.length > 0){ %>
+                            <% var type={xq:'心情',js:'技术',fx:'分享',qz:'求助',rz:'日志',bj:'笔记'}; var className={xq:'',js:'uk-badge-success',fx:'uk-badge-success',qz:'uk-badge-warning',rz:'',bj:'uk-badge-success'}; topicList.forEach(function(content){ %>
+                            <li>
+                                <a href='/topic/<%= content._id %>'>
+                                    <div class="uk-clearfix">
+                                        <div class="uk-float-left card_list_image uk-hidden-small">
+                                            <img src="<%= content.userHeadSrc %>" alt="<%= content.userName%>">
+                                        </div>
+                                        <div class="uk-float-left card_list_num uk-hidden-small">
+                                            <code><%= content.replyQuantity %>/<%= content.visitQuantity %></code>
+                                        </div>
+                                        <div class="uk-float-left card_list_tag">
+                                            <% if(content.isTop){ %>
+                                                <div class="uk-badge uk-badge-black">置顶</div>
+                                                <% if(content.isGood){ %>
+                                                <div class="uk-badge uk-badge-danger uk-hidden-small">精品</div>
+                                                <% }else{ %>
+                                                <div class="uk-badge uk-hidden-small <%= className[content.tag] %>"><%= type[content.tag] %></div>
+                                                <% } %>
+                                            <% }else{ %>
+                                                <% if(content.isGood){ %>
+                                                <div class="uk-badge uk-badge-danger">精品</div>
+                                                <% }else{ %>
+                                                <div class="uk-badge <%= className[content.tag] %>"><%= type[content.tag] %></div>
+                                                <% } %>
+                                            <% } %>
+                                        </div>
+                                        <div class="uk-float-left card_list_title"><p><span><%= content.title %></span></p></div>
+                                        <div class="uk-float-right card_list_time"><%= content.lastTime %></div>
+                                        <div class="uk-float-right card_list_user">
+                                            <img src="<%= content.lastUserHeadSrc %>" alt="<%= content.lastUserName %>">
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <% }) %>
+                            <% }else{ %>
+                                <li style="text-align: center;">暂无数据</li>
+                            <% }%>
+                        </ul>
+                        <div class="pd5">
+                            <ul class="uk-pagination" id="paging">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-large-1-4 uk-hidden-small">
+                    <%- include userInfo %>
+                    <%- include works %>
+                    <%- include tool %>
+                    <%- include friendship %>
+                    <%- include siteStat %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include footer %>
+<script type="text/javascript">
+(function(){
+    function init(){
+        var currentPage = <%- currentPage || 1 %>;
+        var currentType = '<%- currentType || "all" %>';
+        var countPage = <%- count || 1 %>;
+        var pageHtml = '';
+        if(currentPage > countPage || currentPage <= 0){
+            $.UIkit.notify('非法参数。', {pos:'top-right',status:'danger',timeout: 1000});
+            return;
+        }
+        //--处理加载后固定那个位置
+        $('.card_list_title').css({'width':(parseInt($('.card_list').width()) - 152) - (parseInt($('.card_list_num').width()) == 0 ? 0 : 68) - (parseInt($('.card_list_image').width()) == 0 ? 0 : 44)});
+        //分页
+        if(countPage == 1){
+            return;
+        }
+        //头
+        if(currentPage == 1){
+            pageHtml += '<li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>';
+        }else{
+            pageHtml += '<li><a href="/?page=1&&type=' + currentType + '"><i class="uk-icon-angle-double-left"></i></a></li>';
+        }
+        //身
+        if(countPage <= 5){
+            for(var i = 1; i < countPage + 1; i++){
+                if(i == currentPage){
+                    pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
+                }else{
+                    pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
+                }
+            }
+        }else{
+            if(currentPage <= 3){
+                for(var i = 1; i <= 5; i++){
+                    if(i == currentPage){
+                        pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
+                    }else{
+                        pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
+                    }
+                }
+                pageHtml += '<li><span>...</span></li>';
+            }else if(currentPage + 3 > countPage){
+                pageHtml += '<li><span>...</span></li>';
+                for(var i = countPage - 4; i <= countPage; i++){
+                    if(i == currentPage){
+                        pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
+                    }else{
+                        pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
+                    }
+                }
+            }else{
+                pageHtml += '<li><span>...</span></li>';
+                for(var i = currentPage - 2; i <= currentPage + 2; i++){
+                    if(i == currentPage){
+                        pageHtml += '<li class="uk-active"><span>' + i + '</span></li>';
+                    }else{
+                        pageHtml += '<li><a href="/?page=' + i + '&&type=' + currentType + '">' + i + '</a></li>';
+                    }
+                }
+                pageHtml += '<li><span>...</span></li>';
+            }
+        }
+        //尾
+        if(currentPage == countPage){
+            pageHtml += '<li class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>';
+        }else{
+            pageHtml += '<li><a href="/?page=' + countPage + '&&type=' + currentType + '"><i class="uk-icon-angle-double-right"></i></a></li>';
+        }
+        $('#paging').html(pageHtml);
+    }
+    init();
+    //--动画
+    // $('#index_tag_btn a').hover(function(){
+    //     $(this).find('.tag_btn_bg_box').animate({ 
+    //         height: "100%"
+    //     }, 250 ).animate({ 
+    //         height: "80%"
+    //     }, 200 ).animate({ 
+    //         height: "100%"
+    //     }, 150 ).animate({ 
+    //         height: "90%"
+    //     }, 100 ).animate({ 
+    //         height: "100%"
+    //     }, 50 );
+    // },function(){
+    //     $(this).find('.tag_btn_bg_box').animate({ 
+    //         height: "0%"
+    //     }, 300 );
+    // });
+})();
+</script>
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F38d49395be77fd86a782b1e6d2fbef06' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
