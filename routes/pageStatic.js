@@ -146,3 +146,14 @@ exports.gotoBook = function(req, res){
         res.render('books', { titleName: config.NAME ,user : userInfo});  
     // })
 };
+
+
+//跳转到效果页面
+exports.gotoEffect = function(req, res){
+    console.log('-------------');
+    res.render('effect', { titleName: config.NAME}); 
+};
+//跳转到作品页面
+exports.gotoOpus = function(req, res){
+    res.render('opus', { titleName: config.NAME}); 
+};
