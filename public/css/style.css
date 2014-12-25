@@ -54,9 +54,11 @@ width: .6em;height: .6em;background-image: none;-webkit-transform: rotate(45deg)
 
 .right-content .right-content-banner{}
 
-.right-content .left-menu{padding: 20px;border-right:1px #ccc solid;}
-.right-content .effect-panel-box{overflow: hidden;}
-.effect-panel-box .effect-panel-border{float: left;width: 230px; height: 280px;}
+.right-content .left-menu{width: 200px;height: 100%;overflow-y: auto;border-right: 1px solid #CCC;position: fixed;z-index: 888;margin: 0;}
+
+
+.right-content .effect-panel-box{overflow: hidden;margin-left: 200px;margin-bottom: 50px;}
+.effect-panel-box .effect-panel-border{float: left;width: 230px; height: 280px;overflow: hidden;}
 .effect-panel-box .effect-panel{background: #fff;margin: 20px 0 0 20px;height: 100%;border-radius: 5px;}
 
 
