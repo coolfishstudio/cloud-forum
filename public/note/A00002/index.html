@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT酷鱼网 ｜ 打字效果</title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;list-style:none;}
+			html,body{background: #000;height: 100%;font-weight:bold; font-family:微软雅黑;padding: 10px;}
+			span{ transition:1s all ease; text-shadow:0 0 100px #fff; color:rgba(255,255,255,0); opacity:0;}
+			span.on{ text-shadow:0 0 0px #fff; opacity:1;}
+		</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+	window.onload = function(){
+		var str = 'text-shadow还没有出现时，大家在网页设计中阴影一般都是用photoshop做成图片，现在有了css3可以直接使用text-shadow属性来指定阴影。这个属性可以有两个作用，产生阴影和模糊主体。这样在不使用图片时能给文字增加质感。text-shadow曾经在css2中就出现过，但在css2.1版本中又被抛弃了，现在css3.0版本又重新捡回来了。这说明text-shadow这个属性非常值得我们做前端的人员重视。text-shadow 属性向文本添加一个或多个阴影。该属性是逗号分隔的阴影列表，每个阴影有两个或三个长度值和一个可选的颜色值进行规定。省略的长度是 0。所有主流浏览器都支持 text-shadow 属性。Internet Explorer 9 以及更早版本的浏览器不支持 text-shadow 属性。';//定义一个显示内容
+		var timer = null;//定时器
+
+		//生成span
+		for(var i = 0; i < str.length; i++){
+			var oSpan = document.createElement('span');
+			oSpan.innerHTML = str.charAt(i);
+			document.body.appendChild(oSpan);
+		}
+		var i = 0;
+		var aSpan = document.body.children;
+		timer = setInterval(function(){
+			aSpan[i].className = 'on';
+			i++;
+			if(i == aSpan.length){
+				clearInterval(timer);
+			}
+		},100);
+	};
+	</script>
+</html>

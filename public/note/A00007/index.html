@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+	<head>
+		<title>IT酷鱼网 ｜ 翻牌效果</title>
+		<style type="text/css">
+			*{margin:0px;padding:0px;list-style:none;text-align: center;}
+			ul{ width:1022px; margin:40px auto;]}
+			ul li{margin:3px; float:left; }
+			ul li .box{ width: 140px;height: 210px;background: #eee;position: relative;transform-style:preserve-3d;transition:1s all ease;transform:perspective(800px) rotateY(0deg);}
+			ul li .box div{ position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;cursor: pointer;}
+			ul li .box div.front{ transform: translateZ(1px);}
+			ul li .box div img{  width: 140px;height: 210px;background: #000;border-radius: 5px;}
+			ul li .box div.back{ transform:translateZ(-1px) scale(-1,1);}
+			ul li .box:active{transform:perspective(800px) rotateY(180deg);}
+		</style>
+	</head>
+	<body>
+		<h1>按住试试</h1>
+		<ul>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/1.jpg">
+				    </div>
+				</div>
+			</li>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/2.jpg">
+				    </div>
+				</div>
+			</li>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/3.jpg">
+				    </div>
+				</div>
+			</li>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/4.jpg">
+				    </div>
+				</div>
+			</li>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/5.jpg">
+				    </div>
+				</div>
+			</li>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/6.jpg">
+				    </div>
+				</div>
+			</li>
+			<li>
+				<div class="box">
+					<div class="front">
+				    	<img src="/note/A00007/img/bg.jpg">
+				    </div>
+				    <div class="back">
+				    	<img src="/note/A00007/img/7.jpg">
+				    </div>
+				</div>
+			</li>
+		</ul>
+	</body>
+</html>
