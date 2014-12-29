@@ -77,11 +77,16 @@ width: .6em;height: .6em;background-image: none;-webkit-transform: rotate(45deg)
 .effect-panel-box .effect-panel a .effect-panel-bg{border-radius: 5px;position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgba(255,255,255,0);transition:.4s all ease;}
 .effect-panel-box .effect-panel a:hover .effect-panel-bg{background: rgba(255,255,255,0.5);}
 
-.effect-page-box{width: 180px;height:60px;background-color: #ccc;margin: 0 auto 80px auto;border-radius: 5px;}
-.effect-page-box a{width: 100%;height: 100%;border-radius: 5px;position: relative;display: inline-block;}
-.effect-page-box a i{width: 24px;height:24px;position: absolute;top:50%;left:50%;margin-top: -12px;margin-left: -12px;text-align: center;line-height: 24px;}
+.effect-page-box{width: 260px;height:60px;margin: 0 auto 80px auto;padding-left:100px;}
+.effect-page-box a.next{width:60%;}
+.effect-page-box a.prev{width:30%;}
 
+.effect-page-box a{height: 100%;background-color: #ccc;border-radius: 5px;position: relative;display: inline-block;transition:.4s all ease;}
+.effect-page-box a i{width: 24px;height:24px;position: absolute;top:50%;left:50%;margin-top: -12px;margin-left: -12px;text-align: center;line-height: 24px;transition:.4s all ease;}
 
+.effect-page-box a:hover{background: #333;}
+.effect-page-box a.next:hover i{left:80%;color:#fff;}
+.effect-page-box a.prev:hover i{left:20%;color:#fff;}
 
 
 
