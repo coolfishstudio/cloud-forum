@@ -7,15 +7,15 @@ var user = require('./module/user'),
 
 //跳转到首页页面
 exports.gotoIndex = function(req, res){
-	var userInfo = '';
-	if(!req.session || !req.session.user){
-		userInfo = '';
-	}else{
-		userInfo = req.session.user;	
-	}
-	var page = req.query.page || 1;
+    var userInfo = '';
+    if(!req.session || !req.session.user){
+        userInfo = '';
+    }else{
+        userInfo = req.session.user;    
+    }
+    var page = req.query.page || 1;
     var type = req.query.type || 'all';
-	var topicList = [];
+    var topicList = [];
     var count = 0;
     var info = {};
     var userIntegral = 0;
@@ -25,16 +25,16 @@ exports.gotoIndex = function(req, res){
         info.tag = type;
     }
     info.isOpen = true;
-	async.series({
-    	//获取列表信息
+    async.series({
+        //获取列表信息
         findTopicList: function(done){
-        	topic.getAll(config.LIMIT.INDEXPAGENUM, page, info, function(err, info){
-        		for(var i = 0; i < info.length; i++){
-        			info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
-        		}
-        		topicList = info;
-        		done(err);
-        	});
+            topic.getAll(config.LIMIT.INDEXPAGENUM, page, info, function(err, info){
+                for(var i = 0; i < info.length; i++){
+                    info[i].lastTime = tool.getDateDiff(info[i].lastTimestamp);
+                }
+                topicList = info;
+                done(err);
+            });
         },
         //获取对应的用户信息
         findUserInfo: function(done){
@@ -79,20 +79,20 @@ exports.gotoIndex = function(req, res){
             });
         }
     }, function(err){
-        res.render('effect', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
+        res.render('index', { titleName: config.NAME ,user : userInfo, topicList : topicList, count : count, currentPage : page, currentType : type, userIntegral : userIntegral});  
     })
 };
 
 //跳转到静态工具页面
 exports.gotoStatic = function(req, res){
-	var toolName = req.params.toolName;
-	var name = req.query.name;
-	var userInfo = '';
-	if(!req.session || !req.session.user){
-		userInfo = '';
-	}else{
-		userInfo = req.session.user;	
-	}
+    var toolName = req.params.toolName;
+    var name = req.query.name;
+    var userInfo = '';
+    if(!req.session || !req.session.user){
+        userInfo = '';
+    }else{
+        userInfo = req.session.user;    
+    }
     res.render('static/' + toolName, {titleName : name + ' -- ' + config.NAME, user : userInfo});
 };
 
@@ -145,14 +145,4 @@ exports.gotoBook = function(req, res){
     // }, function(err){
         res.render('books', { titleName: config.NAME ,user : userInfo});  
     // })
-};
-
-
-//跳转到效果页面
-exports.gotoEffect = function(req, res){
-    res.render('effect', { titleName: config.NAME}); 
-};
-//跳转到作品页面
-exports.gotoOpus = function(req, res){
-    res.render('opus', { titleName: config.NAME}); 
 };
