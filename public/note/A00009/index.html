@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>网格手风琴</title>
+<style>
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;border-radius:3px;}
+a{text-decoration:none;}
+input,textarea{outline:none; resize:none; border:none;}
+body,html{ height:100%;background:#cccccc;overflow:hidden;}
+.title{
+	text-align:center;
+	height:40px;
+	width:100%;
+	background:#333333;
+	color:#e5e5e5;
+	line-height:40px;
+	font-family: "微软雅黑";
+	position:absolute;
+	z-index:999;
+}
+.bg{
+	width:600px;
+	background:#ffffff;
+	border:2px solid #FFF;
+	margin:50px auto;
+	box-shadow:5px 5px 10px #333333;
+}
+.accordion{
+	width:600px;
+	height:600px;
+	position:relative;
+	overflow:_hidden;
+	padding:0px;
+}
+.accordion li{
+	width:196px;
+	height:196px;
+	margin:2px;
+	overflow:hidden;
+	float:left;
+}
+.accordion li a div{
+	width:196px; 
+	height:196px;
+}
+</style>
+<script>
+var util = {
+	getStyle:function(obj,name){
+		return (obj.currentStyle || getComputedStyle(obj,false))[name];
+	},
+	animate:function(obj,json){
+		clearInterval(obj.timer);
+		//总次数
+		var count = Math.floor(700 / 30);
+		var start = {};//起始位置
+		var dis = {};//总距离
+		for(var name in json){
+			if(name=='opacity'){
+				start[name] = Math.round(parseFloat(util.getStyle(obj,name))*100);
+			}else{
+				start[name] = parseInt(util.getStyle(obj,name));
+			}
+			dis[name] = json[name] - start[name];
+		}
+		//记录步数
+		var n = 0;
+		//开始运动
+		obj.timer = setInterval(function(){
+			n++;
+			for(var name in json){
+				//运动
+				var a = 1 - n / count;
+				var cur = start[name] + dis[name] * (1 - a * a * a);
+				if(name == 'opacity'){
+					obj.style.opacity = cur / 100;
+					obj.style.filter = 'alpha(opacity:' + cur + ')';
+				}else{
+					obj.style[name]	= cur + 'px';
+				}
+			}
+			if(n==count){
+				clearInterval(obj.timer);	
+			}
+		},30);
+	}
+};
+window.onload = function(){
+	(function(){
+		var n = 196;
+		var oBox = document.getElementById('box');
+		var aDiv = oBox.getElementsByTagName('div');
+		
+		var timer = null;
+		//布局转换
+		var aPos=[];
+		for(var i=0; i < aDiv.length; i++){
+			aPos[i] = {left : aDiv[i].offsetLeft, top : aDiv[i].offsetTop};
+			aDiv[i].style.left = aPos[i].left + 'px';
+			aDiv[i].style.top = aPos[i].top + 'px';
+			aDiv[i].style.width = n + 'px';
+			aDiv[i].style.height = n + 'px';
+		}
+		for(var i = 0; i < aDiv.length; i++){
+			aDiv[i].style.position = 'absolute';
+			aDiv[i].style.margin = 0;
+			aDiv[i].index = i;
+		}
+		//移入 移出
+		for(var i = 0; i < aDiv.length; i++){
+			aDiv[i].onmouseover = function(){
+				clearInterval(timer);
+				onMove(this);
+			};	
+			aDiv[i].onmouseout = function(){
+				timer = setInterval(function(){
+					var num = Math.floor(Math.random()* aDiv.length);
+					onMove(aDiv[num]);
+				},2000);
+			};	
+		}
+		//随机
+		timer = setInterval(function(){
+			var num = Math.floor(Math.random()* aDiv.length);
+			onMove(aDiv[num]);
+		},2000);
+		onMove(aDiv[4]);
+		function onMove(obj){
+			for(var j = 0; j < aDiv.length; j++){
+				if(Math.floor(aDiv[j].index / 3) == Math.floor(obj.index / 3) && aDiv[j].index % 3 != obj.index % 3){//同行不同列
+					var x = 0;
+					if(obj.index % 3 == 0){
+						x = 3 - aDiv[j].index % 3;//0 2 1
+					}else if(obj.index % 3 == 1){//0 -1 1
+						x = aDiv[j].index % 3 / 2;
+					}else{//0 -1 -2
+						x = - aDiv[j].index % 3 ;
+					}
+					util.animate(aDiv[j],{
+						width : n / 2,
+						height : n * 2,
+						left : aPos[j].left + n / 2 * x,
+						top : aPos[j].top - n / 2 * Math.floor(aDiv[j].index / 3)
+					});
+						
+				}else if(Math.floor(aDiv[j].index / 3) != Math.floor(obj.index / 3) && aDiv[j].index % 3 == obj.index % 3){
+					var y = 0;
+					if(Math.floor(obj.index / 3) == 0){//0 2 1
+						y = 3 - Math.floor(aDiv[j].index / 3);
+					}else if(Math.floor(obj.index / 3) == 1){//0 -1 1
+						y = Math.floor(aDiv[j].index / 3) / 2;
+					}else{//0 -1 -2
+						y = - Math.floor(aDiv[j].index / 3);
+					}
+					util.animate(aDiv[j],{
+						width : n * 2,
+						height : n / 2,
+						left : aPos[j].left - n / 2 * (aDiv[j].index % 3),
+						top : aPos[j].top + n / 2 * y//-------
+					});
+				}else if(aDiv[j] == obj){
+					util.animate(aDiv[j],{
+						width : n * 2,
+						height : n * 2,
+						left : aPos[j].left - n / 2 * (aDiv[j].index % 3),
+						top : aPos[j].top - n / 2 * Math.floor(aDiv[j].index / 3)
+					});
+				}else{
+					var x = 0;
+					if(obj.index % 3 == 0){
+						x = 3 - aDiv[j].index % 3;//0 2 1
+					}else if(obj.index % 3 == 1){//0 -1 1
+						x = aDiv[j].index % 3 / 2;
+					}else{//0 -1 -2
+						x = - aDiv[j].index % 3 ;
+					}
+					var y = 0;
+					if(Math.floor(obj.index / 3) == 0){
+						y = 3 - Math.floor(aDiv[j].index / 3);//0 2 1
+					}else if(Math.floor(obj.index / 3) == 1){//0 -1 1
+						y = Math.floor(aDiv[j].index / 3) / 2;
+					}else{//0 -1 -2
+						y = - Math.floor(aDiv[j].index / 3);
+					}
+					util.animate(aDiv[j],{
+						width : n / 2,
+						height : n / 2,
+						left : aPos[j].left + n / 2 * x,
+						top : aPos[j].top + n / 2 * y
+					});
+				}
+			}	
+					
+		}
+	})();
+}
+</script>
+</head>
+
+<body>
+<div class="title">
+	利用命名空间封装运动，实现网格手风琴特效
+</div>
+<div class="bg" id="box">
+	<ul class="accordion">
+    	<li>
+        	<a href="javascript:;"><div style=" background: url(img/1.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/2.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/3.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/4.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/5.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/6.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/7.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/8.jpg) center center;"></div></a>
+        </li>
+        <li>
+        	<a href="javascript:;"><div style=" background: url(img/9.jpg) center center;"></div></a>
+        </li>
+	</ul>
+</div>
+</body>
+</html>
