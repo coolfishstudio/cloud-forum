@@ -59,44 +59,7 @@ width: .6em;height: .6em;background-image: none;-webkit-transform: rotate(45deg)
 .right-content .left-panel{width: 25%;height: 100%;overflow: hidden;position: fixed;z-index: 888;margin: 0;-webkit-box-shadow: 1px 1px 6px rgba(0,0,0,0.35);-moz-box-shadow: 1px 1px 6px rgba(0,0,0,0.35);box-shadow: 1px 1px 6px rgba(0,0,0,0.35);}
 .right-content .left-panel .cover-img{position: absolute;top: -10%;left: -10%;bottom: -10%;right: -10%;width: 120%;height: 120%;background-position: center;background-size: cover;}
 
-.randomMove{
-	animation-name: randomMove;
-	animation-duration: 20s;
-	-webkit-animation-name: randomMove;
-	-webkit-animation-duration: 20s;
-	animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-}
 
-@-webkit-keyframes randomMove{
-	0%{
-		-webkit-transform: translate3d(0, 0, 0);
-	}
-	20%{
-		-webkit-transform: translate3d(5%, 0, 0);
-	}
-	40%{
-		-webkit-transform: translate3d(5%, 5%, 0);
-	}
-	60%{
-		-webkit-transform: translate3d(-5%, 5%, 0);
-	}
-	80%{
-		-webkit-transform: translate3d(-5%, -5%, 0);
-	}
-	100%{
-		-webkit-transform: translate3d(0, 0, 0);
-	}
-}
-
-@keyframes randomMove{
-	0%{
-		transform: translateY(0);
-	}
-	100%{
-		transform: translateY(10%);
-	}
-}
 
 /* 用户信息的左侧面板 */
 
@@ -133,3 +96,53 @@ width: .6em;height: .6em;background-image: none;-webkit-transform: rotate(45deg)
 .opus .opus-panel-title{width: 100%;height: 120px;background: #bbb;}
 .opus .opus-panel-box{padding: 60px;}
 .opus .opus-panel{background: #fff;border-radius: 5px;border: 1px #eee solid;}
+
+
+
+
+
+
+
+/* 涉及到的运动 */
+/* ‘随便’的移动 用在了首页左侧面板 */
+.randomMove{animation-name: randomMove;animation-duration: 20s;-webkit-animation-name: randomMove;-webkit-animation-duration: 20s;animation-iteration-count: infinite;-webkit-animation-iteration-count: infinite;}
+@-webkit-keyframes randomMove{
+	0%{
+		-webkit-transform: translate3d(0, 0, 0);
+	}
+	20%{
+		-webkit-transform: translate3d(5%, 0, 0);
+	}
+	40%{
+		-webkit-transform: translate3d(5%, 5%, 0);
+	}
+	60%{
+		-webkit-transform: translate3d(-5%, 5%, 0);
+	}
+	80%{
+		-webkit-transform: translate3d(-5%, -5%, 0);
+	}
+	100%{
+		-webkit-transform: translate3d(0, 0, 0);
+	}
+}
+@keyframes randomMove{
+	0%{
+		transform: translate3d(0, 0, 0);
+	}
+	20%{
+		transform: translate3d(5%, 0, 0);
+	}
+	40%{
+		transform: translate3d(5%, 5%, 0);
+	}
+	60%{
+		transform: translate3d(-5%, 5%, 0);
+	}
+	80%{
+		transform: translate3d(-5%, -5%, 0);
+	}
+	100%{
+		transform: translate3d(0, 0, 0);
+	}
+}
