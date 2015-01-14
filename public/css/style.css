@@ -37,8 +37,7 @@ box-shadow: inset 0 0 10px #003300;}
 .left-bar .bottom-menu li a{display: block;font-size: 16px;padding: 10px;height: 16px;position: relative;color: #999;transition:.4s all ease;}
 .left-bar .bottom-menu li:hover a{color: #fff;}
 /* 右侧内容面板 */
-.right-content{margin-left: 80px;min-height: 600px;overflow: hidden;background-color:#F7F6F2;}
-
+.right-content{margin-left: 45px;min-height: 600px;overflow: hidden;background-color:#F7F6F2;}
 
 .right-content .right-content-box{padding: 20px;}
 .right-content-box .right-content-slide{background: #fff;height: 288px;margin: 5px 0;}
@@ -56,18 +55,53 @@ box-shadow: inset 0 0 10px #003300;}
 .right-content-spit .spit-content-box:before {margin-top: -16px;bottom: auto;right: auto;top: 28px;left: -6px;position: absolute;content: "";
 width: .6em;height: .6em;background-image: none;-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);-webkit-transition: background .1s linear;-moz-transition: background .1s linear;transition: background .1s linear;background-color: #fff;border-left: 1px solid #eee;border-bottom: 1px solid #eee;}
 
+/* 首页左侧面板 */
+.right-content .left-panel{width: 25%;height: 100%;overflow: hidden;position: fixed;z-index: 888;margin: 0;-webkit-box-shadow: 1px 1px 6px rgba(0,0,0,0.35);-moz-box-shadow: 1px 1px 6px rgba(0,0,0,0.35);box-shadow: 1px 1px 6px rgba(0,0,0,0.35);}
+.right-content .left-panel .cover-img{position: absolute;top: -10%;left: -10%;bottom: -10%;right: -10%;width: 120%;height: 120%;background-position: center;background-size: cover;}
 
-.right-content .right-content-banner{}
+.randomMove{
+	animation-name: randomMove;
+	animation-duration: 20s;
+	-webkit-animation-name: randomMove;
+	-webkit-animation-duration: 20s;
+	animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
 
-.right-content .left-menu{width: 200px;height: 100%;overflow-y: auto;border-right: 1px solid #CCC;position: fixed;z-index: 888;margin: 0;}
-.right-content .left-menu ul {padding: 20px 20px 0px 20px;margin-bottom: 100px;}
-.right-content .left-menu ul li {line-height: 40px;font-size: 14px;border-bottom: 1px dotted #ccc;list-style: none;}
-.right-content .left-menu ul li a{display: block;color: #999;}
-.right-content .left-menu ul li a i{margin: 0 5px;width: 14px;height: 14px;}
-.right-content .left-menu ul li a:hover{background: #eee;color: #000;}
+@-webkit-keyframes randomMove{
+	0%{
+		-webkit-transform: translate3d(0, 0, 0);
+	}
+	20%{
+		-webkit-transform: translate3d(5%, 0, 0);
+	}
+	40%{
+		-webkit-transform: translate3d(5%, 5%, 0);
+	}
+	60%{
+		-webkit-transform: translate3d(-5%, 5%, 0);
+	}
+	80%{
+		-webkit-transform: translate3d(-5%, -5%, 0);
+	}
+	100%{
+		-webkit-transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes randomMove{
+	0%{
+		transform: translateY(0);
+	}
+	100%{
+		transform: translateY(10%);
+	}
+}
+
+/* 用户信息的左侧面板 */
 
 
-.right-content .effect-panel-box{overflow: hidden;margin-left: 200px;margin-bottom: 50px;}
+.right-content .effect-panel-box{overflow: hidden;margin-left: 25%;margin-bottom: 50px;}
 .effect-panel-box .effect-panel-border{float: left;width: 300px; height: 280px;overflow: hidden;}
 .effect-panel-box .effect-panel{background: #fff;margin: 20px 0 0 20px;height: 100%;overflow: hidden;}
 .effect-panel-box .effect-panel a{display: block;height: 100%;width: 100%;position: relative;overflow: hidden;}
