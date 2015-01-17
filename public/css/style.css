@@ -1,5 +1,5 @@
 *{margin: 0px;padding: 0px;list-style: none;}
-html,body{height: 100%;background-color:#F7F6F2;font-family: Helvetica, Arial, "Hiragino Sans GB", sans-serif;}
+html,body{height: 100%;background-color:#F7F6F2;font-family: Helvetica, Arial, "Hiragino Sans GB", sans-serif;min-width: 800px;}
 a{text-decoration: none;color:#666;}
 
 .fl-grid{overflow: hidden;width: 100%;}
